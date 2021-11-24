@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(to right, #02010A, #04052E, #140152, #22007C, #0D00A4) ;
+    background: linear-gradient(to right, #02010A, #04052E, #140152, #22007C, #0D00A4) ; /* TODO changer hex->rgb pour uniformiser la couleur entre tout les écrans*/
 }
 
 nav{
@@ -7,7 +7,6 @@ nav{
     flex-direction: column;
     width: 20%;
     height: 100vw;
-    /*border-right: 1px solid #22007C;*/ /* TODO mettre la bordure sur le body et non sur la navbar */
     align-items: center;
     justify-content: center;
 }
@@ -16,12 +15,11 @@ nav{
     width: 150px;
     height: 70px;
     border-radius: 50px;
-    background-color: #04052E;
+    background-color: #060741;
     border-style: none;
     margin: 20px auto;
     align-content: center;
     color: #C5E063;
-
 }
 
 .menuButton:hover{
