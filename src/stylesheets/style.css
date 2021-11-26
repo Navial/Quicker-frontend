@@ -1,12 +1,12 @@
 body{
-    background: linear-gradient(to right, #02010A, #04052E, #140152, #22007C, #0D00A4) ; /* TODO changer hex->rgb pour uniformiser la couleur entre tout les écrans*/
+    background: linear-gradient(to right, rgb(0,0,0), rgb(2, 1, 10), rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164)) ; /* TODO changer hex->rgb pour uniformiser la couleur entre tout les écrans*/
 }
 
 nav{
     display: flex;
     flex-direction: column;
     width: 20%;
-    height: 100vw;
+    height: 100vh;
     align-items: center;
     justify-content: center;
 }
@@ -14,56 +14,63 @@ nav{
 .menuButton{
     width: 150px;
     height: 70px;
-    border-radius: 50px;
-    background-color: #060741;
-    border-style: none;
     margin: 20px auto;
-    align-content: center;
-    color: #C5E063;
 }
 
+
+@keyframes buttonColorHover {
+from{
+        background-color: rgb(11, 12, 93);
+        width: 150px;
+        margin: 20px 100px;
+    }
+to{
+        background-color: rgb(43, 0, 152);
+        width: 200px;
+        margin: 20px 75px
+    }
+/**
+    Animation quand la souris quitte le bouton
+ */
+}
 .menuButton:hover{
     animation-name: buttonColorHover;
     animation-duration: 0.2s;
     width: 200px;
-    background-color: #22007C;
-    color: #FFFFFF;
+    margin: 20px, 75px;
+    background-color: rgb(43, 0, 152);
+    color: rgb(255,255,255);
+    height: 70px;
+    border-radius: 50px;
+    border-style: none;
 }
-
-@keyframes buttonColorHover {
-    from{
-        background-color: #04052E;
-        width: 150px;
-    }
-    to{
-        background-color: #22007C;
-        width: 200px;
-    }
-}
-/**
-    Animation quand la souris quitte le bouton
- */
-.menuButton:not(:hover){
+.menuButton:not(:hover){   /* merge le css ligne 14 avec ce bloc-ci car identique */
     animation-name: buttonColorNoHover;
     animation-duration: 0.2s;
     width: 150px;
-    background-color: #04052E;
-    color: #FFFFFF;
+    background-color: rgb(11, 12, 93);
+    color: rgb(255,255,255);
+    margin: 20px 100px;
+    height: 70px;
+    border-radius: 50px;
+    border-style: none;
+    align-content: center;
 }
 
 @keyframes buttonColorNoHover {
     from{
-        background-color: #22007C;
+        background-color: rgb(43, 0, 152);
         width: 200px;
+        margin: 20px 75px;
     }
     to{
-        background-color: #04052E;
+        background-color: rgb(11, 12, 93);
         width: 150px;
+        margin: 20px 100px;
     }
 }
 
 #logo{
-    background-color: violet;
     width: 200px;
     height: 150px;
     position: fixed;
@@ -78,6 +85,6 @@ nav{
 }
 
 p{
-    color: #8f8f8f;
-    margin: 50%;
+    color: rgb(143, 143, 143);
+    /*margin: 2% 50%;*/
 }
