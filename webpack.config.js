@@ -15,7 +15,7 @@ module.exports = {
     port: 8080,
     host: '0.0.0.0', // server to be accessible externally
     public: "localhost:8080", // force to open localhost instead of 0.0.0.0
-    open: 'google-chrome', // open the default browser
+    open: 'chrome', // open the default browser
     historyApiFallback: true, // serve index.html instead of routes leading to no specific ressource
     proxy: {
       "/api": {
