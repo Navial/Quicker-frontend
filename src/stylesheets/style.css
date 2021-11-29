@@ -1,5 +1,7 @@
 body{
-    background: linear-gradient(to right, rgb(0,0,0), rgb(2, 1, 10), rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));
+    /*background: linear-gradient(to right, rgb(0,0,0), rgb(2, 1, 10), rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));*/
+    background: linear-gradient(to right, rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));
+
 }
 /**
     -----------------------------------------------------
@@ -34,7 +36,7 @@ nav{
      border-style: none;
  }
 
-.menuButton:not(:hover){   /* merge le css ligne 14 avec ce bloc-ci car identique */
+.menuButton:not(:hover){
     animation-name: buttonColorNoHover;
     animation-duration: 0.2s;
     width: 150px;
@@ -52,6 +54,7 @@ nav{
     height: 150px;
     position: fixed;
     top: 50px;
+    background-color: darkblue;
 }
 
 #menu{
@@ -131,34 +134,47 @@ nav{
 #postMessage{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     position: absolute;
-    width: 1071px;
-    height: 113px;
-    padding-top: 30px;
+    width: 60vw;
+    height: 100px;
+    padding: 20px;
     left: 423px;
     top: 36px;
-    background: linear-gradient(to left, rgb(0,0,0), rgb(2, 1, 10), rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));
+    background: linear-gradient(to left, rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));
     border-radius: 150px;
+    color: rgb(21, 48, 88);
+
 }
 
 #imageProfile {
     width: 55px;
     height: 53px;
     background-color: cyan;
-}
-p{
-    color: rgb(143, 143, 143);
+    border-radius: 50%;
 }
 
 #textPost{
-    color: red;
-    width: 45vw;
+    width: 50vw;
     height: 5vh;
     border-radius: 50px;
     border-style: none;
+    background-color: rgb(170, 195, 245);
+    padding-left: 20px;
 }
 
 #buttonPost{
-
+    border-radius: 50px;
+    width: 80px;
+    height: 40px;
+    background-color: rgb(79,126,217);
+    border: none;
 }
+
+/**
+    -----------------------------------------------------
+                       RegisterPage
+    -----------------------------------------------------
+ */
+
+/* TODO */

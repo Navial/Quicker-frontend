@@ -25,7 +25,7 @@ const navbarLogged = `
 
 const Navbar = () => {
   const navbarWrapper = document.querySelector("#navbarWrapper");
-  if(window.localStorage.getItem("user"))
+  //if(window.localStorage.getItem("user"))
     navbarWrapper.innerHTML = navbarLogged;
 };
 
