@@ -4,16 +4,7 @@
 // we change the name of the imported Bootstrap's 'Navbar' component
 import { Navbar as BootstrapNavbar} from "bootstrap";
 
-/**
- * Render the Navbar which is styled by using Bootstrap
- * Each item in the Navbar is tightly coupled with the Router configuration :
- * - the URI associated to a page shall be given in the attribute "data-uri" of the Navbar
- * - the router will show the Page associated to this URI when the user click on a nav-link
- */
-
-const Navbar = () => {
-  const navbarWrapper = document.querySelector("#navbarWrapper");
-  let navbar = `
+const navbarLogged = `
     <nav>
         <a id="logo" href="#top">AJOUTER LOGO ICI</a> <!-- si on clique sur le logo on remonte en haut de la page -->
         <div id="menu">
@@ -23,8 +14,19 @@ const Navbar = () => {
           <button class="menuButton" id="settingsButton">Paramètres</button>
         </div>
     </nav>
-  `;  
-  navbarWrapper.innerHTML = navbar;
+  `;
+
+/**
+ * Render the Navbar which is styled by using Bootstrap
+ * Each item in the Navbar is tightly coupled with the Router configuration :
+ * - the URI associated to a page shall be given in the attribute "data-uri" of the Navbar
+ * - the router will show the Page associated to this URI when the user click on a nav-link
+ */
+
+const Navbar = () => {
+  const navbarWrapper = document.querySelector("#navbarWrapper");
+  if(window.localStorage.getItem("user"))
+    navbarWrapper.innerHTML = navbarLogged;
 };
 
 export default Navbar;

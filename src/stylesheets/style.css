@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(to right, rgb(0,0,0), rgb(2, 1, 10), rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164)) ; /* TODO changer hex->rgb pour uniformiser la couleur entre tout les écrans*/
+    background: linear-gradient(to right, rgb(0,0,0), rgb(2, 1, 10), rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164)) ;
 }
 
 nav{
@@ -86,5 +86,4 @@ to{
 
 p{
     color: rgb(143, 143, 143);
-    /*margin: 2% 50%;*/
 }

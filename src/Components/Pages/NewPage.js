@@ -1,4 +1,3 @@
-import HomePage from "./HomePage";
 import { Redirect } from "../Router/Router";
 
 /**
