@@ -16,7 +16,7 @@ const Footer = () => {
 <!--        <a href="https://twitter.com/?lang=fr"><img id="twitter" class="reseau" alt="Twitter logo"></a>-->
 <!--        <a href="https://www.instagram.com/?hl=fr"><img id="instagram" class="reseau" alt="Instagram logo"></a>-->
 <!--        <a href="https://fr-fr.facebook.com/"><img id="facebook" class="reseau" alt="Facebook logo"></a>-->
-        <p class="reseau">Twitter</p><p class="reseau">Instagram</p><p class="reseau">Facebook</p><img id="photoDeProfile">
+<!--        <p class="reseau">Twitter</p><p class="reseau">Instagram</p><p class="reseau">Facebook</p>-->
   `;
 
 

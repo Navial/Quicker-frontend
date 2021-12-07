@@ -12,6 +12,7 @@ const navbarLogged = `
           <button class="menuButton" id="tendanceButton">Top kwicks</button>
           <button class="menuButton" id="messagesButton">Messages</button>
           <button class="menuButton" id="settingsButton">Paramètres</button>
+          <img id="photoDeProfile">
         </div>
     </nav>
   `;
@@ -25,7 +26,7 @@ const navbarLogged = `
 
 const Navbar = () => {
   const navbarWrapper = document.querySelector("#navbarWrapper");
-  //if(window.localStorage.getItem("user"))
+  if(window.localStorage.getItem("user"))
     navbarWrapper.innerHTML = navbarLogged;
 };
 

@@ -1,13 +1,16 @@
 body{
-    /*background: linear-gradient(to right, rgb(0,0,0), rgb(2, 1, 10), rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));*/
-    background: linear-gradient(to right, rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));
-
+    background-color: rgb(21, 48, 88);
 }
 /**
     -----------------------------------------------------
                     Navbar and Footer
     -----------------------------------------------------
  */
+#navbarWrapper{
+    width: 0;
+    height: 0;
+}
+
 nav{
     display: flex;
     flex-direction: column;
@@ -138,9 +141,8 @@ nav{
     position: absolute;
     width: 60vw;
     height: 100px;
+    margin: auto 20vw;
     padding: 20px;
-    left: 423px;
-    top: 36px;
     background: linear-gradient(to left, rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));
     border-radius: 150px;
     color: rgb(21, 48, 88);
@@ -156,7 +158,7 @@ nav{
 
 #textPost{
     width: 50vw;
-    height: 5vh;
+    height: 50px;
     border-radius: 50px;
     border-style: none;
     background-color: rgb(170, 195, 245);
@@ -177,4 +179,127 @@ nav{
     -----------------------------------------------------
  */
 
-/* TODO */
+
+#registerContainer{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 40vw;
+    position: absolute;
+    margin: 10vh 30vw;
+    background-color: rgb(21, 58, 114);
+}
+#logoRegister{
+    height: 20vh;
+    width: 30vw;
+    margin: 0 auto;
+}
+
+.inputForm{
+    margin: 15px auto;
+    border-radius: 50px;
+    text-align: center;
+    height: 50px;
+    width: 300px;
+    border: none;
+}
+
+/**
+    TODO en javascript,
+      si le champ est rempli correctement alors
+      le border ou le background-color devient vert,
+      sinon le champ ne change pas ou devient rouge
+      si le champ n'est pas rempli correctement
+      (mot de passe trop court ou regex d'adresse mail pas respectée par exemple)
+ */
+.fields:focus{
+    animation-name: animationFocusFormInput;
+    animation-duration: 0.2s;
+    width: 350px;
+    border: solid red 3px;
+    background-color: rgb(169, 195, 245);
+
+}
+
+.fields:not(:focus){
+    animation-name: animationNotFocusFormInput;
+    animation-duration: 0.2s;
+    background-color: rgb(169, 195, 245);
+    border: none;
+}
+
+#registerButton:not(:focus){
+    animation: animationRegisterFocusFormInput;
+    animation-duration: 0.2s;
+    width: 200px;
+    margin: 15px auto;
+}
+
+#registerButton:focus{
+    animation: animationRegisterNotFocusFormInput;
+    animation-duration: 0.2s;
+    width: 250px;
+    margin: 15px auto;
+}
+
+@keyframes animationFocusFormInput {
+    from{
+        width: 300px;
+        border: none;
+        background-color: rgb(169, 195, 245);
+
+    }
+    to{
+        width: 350px;
+        border: solid red 3px;
+        background-color: rgb(169, 195, 245);
+
+    }
+}
+
+@keyframes animationNotFocusFormInput {
+    from{
+        width: 350px;
+        border: solid red 3px;
+        background-color: rgb(169, 195, 245);
+
+    }
+    to{
+        width: 300px;
+        border: none;
+        background-color: rgb(169, 195, 245);
+
+    }
+}
+
+@keyframes animationRegisterFocusFormInput {
+    from{
+        width: 200px;
+        border: none;
+        background-color: rgb(169, 195, 245);
+
+    }
+    to{
+        width: 250px;
+        border: solid red 3px;
+        background-color: rgb(169, 195, 245);
+
+    }
+}
+
+@keyframes animationRegisterNotFocusFormInput {
+    from{
+        width: 250px;
+        border: solid red 3px;
+        background-color: rgb(169, 195, 245);
+
+    }
+    to{
+        width: 200px;
+        border: none;
+        background-color: rgb(169, 195, 245);
+
+    }
+}
+

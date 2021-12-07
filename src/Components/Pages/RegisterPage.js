@@ -1,15 +1,18 @@
 import { Redirect } from "../Router/Router";
+import logoKwicker from "../../img/banniereKiwi.png";
 
 const registerDiv = `
         <div id="registerPage">
-            <p>Kwicker</p>
-            <input type="text" id="nomRegister" placeholder="Nom">
-            <input type="text" id="prenomRegister" placeholder="Prénom">
-            <input type="text" id="pseudoRegister" placeholder="Nom d'utilisateur">
-            <input type="email" id="mailRegister" placeholder="Adresse mail">
-            <input type="password" id="passwordRegister" placeholder="Mot de passe">
-            <input type="password" id="confirmerPasswordRegister" placeholder="Confirmez votre mot de passe">
-            <input type="submit" value="S'inscrire" id="registerButton">
+            <div id="registerContainer">
+                <img src="" alt="Logo Kwicker" id="logoRegister">
+                <input class="inputForm fields" type="text" id="nomRegister" placeholder="Nom">
+                <input class="inputForm fields" type="text" id="prenomRegister" placeholder="Prénom">
+                <input class="inputForm fields" type="text" id="pseudoRegister" placeholder="Nom d'utilisateur">
+                <input class="inputForm fields" type="email" id="mailRegister" placeholder="Adresse mail">
+                <input class="inputForm fields" type="password" id="passwordRegister" placeholder="Mot de passe">
+                <input class="inputForm fields" type="password" id="confirmerPasswordRegister" placeholder="Confirmez votre mot de passe">
+                <input class="inputForm" type="submit" value="S'inscrire" id="registerButton">
+            </div>
         </div>
     `;
 
@@ -19,14 +22,12 @@ const registerDiv = `
  * Just an example to demonstrate how to use the router to "redirect" to a new page
  */
 function RegisterPage() {
-    // Deal with your NewPage content here
     const pageDiv = document.querySelector("#page");
-
-
-    // submit.addEventListener("click", () => {
-    //     Redirect("/");
-    // });
     pageDiv.innerHTML = registerDiv;
+    // Créer d'abord l'élément dans le innerHTML puis le querySelector pour séléctionner
+    // l'élément qui vient d'être créer
+    const logo = document.querySelector("#logoRegister");
+    logo.src = logoKwicker;
 }
 
 export default RegisterPage;
