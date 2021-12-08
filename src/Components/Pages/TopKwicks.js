@@ -6,6 +6,7 @@ const TopKwicks = async () => {
     const pageDiv = document.querySelector("#page");
     pageDiv.innerHTML = " ";
     const api = "https://paf.be/tweet/";
+
     try {
 
         // hide data to inform if the pizza menu is already printed
@@ -37,9 +38,11 @@ const TopKwicks = async () => {
         `;
         let author
         let table = document.getElementById("tableTopKiwcks")
-        let dateformated; 
+        let date;
+        let dateString;
         posts.forEach((post) => {
-            dateformated = post.creationDate;
+            date = new Date(post.creationDate)
+            dateString = date.toDateString();
             users.forEach((user) => {
                 if(user.idUser == post.idUser){
                     author = user.forename;
@@ -48,7 +51,7 @@ const TopKwicks = async () => {
             let row = `<div id="post">
 							<div class="col-sm-auto" id="postText">
                                 <div class="col-sm-5">${author}</div>
-                                <div class="col-sm-5" id="creationDate">Posté le ${post.creationDate}</div>
+                                <div class="col-sm-5" id="creationDate">Posté le ${dateString}</div>
                             </div>
 							<div class="col-sm-auto" id="postText">${post.message}</div>
 							<div class="col-sm-auto" id="imageDiv" >

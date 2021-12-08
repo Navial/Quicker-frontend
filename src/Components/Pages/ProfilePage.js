@@ -31,18 +31,23 @@ const ProfilePage = async () => {
 
         const user = await responseUserInfo.json();
         const posts = await responsePosts.json();
-        page.innerHTML = `
-                
-                      <div id="banner"></div>
-                     
-                      <div id="userContainer">
-                          <div class="col-sm-5" id="userName">${user.forename} ${user.lastname} </div>
-                          <div class="col-sm-10" id="biography">Biography : ${user.biography}</div>
-                          <div class="col-sm-6" id="creationDate">A crée son compte le ${user.creationDate}</div>
-                      </div>
-                <div class="container" id="tablePost"></div>  
-            `;
+        
+        let date = new Date(user.creationDate);
+        
+        let dateString = date.toDateString();
 
+        page.innerHTML = `
+                <div id="banner"></div>
+
+                <div id="userContainer">
+                    <div class="col-sm-10" id="userName">${user.forename} ${user.lastname} </div>
+                    <div class="col-sm-10" id="biography">Biography : ${user.biography}</div>
+                    <div class="col-sm-10" id="creationDate">Created his account on ${dateString}</div>
+                </div>
+            <div class="container" id="tablePost"></div>  
+        `;
+        
+        
         let table = document.getElementById("tablePost")
         posts.forEach((post) => {
             var row = `<div id="post">
