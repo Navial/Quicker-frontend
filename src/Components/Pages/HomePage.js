@@ -2,15 +2,15 @@
  * Render the HomePage
  */
 
-const HomePage = () => { 
-  const pageDiv = document.querySelector("#page");
+const HomePage = () => {
+    const pageDiv = document.querySelector("#page");
 
-  let page = `
+    let page = `
   
        <div id="postMessage">
             <p id="imageProfile"></p>
-                <input type="text" id="textPost">
-                <input type="submit" id="buttonPost" value="Post">
+            <input type="text" id="textPost">
+            <input type="submit" id="buttonPost" value="Post">
        </div>
        
        <div id="posts">
@@ -19,7 +19,7 @@ const HomePage = () => {
   
   `;
 
-  pageDiv.innerHTML = page;
+    pageDiv.innerHTML = page;
 };
 
 export default HomePage;

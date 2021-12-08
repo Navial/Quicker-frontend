@@ -1,6 +1,52 @@
 body{
     background-color: rgb(21, 48, 88);
 }
+
+#userContainer{
+    font-size: x-large;
+    padding-top: 6em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    color: rgb(205, 222, 254);
+    background-color: rgb(4, 57, 119);
+    margin-bottom: 1em;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#biography{
+    font-size: medium;
+}
+#creationDate{
+    font-size: medium;
+}
+#post{
+    color: rgb(205, 222, 254);
+    background-color: rgb(4, 57, 119);
+    border-radius: 2em;
+    margin-bottom: 1em;
+    padding: 1em;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#postText{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#image{
+    border-radius: 1em;
+}
+
+#imageDiv{
+    display: flex;
+    justify-content: center;
+}
 /**
     -----------------------------------------------------
                     Navbar and Footer
@@ -161,7 +207,7 @@ nav{
     height: 50px;
     border-radius: 50px;
     border-style: none;
-    background-color: rgb(170, 195, 245);
+    background-color: white;
     padding-left: 20px;
 }
 
@@ -172,6 +218,14 @@ nav{
     background-color: rgb(79,126,217);
     border: none;
 }
+
+
+/**
+    -----------------------------------------------------
+                       ProfilePage
+    -----------------------------------------------------
+ */
+/* ------Banner------*/
 
 /**
     -----------------------------------------------------

@@ -3,10 +3,24 @@
 // Here, because our JS component 'Navbar' has the same name as Navbar Bootstrap's component
 // we change the name of the imported Bootstrap's 'Navbar' component
 import { Navbar as BootstrapNavbar} from "bootstrap";
+import homePage from "../Pages/HomePage";
+
+
 
 const navbarLogged = `
+    
+    <!--<div class="sidenav">
+        <div id="menu">
+                
+        </div>
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="/resister" id="homeButton">Home</a>
+        <a href="#" id="tendanceButton">Top kwicks</a>
+        <a href="#"  id="settingsButton">Paramètres</a>
+    </div>
     <nav>
-        <a id="logo" href="#top">AJOUTER LOGO ICI</a> <!-- si on clique sur le logo on remonte en haut de la page -->
         <div id="menu">
           <button class="menuButton" id="homeButton">Home</button>
           <button class="menuButton" id="tendanceButton">Top kwicks</button>
@@ -14,9 +28,9 @@ const navbarLogged = `
           <button class="menuButton" id="settingsButton">Paramètres</button>
           <img id="photoDeProfile">
         </div>
-    </nav>
+    </nav>-->
   `;
-
+  navbarWrapper.innerHTML = navbarLogged;
 /**
  * Render the Navbar which is styled by using Bootstrap
  * Each item in the Navbar is tightly coupled with the Router configuration :
