@@ -1,42 +1,64 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 body{
     background-color: rgb(21, 48, 88);
+    font-family: 'Poppins', sans-serif;
 }
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+/** ---- PROFILE PAGE ---- */
 
 #userContainer{
     font-size: x-large;
-    padding-top: 6em;
     padding-bottom: 1em;
     padding-left: 1em;
     color: rgb(205, 222, 254);
     background-color: rgb(4, 57, 119);
     margin-bottom: 1em;
-    border-bottom-left-radius: 2em;
-    border-bottom-right-radius: 2em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
 }
-
+#banner{
+    background-color: rgb(79, 126, 217);
+    padding: 4em;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
 #biography{
-    font-size: medium;
+    font-size: x-small;
 }
 #creationDate{
-    font-size: medium;
+    font-size: x-small;
 }
+
+
 #post{
     color: rgb(205, 222, 254);
     background-color: rgb(4, 57, 119);
-    border-radius: 2em;
+    border-radius: 1em;
     margin-bottom: 1em;
     padding: 1em;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 #postText{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    font-size: small;
 }
 
 #image{
@@ -47,97 +69,74 @@ body{
     display: flex;
     justify-content: center;
 }
+
+/** ---- TOP KWICKS ---- */
+
+#tableTopKiwcks{
+    margin-top: 2em;
+}
+
+/** ---- SIDE BAR ---- */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    padding-left: 2em;
+    padding-top: 1em;
+}
+
+#sidebarContainer{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar {
+    /* don't forget to add all the previously mentioned styles here too */
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: rgb(21, 48, 88);
+    background: rgb(79, 126, 217);
+}
+
+#sidebar ul li.active{
+    color: rgb(21, 48, 88);
+    background: rgb(101, 148, 239);
+}
+
+
 /**
     -----------------------------------------------------
                     Navbar and Footer
     -----------------------------------------------------
  */
-#navbarWrapper{
-    width: 0;
-    height: 0;
-}
 
-nav{
-    display: flex;
-    flex-direction: column;
-    width: 20vw;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-}
-
-.menuButton{
-    width: 150px;
-    height: 70px;
-    margin: 20px auto;
-    font-size: 1.3em;
-    color: rgb(158, 175, 201);
-}
-
-.menuButton:hover{
-     animation-name: buttonColorHover;
-     animation-duration: 0.2s;
-     width: 200px;
-     margin: 20px 75px;
-     background-color: rgb(43, 0, 152);
-     height: 70px;
-     border-radius: 50px;
-     border-style: none;
- }
-
-.menuButton:not(:hover){
-    animation-name: buttonColorNoHover;
-    animation-duration: 0.2s;
-    width: 150px;
-    background-color: rgb(11, 12, 93);
-    margin: 20px 100px;
-    height: 70px;
-    border-radius: 50px;
-    border-style: none;
-    align-content: center;
-}
-
-
-#logo{
-    width: 200px;
-    height: 150px;
-    position: fixed;
-    top: 50px;
-    background-color: darkblue;
-}
-
-#menu{
-    position: fixed;
-    top: 250px;
-    display: flex;
-    flex-direction: column;
-}
-
-#footerWrapper{
-    display: flex;
-    flex-direction: column;
-    top: 60vh;
-    right: 10vw;
-    position: fixed;
-    height: 100vh;
-}
-
-.reseau{
-    background-color: black;
-    height: 10vh;
-    width: 10vh;
-    justify-content: center;
-}
-
-#photoDeProfile{
-    position: fixed;
-    top: 0;
-    margin-top: 5vh;
-    background-color: black;
-    width: 12vh;
-    height: 12vh;
-    border-radius: 50%;
-}
 
 /**
                 Animations
@@ -179,21 +178,6 @@ nav{
 /**
             Ajout d'un kwick
  */
-
-#postMessage{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: absolute;
-    width: 60vw;
-    height: 100px;
-    margin: auto 20vw;
-    padding: 20px;
-    background: linear-gradient(to left, rgb(4, 5, 46), rgb(20, 1, 82), rgb(34, 0, 124), rgb(13, 0, 164));
-    border-radius: 150px;
-    color: rgb(21, 48, 88);
-
-}
 
 #imageProfile {
     width: 55px;

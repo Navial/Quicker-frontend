@@ -7,20 +7,30 @@ import homePage from "../Pages/HomePage";
 
 
 
-const navbarLogged = `
-    
-    <!--<div class="sidenav">
-        <div id="menu">
-                
+const navbar = `
+<div id="sidebarContainer">
+<nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Kwicker</h3>
         </div>
-    </div>
 
-    <div id="mySidenav" class="sidenav">
-        <a href="/resister" id="homeButton">Home</a>
-        <a href="#" id="tendanceButton">Top kwicks</a>
-        <a href="#"  id="settingsButton">Paramètres</a>
-    </div>
-    <nav>
+        <ul class="list-unstyled components">
+            <li>
+                <a href="/" data-toggle="collapse" class="" onclick="class = active">Home</a>
+            </li>
+            <li>
+                <a href="/top_kwicks" data-toggle="collapse">Top kwicks</a>
+            </li>
+            <li>
+                <a href="/profile" data-toggle="collapse">Profile</a>
+            </li>
+            <li>
+                <a href="#" data-toggle="collapse">Settings</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+    <!--<nav>
         <div id="menu">
           <button class="menuButton" id="homeButton">Home</button>
           <button class="menuButton" id="tendanceButton">Top kwicks</button>
@@ -30,7 +40,9 @@ const navbarLogged = `
         </div>
     </nav>-->
   `;
-  navbarWrapper.innerHTML = navbarLogged;
+
+
+  navbarWrapper.innerHTML = navbar;
 /**
  * Render the Navbar which is styled by using Bootstrap
  * Each item in the Navbar is tightly coupled with the Router configuration :
@@ -41,7 +53,7 @@ const navbarLogged = `
 const Navbar = () => {
   const navbarWrapper = document.querySelector("#navbarWrapper");
   if(window.localStorage.getItem("user"))
-    navbarWrapper.innerHTML = navbarLogged;
+    navbarWrapper.innerHTML = navbar;
 };
 
 export default Navbar;
