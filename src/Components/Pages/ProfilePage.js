@@ -11,7 +11,7 @@ const ProfilePage = async () => {
 
     try {
         // hide data to inform if the pizza menu is already printed
-        const responseUserInfo = await fetch(api+"user/1/"); // fetch return a promise => we wait for the response
+        const responseUserInfo = await fetch(api + "user/1/"); // fetch return a promise => we wait for the response
 
         if (!responseUserInfo.ok) {
             // status code was not 200, error status code
@@ -20,7 +20,7 @@ const ProfilePage = async () => {
             );
         }
 
-        const responsePosts = await fetch(api+"user/1/post/"); // fetch return a promise => we wait for the response
+        const responsePosts = await fetch(api + "user/1/post/"); // fetch return a promise => we wait for the response
 
         if (!responsePosts.ok) {
             // status code was not 200, error status code
@@ -54,8 +54,8 @@ const ProfilePage = async () => {
 					  </div>`;
             table.innerHTML += row;
         });
-    }catch (error){
-            console.error("Error");
+    } catch (error) {
+        console.error("Error");
     }
 };
 
