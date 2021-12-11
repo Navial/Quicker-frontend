@@ -144,37 +144,6 @@ a, a:hover, a:focus {
 
 
 /**
-                Animations
- */
-
-@keyframes buttonColorHover {
-    from{
-        background-color: rgb(11, 12, 93);
-        width: 150px;
-        margin: 20px 100px;
-    }
-    to{
-        background-color: rgb(43, 0, 152);
-        width: 200px;
-        margin: 20px 75px
-    }
-}
-
-@keyframes buttonColorNoHover {
-    from{
-        background-color: rgb(43, 0, 152);
-        width: 200px;
-        margin: 20px 75px;
-    }
-    to{
-        background-color: rgb(11, 12, 93);
-        width: 150px;
-        margin: 20px 100px;
-    }
-}
-
-
-/**
     -----------------------------------------------------
                        HomePage
     -----------------------------------------------------
@@ -223,7 +192,7 @@ a, a:hover, a:focus {
  */
 
 
-#registerContainer{
+.loginRegisterContainer{
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -254,14 +223,14 @@ a, a:hover, a:focus {
       le border ou le background-color devient vert,
       sinon le champ ne change pas ou devient rouge
       si le champ n'est pas rempli correctement
-      (mot de passe trop court ou regex d'adresse mail pas respectée par exemple)
+      (mot de passe trop court ou regex d'adresse mail pas respectée par exemple lors de l'inscription, pas pendant le login !)
  */
 .fields:focus{
     animation-name: animationFocusFormInput;
     animation-duration: 0.2s;
     width: 350px;
-    border: solid red 3px;
     background-color: rgb(169, 195, 245);
+    outline: none;
 
 }
 
@@ -272,14 +241,15 @@ a, a:hover, a:focus {
     border: none;
 }
 
-#registerButton:not(:focus){
+.submitButton:not(:focus){
     animation: animationRegisterFocusFormInput;
     animation-duration: 0.2s;
     width: 200px;
     margin: 15px auto;
+    outline: none;
 }
 
-#registerButton:focus{
+.submitButton:focus{
     animation: animationRegisterNotFocusFormInput;
     animation-duration: 0.2s;
     width: 250px;
@@ -291,28 +261,22 @@ a, a:hover, a:focus {
         width: 300px;
         border: none;
         background-color: rgb(169, 195, 245);
-
     }
     to{
         width: 350px;
-        border: solid red 3px;
         background-color: rgb(169, 195, 245);
-
     }
 }
 
 @keyframes animationNotFocusFormInput {
     from{
         width: 350px;
-        border: solid red 3px;
         background-color: rgb(169, 195, 245);
-
     }
     to{
         width: 300px;
         border: none;
         background-color: rgb(169, 195, 245);
-
     }
 }
 
@@ -321,28 +285,31 @@ a, a:hover, a:focus {
         width: 200px;
         border: none;
         background-color: rgb(169, 195, 245);
-
     }
     to{
         width: 250px;
         border: solid red 3px;
         background-color: rgb(169, 195, 245);
-
     }
 }
 
 @keyframes animationRegisterNotFocusFormInput {
     from{
         width: 250px;
-        border: solid red 3px;
         background-color: rgb(169, 195, 245);
-
     }
     to{
         width: 200px;
         border: none;
         background-color: rgb(169, 195, 245);
-
     }
 }
 
+.newPost{
+    margin: 2vh 0 0 10vw;
+    width: fit-content;
+}
+
+input:focus{
+    outline: none;
+}

@@ -3,7 +3,7 @@ import logoKwicker from "../../img/banniereKiwi.png";
 
 const registerDiv = `
         <div id="registerPage">
-            <div id="registerContainer">
+            <div class="loginRegisterContainer">
                 <img src="" alt="Logo Kwicker" id="logoRegister">
                 <input class="inputForm fields" type="text" id="nomRegister" placeholder="Nom">
                 <input class="inputForm fields" type="text" id="prenomRegister" placeholder="Prénom">
@@ -11,7 +11,7 @@ const registerDiv = `
                 <input class="inputForm fields" type="email" id="mailRegister" placeholder="Adresse mail">
                 <input class="inputForm fields" type="password" id="passwordRegister" placeholder="Mot de passe">
                 <input class="inputForm fields" type="password" id="confirmerPasswordRegister" placeholder="Confirmez votre mot de passe">
-                <input class="inputForm" type="submit" value="S'inscrire" id="registerButton">
+                <input class="inputForm submitButton" type="submit" value="S'inscrire" id="registerButton">
             </div>
         </div>
     `;

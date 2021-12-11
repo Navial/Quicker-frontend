@@ -3,6 +3,7 @@ import NewPage from "../Pages/NewPage";
 import RegisterPage from "../Pages/RegisterPage"
 import ProfilePage from "../Pages/ProfilePage";
 import TopKwicks from "../Pages/TopKwicks";
+import LoginPage from "../Pages/LoginPage";
 
 // Configure your routes here
 const routes = {
@@ -10,7 +11,8 @@ const routes = {
   "/new": NewPage,
   "/register": RegisterPage,
   "/profile" : ProfilePage,
-  "/top_kwicks" : TopKwicks
+  "/top_kwicks" : TopKwicks,
+  "/login": LoginPage,
 };
 
 /**

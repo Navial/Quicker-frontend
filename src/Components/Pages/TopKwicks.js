@@ -34,6 +34,10 @@ const TopKwicks = async () => {
 
 
         page.innerHTML = `
+            <div class="newPost">
+                <input type="text" id="textPost">
+                <input type="submit" id="buttonPost" value="Post">
+            </div>
             <div class="container" id="tableTopKiwcks"></div>  
         `;
         let author
