@@ -5,6 +5,7 @@ import ProfilePage from "../Pages/ProfilePage";
 import TopKwicks from "../Pages/TopKwicks";
 import LoginPage from "../Pages/LoginPage";
 import AdminPage from "../Pages/AdminPage";
+import Logout from "../Pages/Logout";
 
 // Configure your routes here
 const routes = {
@@ -14,7 +15,8 @@ const routes = {
   "/profile" : ProfilePage,
   "/top_kwicks" : TopKwicks,
   "/login": LoginPage,
-  "/admin_page": AdminPage
+  "/admin_page": AdminPage,
+  "/logout": Logout
 };
 
 /**
