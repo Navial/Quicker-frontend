@@ -4,6 +4,8 @@ const adminPagehtml = `
             <input id="postsGestionButton" type="button" value="Posts Gestion">
             <input id="membersGestionButton" type="button" value="Members Gestion">
         </div>
+        <div id="adminTable">
+        </div>
     </div>
 `;
 
@@ -17,25 +19,24 @@ const AdminPage = () => {
 }
 
 const postsGestionHtml = `
-    <div id="postsGestionDiv">
-        <table id="postsGestionTable" class="table-bordered">
-            <tr>
-                <th>Post's Id</th>
-                <th>User's Id</th>
-                <th>Image</th>
-                <th>Message</th>
-                <th>Parent Post's Id</th>
-                <th>Removed (True/False)</th>
-                <th>Creation Date</th>
-                <th>Number of Likes</th>
-            </tr>
-        </table>
-    </div>
+    <h3>Posts Gestion</h3>
+    <table id="postsGestionTable" class="table-bordered">
+        <tr>
+            <th>Post's Id</th>
+            <th>User's Id</th>
+            <th>Image</th>
+            <th>Message</th>
+            <th>Parent Post's Id</th>
+            <th>Removed (True/False)</th>
+            <th>Creation Date</th>
+            <th>Number of Likes</th>
+        </tr>
+    </table>
 `;
 
 async function showPostsGestion() {
-    const adminPage = document.getElementById("adminPage");
-    adminPage.innerHTML += postsGestionHtml;
+    const adminTable = document.getElementById("adminTable");
+    adminTable.innerHTML = postsGestionHtml;
     const table = document.getElementById("postsGestionTable");
 
     try {
@@ -63,8 +64,54 @@ async function showPostsGestion() {
     }
 }
 
-function showMembersGestion() {
+const membersGestionHtml = `
+    <h3>Members Gestion</h3>
+    <table id="membersGestionTable" class="table-bordered">
+        <tr>
+            <th>User's Id</th>
+            <th>Forename</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Image</th>
+            <th>Active (True/False)</th>
+            <th>Admin (True/False)</th>
+            <th>Biography</th>
+            <th>Creation Date</th>
+        </tr>
+    </table>
+`;
 
+async function showMembersGestion() {
+    const adminTable = document.getElementById("adminTable");
+    adminTable.innerHTML = membersGestionHtml;
+    const table = document.getElementById("membersGestionTable");
+
+    try {
+        const response = await fetch("/api/users/");
+        if (!response.ok)
+            throw new Error("AdminPage::error: fetch error: fetch error : " + response.status + " : " + response.statusText);
+        const users = await response.json();
+
+        users.forEach((user) => {
+            table.innerHTML += `
+                <tr>
+                    <td>${user.id_user}</td>
+                    <td>${user.forename}</td>   
+                    <td>${user.lastname}</td>    
+                    <td>${user.email}</td>
+                    <td>${user.username}</td>
+                    <td>${user.image}</td>
+                    <td>${user.is_active}</td>
+                    <td>${user.is_admin}</td>
+                    <td>${user.biography}</td>
+                    <td>${user.date_creation}</td>
+                </tr>
+            `;
+        });
+    } catch (e) {
+        console.log(e.message);
+    }
 }
 
 export default AdminPage;
