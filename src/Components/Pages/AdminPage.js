@@ -18,7 +18,7 @@ const AdminPage = () => {
 
 const postsGestionHtml = `
     <div id="postsGestionDiv">
-        <table class="table-bordered">
+        <table id="postsGestionTable" class="table-bordered">
             <tr>
                 <th>Post's Id</th>
                 <th>User's Id</th>
@@ -29,16 +29,38 @@ const postsGestionHtml = `
                 <th>Creation Date</th>
                 <th>Number of Likes</th>
             </tr>
-            <tr id="postsGestionTableRows">
-            </tr>
         </table>
     </div>
 `;
 
-function showPostsGestion() {
+async function showPostsGestion() {
     const adminPage = document.getElementById("adminPage");
     adminPage.innerHTML += postsGestionHtml;
+    const table = document.getElementById("postsGestionTable");
 
+    try {
+        const response = await fetch("/api/posts/");
+        if (!response.ok)
+            throw new Error("AdminPage::error: fetch error: fetch error : " + response.status + " : " + response.statusText);
+        const posts = await response.json();
+
+        posts.forEach((post) => {
+            table.innerHTML += `
+                <tr>
+                    <td>${post.id_post}</td>
+                    <td>${post.id_user}</td>   
+                    <td>${post.image}</td>    
+                    <td>${post.message}</td>
+                    <td>${post.parent_post}</td>
+                    <td>${post.is_removed}</td>
+                    <td>${post.date_creation}</td>
+                    <td>${post.number_of_likes}</td>
+                </tr>
+            `;
+        });
+    } catch (e) {
+        console.log(e.message);
+    }
 }
 
 function showMembersGestion() {
