@@ -65,6 +65,13 @@ const Navbar = () => {
     const adminPageLink = document.getElementById("adminPageLink");
     adminPageLink.innerHTML = adminkPageLinkHtml;
   }
+  for (const item of list) {
+    item.addEventListener("click", (e) => {
+      if (e.target.dataset.uri === window.location.pathname) {
+        item.setAttribute("class", "active");
+      }
+    });
+  }
 };
 
 export default Navbar;
