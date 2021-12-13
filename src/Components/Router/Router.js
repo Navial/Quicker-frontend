@@ -4,6 +4,7 @@ import RegisterPage from "../Pages/RegisterPage"
 import ProfilePage from "../Pages/ProfilePage";
 import TopKwicks from "../Pages/TopKwicks";
 import LoginPage from "../Pages/LoginPage";
+import AdminPage from "../Pages/AdminPage";
 
 // Configure your routes here
 const routes = {
@@ -13,6 +14,7 @@ const routes = {
   "/profile" : ProfilePage,
   "/top_kwicks" : TopKwicks,
   "/login": LoginPage,
+  "/admin_page": AdminPage
 };
 
 /**
