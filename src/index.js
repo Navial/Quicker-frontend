@@ -5,7 +5,9 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Navbar/Footer";
 import { Router } from "./Components/Router/Router";
 
-Navbar();
+const actuelRoot = window.location.pathname;
+if (actuelRoot !== '/login' && actuelRoot !== '/register')
+    Navbar();
 
 Router(); // The router will automatically load the root page
 
