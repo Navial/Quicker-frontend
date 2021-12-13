@@ -57,7 +57,7 @@ const Navbar = () => {
 
     // Set active element
     const list = document.querySelector("#navbarWrapper").getElementsByTagName("a");
-    for (let item of list) {
+    for (const item of list) {
       if (item.href.split("/").pop() === window.location.pathname.split("/").pop()) {
         item.setAttribute("class", "active");
       }
