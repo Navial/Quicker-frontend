@@ -1,18 +1,22 @@
 import { Redirect } from "../Router/Router";
 import logoKwicker from "../../img/banniereKiwi.png";
+import Navbar from "../Navbar/Navbar";
 
 const registerDiv = `
         <div id="registerPage">
             <div class="loginRegisterContainer">
                 <img src="" alt="Logo Kwicker" id="logoRegister">
-                <input class="inputForm fields" type="text" id="nomRegister" placeholder="Nom">
-                <input class="inputForm fields" type="text" id="prenomRegister" placeholder="Prénom">
-                <input class="inputForm fields" type="text" id="pseudoRegister" placeholder="Nom d'utilisateur">
-                <input class="inputForm fields" type="email" id="mailRegister" placeholder="Adresse mail">
-                <input class="inputForm fields" type="password" id="passwordRegister" placeholder="Mot de passe">
-                <input class="inputForm fields" type="password" id="confirmerPasswordRegister" placeholder="Confirmez votre mot de passe">
-                <input class="inputForm submitButton" type="submit" value="S'inscrire" id="registerButton">
+                <form id="registerForm">
+                    <input class="inputForm fields" type="text" id="lastnameRegister" placeholder="Nom">
+                    <input class="inputForm fields" type="text" id="forenameRegister" placeholder="Prénom">
+                    <input class="inputForm fields" type="text" id="usernameRegister" placeholder="Nom d'utilisateur">
+                    <input class="inputForm fields" type="email" id="emailRegister" placeholder="Adresse mail">
+                    <input class="inputForm fields" type="password" id="passwordRegister" placeholder="Mot de passe">
+                    <input class="inputForm fields" type="password" id="passwordConfirmationRegister" placeholder="Confirmez votre mot de passe">
+                    <input class="inputForm submitButton" type="submit" value="S'inscrire" id="registerButton">
+                </form>
             </div>
+            <div id="errorRegister" class="alert-danger"></div>
         </div>
     `;
 
@@ -28,6 +32,71 @@ function RegisterPage() {
     // l'élément qui vient d'être créer
     const logo = document.querySelector("#logoRegister");
     logo.src = logoKwicker;
+    const form = document.getElementById("registerForm");
+    form.addEventListener("submit", register);
+}
+
+async function register (e) {
+    e.preventDefault();
+    const errorLogin = document.getElementById("errorRegister");
+    const password = document.getElementById("passwordRegister").value;
+    const passwordConfirmation = document.getElementById("passwordConfirmationRegister").value;
+    if(password !== passwordConfirmation) {
+        errorLogin.innerHTML = "<h2>Les mots de passe ne sont pas identiques</h2>";
+        throw new Error("Passwords don't match");
+    } else
+        errorLogin.innerHTML = "";
+
+    const user = {
+        lastname: document.getElementById("lastnameRegister").value,
+        forename: document.getElementById("forenameRegister").value,
+        username: document.getElementById("usernameRegister").value,
+        email: document.getElementById("emailRegister").value,
+        password: password,
+    }
+    if(!user.lastname){
+        errorLogin.innerHTML = `<h2>Tu dois entrer un nom!</h2>`;
+        throw new Error("No lastname");
+    } else if (!user.forename){
+        errorLogin.innerHTML = `<h2>Tu dois entrer un prénom!</h2>`;
+        throw new Error("No forename");
+    } else if (!user.username){
+        errorLogin.innerHTML = `<h2>Tu dois entrer un pseudo!</h2>`;
+        throw new Error("No username");
+    } else if (!user.email){
+        errorLogin.innerHTML = `<h2>Tu dois entrer un email!</h2>`;
+        throw new Error("No email");
+    } else if (!user.password){
+        errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe!</h2>`;
+        throw new Error("No password");
+    } else {
+        errorLogin.innerHTML = "";
+    }
+
+    const request = {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    try {
+        const response = await fetch("api/users/register", request);
+
+        if (!response.ok) {
+            errorLogin.innerHTML = "<h2>Problème lors de l'inscription.</h2>";
+            throw new Error("fetch error : " + response.status + " : " + response.statusText);
+        } else {
+            errorLogin.innerHTML = "";
+        }
+
+        const idUser = await response.json();
+        window.localStorage.setItem("id_user", idUser);
+        Navbar();
+        Redirect("/");
+    } catch (e) {
+        console.error("LoginPage::error ", e);
+    }
 }
 
 export default RegisterPage;
