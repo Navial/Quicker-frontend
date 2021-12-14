@@ -41,6 +41,7 @@ async function showPostsGestion() {
 
     try {
         const response = await fetch("/api/posts/");
+        console.log(response)
         if (!response.ok)
             throw new Error("AdminPage::error: fetch error: fetch error : " + response.status + " : " + response.statusText);
         const posts = await response.json();
@@ -89,10 +90,11 @@ async function showMembersGestion() {
 
     try {
         const response = await fetch("/api/users/");
+        console.log(response)
         if (!response.ok)
             throw new Error("AdminPage::error: fetch error: fetch error : " + response.status + " : " + response.statusText);
         const users = await response.json();
-
+        console.log(users)
         users.forEach((user) => {
             table.innerHTML += `
                 <tr>
