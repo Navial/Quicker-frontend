@@ -4,7 +4,12 @@
 
 const HomePage = async () => {
     const pageDiv = document.querySelector("#page");
-    pageDiv.innerHTML = " ";
+    pageDiv.innerHTML = `<div class="newPost">
+                <input type="text" id="textPost">
+                <input type="submit" id="buttonPost" value="Post">
+            </div>
+            <div class="container" id="tableTopKiwcks"></div>`;
+
     const token = JSON.parse(window.localStorage.getItem("user")).token;
     const request = {
         method: "GET",
@@ -33,22 +38,14 @@ const HomePage = async () => {
         }
 
         const users = await responseUsersInfo.json();
-        console.log("ici")
         const posts = await responsePosts.json();
 
-
-        page.innerHTML = `
-            <div class="newPost">
-                <input type="text" id="textPost">
-                <input type="submit" id="buttonPost" value="Post">
-            </div>
-            <div class="container" id="tableTopKiwcks"></div>  
-        `;
         let author
         let table = document.getElementById("tableTopKiwcks")
         let date;
         let dateString;
         let htmlImage;
+        console.log(users[0]);
 
         posts.forEach((post) => {
             date = new Date(post.creationDate)
