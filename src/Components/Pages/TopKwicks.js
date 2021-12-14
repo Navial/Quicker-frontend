@@ -5,12 +5,11 @@
 const TopKwicks = async () => {
     const pageDiv = document.querySelector("#page");
     pageDiv.innerHTML = " ";
-    const api = "https://paf.be/tweet/";
 
     try {
 
         // hide data to inform if the pizza menu is already printed
-        const responseUsersInfo = await fetch(api + "user/"); // fetch return a promise => we wait for the response
+        const responseUsersInfo = await fetch( "/api/users/"); // fetch return a promise => we wait for the response
 
         if (!responseUsersInfo.ok) {
             // status code was not 200, error status code
