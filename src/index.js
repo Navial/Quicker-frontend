@@ -14,12 +14,23 @@ const unloggedPage = [
     "/logout"
 ];
 
+const adminPage = [
+    "/admin_page"
+]
+
+const user = JSON.parse(window.localStorage.getItem("user"));
 if (unloggedPage.findIndex(s => s === actuelRoot) < 0) {
     if (!isConnected) {
         window.location.replace(window.location.origin + "/login");
     } else {
-        Navbar();
+        if(!user.is_admin && adminPage.findIndex(s => s === actuelRoot) >= 0) {
+            window.location.replace(window.location.origin + "/");
+        } else {
+            Navbar();
+        }
     }
+} else if (isConnected) {
+    window.location.replace(window.location.origin + "/");
 }
 
 Router(); // The router will automatically load the root page
