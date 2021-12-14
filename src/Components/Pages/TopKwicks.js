@@ -5,12 +5,17 @@
 const TopKwicks = async () => {
     const pageDiv = document.querySelector("#page");
     pageDiv.innerHTML = " ";
-
+    const request = {
+        method: "GET",
+        headers: {
+            "Authorization": JSON.parse(window.localStorage.getItem("user")).token
+        }
+    };
     try {
 
         // hide data to inform if the pizza menu is already printed
-        const responseUsersInfo = await fetch( "/api/users/"); // fetch return a promise => we wait for the response
-
+        const responseUsersInfo = await fetch( "/api/users/", request); // fetch return a promise => we wait for the response
+        console.log(responseUsersInfo);
         if (!responseUsersInfo.ok) {
             // status code was not 200, error status code
             throw new Error(
@@ -18,8 +23,7 @@ const TopKwicks = async () => {
             );
         }
 
-
-        const responsePosts = await fetch(`api/posts/`); // fetch return a promise => we wait for the response
+        const responsePosts = await fetch(`/api/posts/`, request); // fetch return a promise => we wait for the response
 
         if (!responsePosts.ok) {
             // status code was not 200, error status code
@@ -28,7 +32,7 @@ const TopKwicks = async () => {
             );
         }
 
-        const responseLikes = await fetch(`api/likes/`); // fetch return a promise => we wait for the response
+        const responseLikes = await fetch(`/api/likes/`, request); // fetch return a promise => we wait for the response
 
         if (!responseLikes.ok) {
             // status code was not 200, error status code
@@ -59,12 +63,12 @@ const TopKwicks = async () => {
             date = new Date(post.creationDate)
             dateString = date.toDateString();
             users.forEach((user) => {
-                if(user.idUser == post.idUser){
+                if(user.id_user === post.id_user){
                     author = user.forename;
                 } 
             });
             likes.forEach((like) => {
-                if(like.id_post == post.id_post) {
+                if(like.id_post === post.id_post) {
                     likesPost++;
                 }
             });
