@@ -69,7 +69,6 @@ async function login(e) {
         }
 
         const user = await response.json();
-        console.log(user);
         window.localStorage.setItem("user", JSON.stringify(user));
         Navbar();
         Redirect("/");
