@@ -34,6 +34,9 @@ const Router = () => {
 
     if (uri) {
       e.preventDefault();
+      const user = JSON.parse(window.localStorage.getItem("user"));
+      if(user && !user.is_admin && uri === "/admin_page")
+        uri = "/";
       /* use Web History API to add current page URL to the user's navigation history 
        & set right URL in the browser (instead of "#") */
       window.history.pushState({}, uri, window.location.origin + uri);
@@ -52,6 +55,10 @@ const Router = () => {
 
   /* Route the right component when the page is loaded / refreshed */
   window.addEventListener("load", (e) => {
+    const user = JSON.parse(window.localStorage.getItem("user"));
+    if(user && !user.is_admin && window.location.pathname === "/admin_page")
+      window.location.pathname = "/";
+
     const componentToRender = routes[window.location.pathname];
     if (!componentToRender)
       throw Error(
@@ -63,6 +70,10 @@ const Router = () => {
 
   // Route the right component when the user use the browsing history
   window.addEventListener("popstate", () => {
+    const user = JSON.parse(window.localStorage.getItem("user"));
+    if(user && !user.is_admin && window.location.pathname === "/admin_page")
+      window.location.pathname = "/";
+
     const componentToRender = routes[window.location.pathname];
     componentToRender();
   });
@@ -76,6 +87,9 @@ const Router = () => {
 
 const Redirect = (uri) => {
   // use Web History API to add current page URL to the user's navigation history & set right URL in the browser (instead of "#")
+  const user = JSON.parse(window.localStorage.getItem("user"));
+  if(user && !user.is_admin && uri === "/admin_page")
+    uri = "/";
   window.history.pushState({}, uri, window.location.origin + uri);
   // render the requested component
   const componentToRender = routes[uri];

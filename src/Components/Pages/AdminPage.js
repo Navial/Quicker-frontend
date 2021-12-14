@@ -12,26 +12,29 @@ const adminPagehtml = `
 const AdminPage = () => {
     const page = document.getElementById("page");
     page.innerHTML = adminPagehtml;
-    const postGestionutton = document.getElementById("postsGestionButton");
+    const postGestionButton = document.getElementById("postsGestionButton");
     const membersGestionButton = document.getElementById("membersGestionButton");
-    postGestionutton.addEventListener("click", showPostsGestion);
+    postGestionButton.addEventListener("click", showPostsGestion);
     membersGestionButton.addEventListener("click", showMembersGestion);
 }
 
 const postsGestionHtml = `
     <h3>Posts Gestion</h3>
-    <table id="postsGestionTable" class="table-bordered">
-        <tr>
-            <th>Post's Id</th>
-            <th>User's Id</th>
-            <th>Image</th>
-            <th>Message</th>
-            <th>Parent Post's Id</th>
-            <th>Removed (True/False)</th>
-            <th>Creation Date</th>
-            <th>Number of Likes</th>
-        </tr>
-    </table>
+    <form id="postsGestionForm">
+        <table id="postsGestionTable" class="table-bordered">
+            <tr>
+                <th>Post's Id</th>
+                <th>User's Id</th>
+                <th>Image</th>
+                <th>Message</th>
+                <th>Parent Post's Id</th>
+                <th>Removed (True/False)</th>
+                <th>Creation Date</th>
+                <th>Number of Likes</th>
+                <th>Suppression</th>
+            </tr>
+        </table>
+    </form>
 `;
 
 async function showPostsGestion() {
@@ -47,6 +50,11 @@ async function showPostsGestion() {
         const posts = await response.json();
 
         posts.forEach((post) => {
+            if (post.is_removed)
+                var postStatus = "Cancel remove";
+            else
+                var postStatus = "Remove";
+
             table.innerHTML += `
                 <tr>
                     <td>${post.id_post}</td>
@@ -57,6 +65,10 @@ async function showPostsGestion() {
                     <td>${post.is_removed}</td>
                     <td>${post.date_creation}</td>
                     <td>${post.number_of_likes}</td>
+                    <td>
+                        <input type="hidden" value="${post.id_post}">
+                        <input type="submit" value="${postStatus}">
+                    </td>
                 </tr>
             `;
         });
@@ -67,20 +79,23 @@ async function showPostsGestion() {
 
 const membersGestionHtml = `
     <h3>Members Gestion</h3>
-    <table id="membersGestionTable" class="table-bordered">
-        <tr>
-            <th>User's Id</th>
-            <th>Forename</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Image</th>
-            <th>Active (True/False)</th>
-            <th>Admin (True/False)</th>
-            <th>Biography</th>
-            <th>Creation Date</th>
-        </tr>
-    </table>
+    <form id="membersGetionForm"></form>
+        <table id="membersGestionTable" class="table-bordered">
+            <tr>
+                <th>User's Id</th>
+                <th>Forename</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Image</th>
+                <th>Active (True/False)</th>
+                <th>Admin (True/False)</th>
+                <th>Biography</th>
+                <th>Creation Date</th>
+                <th>Modifications</th>
+            </tr>
+        </table>
+    </form>
 `;
 
 async function showMembersGestion() {
@@ -96,6 +111,15 @@ async function showMembersGestion() {
         const users = await response.json();
         console.log(users)
         users.forEach((user) => {
+            if (user.is_active)
+                var memberStatus = "Activate";
+            else
+                var memberStatus = "Deactivate";
+            if (user.is_admin)
+                var memberType = "Member";
+            else
+                var memberType = "Admin";
+
             table.innerHTML += `
                 <tr>
                     <td>${user.id_user}</td>
@@ -108,6 +132,11 @@ async function showMembersGestion() {
                     <td>${user.is_admin}</td>
                     <td>${user.biography}</td>
                     <td>${user.date_creation}</td>
+                    <td>
+                        <input id="id_user" type="hidden" value="${user.id_user}">
+                        <input type="submit" value="${memberStatus}">
+                        <input type="submit" value="${memberType}">
+                    </td>
                 </tr>
             `;
         });
