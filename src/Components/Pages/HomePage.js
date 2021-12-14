@@ -45,13 +45,12 @@ const HomePage = async () => {
         let date;
         let dateString;
         let htmlImage;
-        console.log(users[0]);
 
         posts.forEach((post) => {
             date = new Date(post.creationDate)
             dateString = date.toDateString();
             users.forEach((user) => {
-                if(user.idUser == post.idUser){
+                if(user.id_user === post.id_user){
                     author = user.forename;
                 }
             });
