@@ -1,12 +1,13 @@
 import Tables from "../../utils/tables";
 
 const userToken = JSON.parse(window.localStorage.getItem("user")).token;
-const getRequest = {
-    method: "GET",
+const deleteRequest = {
+    method: "DELETE",
     headers: {
         "Authorisation": userToken
     }
 };
+
 
 const adminPagehtml = `
     <div id="adminPage">
@@ -30,7 +31,6 @@ const AdminPage = () => {
 
 const postsGestionHtml = `
     <h3>Posts Gestion</h3>
-    <form id="postsGestionForm">
         <table id="postsGestionTable" class="table-bordered">
             <tr>
                 <th>Post's Id</th>
@@ -47,14 +47,30 @@ const postsGestionHtml = `
             
             </tbody>
         </table>
-    </form>
 `;
 
 async function showPostsGestion() {
     const adminTable = document.getElementById("adminTable");
     adminTable.innerHTML = postsGestionHtml;
     try {
-
+        await Tables.refreshPostsTable();
+        const forms = document.querySelectorAll("#postsGestionForm");
+        forms.forEach((form) => {
+            let id_post;
+            let postStatus;
+            form.querySelectorAll("input").forEach((input) => {
+                if (input.id === "id_post")
+                    id_post = input.value;
+                else {
+                    postStatus = input.value;
+                    input.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        if (postStatus === "Remove")
+                            removePost(id_post);
+                    });
+                }
+            });
+        });
     } catch (e) {
         console.log(e.message);
     }
@@ -78,10 +94,8 @@ const membersGestionHtml = `
                 <th>Modifications</th>
             </tr>
             <tbody id="membersGestionTbody">
-            
             </tbody>
         </table>
- 
 `;
 
 async function showMembersGestion() {
@@ -118,17 +132,22 @@ async function showMembersGestion() {
 }
 
 async function removeUser(id_user) {
-    const deleteRequest = {
-        method: "DELETE",
-        headers: {
-            "Authorisation": userToken
-        }
-    };
     try {
         const response = await fetch(`/api/users/${id_user}`, deleteRequest);
         if (!response.ok)
             throw new Error("fetch error : " + responsePosts.status + " : " + responsePosts.statusText);
         await Tables.refreshMembersTable();
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+async function removePost(id_post){
+   try {
+        const response = await fetch(`/api/posts/${id_post}`, deleteRequest);
+        if (!response.ok)
+            throw new Error("fetch error : " + response.status + " : " + response.statusText);
+        await Tables.refreshPostsTable();
     } catch (e) {
         console.error(e);
     }
