@@ -5,13 +5,18 @@
 const HomePage = async () => {
     const pageDiv = document.querySelector("#page");
     pageDiv.innerHTML = " ";
-    const api = "https://paf.be/tweet/";
-
+    const token = JSON.parse(window.localStorage.getItem("user")).token;
+    const request = {
+        method: "GET",
+        headers: {
+            "Authorization": token
+        }
+    };
     try {
 
         // hide data to inform if the pizza menu is already printed
-        const responseUsersInfo = await fetch(api + "user/"); // fetch return a promise => we wait for the response
-
+        const responseUsersInfo = await fetch("/api/users/", request); // fetch return a promise => we wait for the response
+        console.log(responseUsersInfo);
         if (!responseUsersInfo.ok) {
             // status code was not 200, error status code
             throw new Error(
@@ -19,8 +24,7 @@ const HomePage = async () => {
             );
         }
 
-
-        const responsePosts = await fetch(api + "post/"); // fetch return a promise => we wait for the response
+        const responsePosts = await fetch("/api/posts/"); // fetch return a promise => we wait for the response
 
         if (!responsePosts.ok) {
             // status code was not 200, error status code
@@ -30,6 +34,8 @@ const HomePage = async () => {
         }
 
         const users = await responseUsersInfo.json();
+        console.log("ici")
+        console.log(users);
         const posts = await responsePosts.json();
 
 
