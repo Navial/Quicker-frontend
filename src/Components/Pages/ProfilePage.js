@@ -6,14 +6,18 @@ const ProfilePage = async () => {
     const pageDiv = document.querySelector("#page");
 
     pageDiv.innerHTML = "";
-    const api = "https://paf.be/tweet/";
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const idUser = urlParams.get('idUser');
+    const userSession = JSON.parse(window.localStorage.getItem("user"));
+    let idUser = userSession.id_user;
+    const request = {
+        method: "GET",
+        headers: {
+            "Authorization": userSession.token
+        }
+    };
     try {
-        // hide data to inform if the pizza menu is already printed
-        const responseUserInfo = await fetch(api + `user/${idUser}/`); // fetch return a promise => we wait for the response
-
+        const responseUserInfo = await fetch(`api/users/profile/${idUser}`, request); // fetch return a promise => we wait for the response
         if (!responseUserInfo.ok) {
             // status code was not 200, error status code
             throw new Error(
@@ -21,7 +25,7 @@ const ProfilePage = async () => {
             );
         }
 
-        const responsePosts = await fetch(`api/posts/${idUser}`); // fetch return a promise => we wait for the response
+        const responsePosts = await fetch(`api/posts/user/${idUser}`, request); // fetch return a promise => we wait for the response
 
         if (!responsePosts.ok) {
             // status code was not 200, error status code
@@ -30,7 +34,7 @@ const ProfilePage = async () => {
             );
         }
 
-        const responseLikes = await fetch(`api/likes/`); // fetch return a promise => we wait for the response
+        const responseLikes = await fetch(`api/likes/`, request); // fetch return a promise => we wait for the response
 
         if (!responseLikes.ok) {
             // status code was not 200, error status code
@@ -39,11 +43,11 @@ const ProfilePage = async () => {
             );
         }
         
-        const likes = await responseLikes.json();
         const user = await responseUserInfo.json();
+        const likes = await responseLikes.json();
         const posts = await responsePosts.json();
 
-        let date = new Date(user.creationDate);
+        let date = new Date(user.date_creation);
         let likesPost = 0;
         let dateString = date.toDateString();
         let htmlImage;
