@@ -77,8 +77,10 @@ async function refreshPostsTable() {
                 <td>${post.date_creation}</td>
                 <td>${post.number_of_likes}</td>
                 <td>
-                    <input id="id_post" type="hidden" value="${post.id_post}">
-                    <input type="submit" value="${postStatus}">
+                    <form id="postsGestionForm">
+                        <input id="id_post" type="hidden" value="${post.id_post}">
+                        <input type="submit" value="${postStatus}">
+                    </form>
                 </td>
             </tr>
         `;
