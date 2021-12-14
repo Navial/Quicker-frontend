@@ -31,8 +31,9 @@ const Router = () => {
   navbarWrapper.addEventListener("click", (e) => {
     // To get a data attribute through the dataset object, get the property by the part of the attribute name after data- (note that dashes are converted to camelCase).
     let uri = e.target.dataset.uri;
-    const list = document.querySelector("#navbarWrapper").getElementsByTagName("a");
 
+    // Active navbar item
+    const list = navbarWrapper.getElementsByTagName("a");
     for (const item of list) {
       if ((item.getAttribute("data-uri") === uri)) {
         item.setAttribute("class", "active");
@@ -96,9 +97,9 @@ const Router = () => {
 
 const Redirect = (uri) => {
   // use Web History API to add current page URL to the user's navigation history & set right URL in the browser (instead of "#")
-  const user = JSON.parse(window.localStorage.getItem("user"));
-  if(user && !user.is_admin && uri === "/admin_page")
-    uri = "/";
+  // const user = JSON.parse(window.localStorage.getItem("user"));
+  // if(user && !user.is_admin && uri === "/admin_page")
+  //   uri = "/";
   window.history.pushState({}, uri, window.location.origin + uri);
   // render the requested component
   const componentToRender = routes[uri];
