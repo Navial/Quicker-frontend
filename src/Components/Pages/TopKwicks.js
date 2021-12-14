@@ -15,7 +15,6 @@ const TopKwicks = async () => {
 
         // hide data to inform if the pizza menu is already printed
         const responseUsersInfo = await fetch( "/api/users/", request); // fetch return a promise => we wait for the response
-        console.log(responseUsersInfo);
         if (!responseUsersInfo.ok) {
             // status code was not 200, error status code
             throw new Error(
