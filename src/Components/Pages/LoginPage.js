@@ -62,7 +62,7 @@ async function login(e) {
         const response = await fetch("api/users/login", request);
 
         if (!response.ok) {
-            errorLogin.innerHTML = "<h2>Problème lors de la connexion.</h2>";
+            errorLogin.innerHTML = "<h2>ProblÃ¨me lors de la connexion.</h2>";
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         } else {
             errorLogin.innerHTML = "";
