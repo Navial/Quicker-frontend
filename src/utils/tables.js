@@ -52,4 +52,37 @@ async function refreshMembersTable() {
     }
 }
 
-export default {refreshMembersTable};
+async function refreshPostsTable() {
+    const tableTbody = document.getElementById("postsGestionTbody");
+    const response = await fetch("/api/posts/", getRequest);
+    console.log(response)
+    if (!response.ok)
+        throw new Error("AdminPage::error: fetch error: fetch error : " + response.status + " : " + response.statusText);
+    const posts = await response.json();
+    tableTbody.innerHTML = "";
+    posts.forEach((post) => {
+        if (post.is_removed)
+            var postStatus = "Cancel remove";
+        else
+            var postStatus = "Remove";
+
+        tableTbody.innerHTML += `
+             <tr>
+                <td>${post.id_post}</td>
+                <td>${post.id_user}</td>   
+                <td>${post.image}</td>    
+                <td>${post.message}</td>
+                <td>${post.parent_post}</td>
+                <td>${post.is_removed}</td>
+                <td>${post.date_creation}</td>
+                <td>${post.number_of_likes}</td>
+                <td>
+                    <input type="hidden" value="${post.id_post}">
+                    <input type="submit" value="${postStatus}">
+                </td>
+            </tr>
+        `;
+    });
+}
+
+export default {refreshMembersTable, refreshPostsTable};
