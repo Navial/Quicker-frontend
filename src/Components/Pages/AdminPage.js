@@ -16,8 +16,7 @@ const AdminPage = () => {
     const membersGestionButton = document.getElementById("membersGestionButton");
     postGestionButton.addEventListener("click", showPostsGestion);
     membersGestionButton.addEventListener("click", showMembersGestion);
-    const
-        }
+}
 
 const postsGestionHtml = `
     <h3>Posts Gestion</h3>
