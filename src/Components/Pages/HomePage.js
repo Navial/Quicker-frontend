@@ -44,6 +44,8 @@ const HomePage = async () => {
         let table = document.getElementById("tableTopKiwcks")
         let date;
         let dateString;
+        let htmlImage;
+
         posts.forEach((post) => {
             date = new Date(post.creationDate)
             dateString = date.toDateString();
@@ -52,15 +54,20 @@ const HomePage = async () => {
                     author = user.forename;
                 }
             });
+            if(post.image == null) htmlImage = "";
+            else htmlImage =  
+                `<div class="col-sm-auto" id="imageDiv" >
+                <img id="image" src="${post.image}" width="50%">                
+                </div>`;
             let row = `<div id="post">
 							<div class="col-sm-auto" id="postText">
                                 <div class="col-sm-5">${author}</div>
                                 <div class="col-sm-5" id="creationDate">Posté le ${dateString}</div>
                             </div>
 							<div class="col-sm-auto" id="postText">${post.message}</div>
-							<div class="col-sm-auto" id="imageDiv" >
-                            <img id="image" src="${post.image}" width="50%">                
-                            </div>
+							`+
+                            htmlImage
+                            +`
 					  </div>`;
             table.innerHTML += row;
         });

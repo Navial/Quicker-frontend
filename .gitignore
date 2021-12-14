@@ -1,3 +1,5 @@
 /node_modules
 .idea
 package-lock.json
+webpack.config.js
+LoginPage.js

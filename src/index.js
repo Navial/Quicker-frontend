@@ -6,8 +6,21 @@ import Footer from "./Components/Navbar/Footer";
 import { Router } from "./Components/Router/Router";
 
 const actuelRoot = window.location.pathname;
-if (actuelRoot !== '/login' && actuelRoot !== '/register')
-    Navbar();
+const isConnected = window.localStorage.length !== 0;
+
+const unloggedPage = [
+    "/login",
+    "/register",
+    "/logout"
+];
+
+if (unloggedPage.findIndex(s => s === actuelRoot) < 0) {
+    if (!isConnected) {
+        window.location.replace(window.location.origin + "/login");
+    } else {
+        Navbar();
+    }
+}
 
 Router(); // The router will automatically load the root page
 
