@@ -1,4 +1,5 @@
 import Tables from "../../utils/tables";
+
 const userToken = JSON.parse(window.localStorage.getItem("user")).token;
 const getRequest = {
     method: "GET",
@@ -118,26 +119,24 @@ async function showMembersGestion() {
         await Tables.refreshMembersTable();
         const forms = document.querySelectorAll("#membersGestionForm");
         forms.forEach((form) => {
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
-                let id_user;
-                let memberStatus;
-                let memberType;
-                form.querySelectorAll("input").forEach((input) => {
-                    if (input.id === "id_user")
-                        id_user = input.value;
-                    else if (input.id === "memberStatus") {
-                        memberStatus = input.value;
-                        input.addEventListener("click", (e) => {
-                            if (memberStatus === "Deactivate")
-                                console.log(id_user)
-                            removeUser(id_user);
-                        });
-                    } else {
-                        memberType = input.value;
+            let id_user;
+            let memberStatus;
+            let memberType;
+            form.querySelectorAll("input").forEach((input) => {
+                if (input.id === "id_user")
+                    id_user = input.value;
+                else if (input.id === "memberStatus") {
+                    memberStatus = input.value;
+                    input.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        if (memberStatus === "Deactivate")
+                            console.log(id_user)
+                        removeUser(id_user);
+                    });
+                } else {
+                    memberType = input.value;
 
-                    }
-                });
+                }
             });
         });
     } catch (e) {
