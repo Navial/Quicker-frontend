@@ -71,9 +71,10 @@ async function refreshMembersTable() {
                     memberStatus = input.value;
                     input.addEventListener("click", (e) => {
                         e.preventDefault();
-                        if (memberStatus === "Deactivate") {
+                        if (memberStatus === "Deactivate")
                             members_modifications.deactivateUser(id_user);
-                        }
+                        else
+                            members_modifications.activateUser(id_user);
                     });
                 } else {
                     memberType = input.value;
