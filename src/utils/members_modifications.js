@@ -8,7 +8,9 @@ const deleteRequest = {
     }
 };
 
-async function removeUser(id_user) {
+
+
+async function deactivateUser(id_user) {
     userToken = JSON.parse(window.localStorage.getItem("user")).token;
     try {
         const response = await fetch(`/api/users/${id_user}`, deleteRequest);
@@ -20,4 +22,4 @@ async function removeUser(id_user) {
     }
 }
 
-export default {removeUser};
+export default {deactivateUser};

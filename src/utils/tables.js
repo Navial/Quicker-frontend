@@ -72,7 +72,7 @@ async function refreshMembersTable() {
                     input.addEventListener("click", (e) => {
                         e.preventDefault();
                         if (memberStatus === "Deactivate") {
-                            members_modifications.removeUser(id_user);
+                            members_modifications.deactivateUser(id_user);
                         }
                     });
                 } else {
