@@ -1,5 +1,4 @@
 import Tables from "./tables";
-import user from "../models/User";
 
 let userToken;
 
