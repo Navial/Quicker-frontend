@@ -10,7 +10,7 @@ const deleteRequest = {
 };
 
 async function removePost(id_post){
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+    loadToken();
     try {
         const response = await fetch(`/api/posts/${id_post}`, deleteRequest);
         if (!response.ok)
