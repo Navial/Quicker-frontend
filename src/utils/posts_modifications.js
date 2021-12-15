@@ -1,4 +1,5 @@
 import Tables from "./tables";
+import user from "../models/User";
 
 let userToken;
 const deleteRequest = {
@@ -18,6 +19,10 @@ async function removePost(id_post){
     } catch (e) {
         console.error(e);
     }
+}
+
+function loadToken() {
+    userToken = JSON.parse(window.localStorage.getItem("user")).token;
 }
 
 export default {removePost};
