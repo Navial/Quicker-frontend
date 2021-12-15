@@ -1,4 +1,5 @@
 import posts_modifications from "./posts_modifications";
+import members_modifications from "./members_modifications";
 
 let userToken = "";
 const getRequest = {
@@ -71,7 +72,7 @@ async function refreshMembersTable() {
                     input.addEventListener("click", (e) => {
                         e.preventDefault();
                         if (memberStatus === "Deactivate") {
-                            removeUser(id_user);
+                            members_modifications.removeUser(id_user);
                         }
                     });
                 } else {
@@ -82,18 +83,6 @@ async function refreshMembersTable() {
         });
     } catch (e) {
         console.error(e)
-    }
-}
-
-async function removeUser(id_user) {
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
-    try {
-        const response = await fetch(`/api/users/${id_user}`, deleteRequest);
-        if (!response.ok)
-            throw new Error("fetch error : " + response.status + " : " + response.statusText);
-        await refreshMembersTable();
-    } catch (e) {
-        console.error(e);
     }
 }
 
