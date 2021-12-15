@@ -1,13 +1,5 @@
 import Tables from "../../utils/tables";
 
-let userToken = "";
-const deleteRequest = {
-    method: "DELETE",
-    headers: {
-        "Authorisation": userToken
-    }
-};
-
 const adminPagehtml = `
     <div id="adminPage">
         <div id="adminButtons">
@@ -26,7 +18,6 @@ const AdminPage = () => {
     const membersGestionButton = document.getElementById("membersGestionButton");
     postGestionButton.addEventListener("click", showPostsGestion);
     membersGestionButton.addEventListener("click", showMembersGestion);
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
 }
 
 const postsGestionHtml = `
