@@ -27,6 +27,18 @@ async function setAdmin(id_user) {
     }
 }
 
+async function setNotAdmin(id_user) {
+    loadToken();
+    try {
+        const response = await fetch(`/api/users/setnotadmin/${id_user}`, putRequest);
+        if(!response.ok)
+            throw new Error("fetch error : " + response.status + " : " + response.statusText);
+        await Tables.refreshMembersTable();
+    } catch (e) {
+        console.error(e);
+    }
+}
+
 async function activateUser(id_user) {
     loadToken();
     try {
@@ -55,4 +67,4 @@ function loadToken() {
     userToken = JSON.parse(window.localStorage.getItem("user")).token;
 }
 
-export default {activateUser, deactivateUser, setAdmin};
+export default {activateUser, deactivateUser, setAdmin, setNotAdmin};
