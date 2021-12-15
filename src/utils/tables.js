@@ -1,4 +1,5 @@
 import user from "../models/User";
+import posts_modifications from "./posts_modifications";
 
 let userToken = "";
 const getRequest = {
@@ -144,23 +145,11 @@ async function refreshPostsTable() {
                 input.addEventListener("click", (e) => {
                     e.preventDefault();
                     if (postStatus === "Remove")
-                        removePost(id_post);
+                        posts_modifications.removePost(id_post);
                 });
             }
         });
     });
-}
-
-async function removePost(id_post){
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
-    try {
-        const response = await fetch(`/api/posts/${id_post}`, deleteRequest);
-        if (!response.ok)
-            throw new Error("fetch error : " + response.status + " : " + response.statusText);
-        await refreshPostsTable();
-    } catch (e) {
-        console.error(e);
-    }
 }
 
 export default {refreshMembersTable, refreshPostsTable};
