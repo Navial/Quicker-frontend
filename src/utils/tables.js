@@ -6,6 +6,13 @@ const getRequest = {
     }
 };
 
+const deleteRequest = {
+    method: "DELETE",
+    headers: {
+        "Authorisation": userToken
+    }
+};
+
 async function refreshMembersTable() {
     userToken = JSON.parse(window.localStorage.getItem("user")).token;
     try {
@@ -87,6 +94,36 @@ async function refreshPostsTable() {
             </tr>
         `;
     });
+
+    const forms = document.querySelectorAll("#postsGestionForm");
+    forms.forEach((form) => {
+        let id_post;
+        let postStatus;
+        form.querySelectorAll("input").forEach((input) => {
+            if (input.id === "id_post")
+                id_post = input.value;
+            else {
+                postStatus = input.value;
+                input.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    if (postStatus === "Remove")
+                        removePost(id_post);
+                });
+            }
+        });
+    });
+}
+
+async function removePost(id_post){
+    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+    try {
+        const response = await fetch(`/api/posts/${id_post}`, deleteRequest);
+        if (!response.ok)
+            throw new Error("fetch error : " + response.status + " : " + response.statusText);
+        await refreshPostsTable();
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 export default {refreshMembersTable, refreshPostsTable};
