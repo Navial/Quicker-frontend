@@ -1,4 +1,3 @@
-import user from "../models/User";
 import posts_modifications from "./posts_modifications";
 
 let userToken = "";
