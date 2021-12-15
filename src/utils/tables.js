@@ -78,7 +78,11 @@ async function refreshMembersTable() {
                     });
                 } else {
                     memberType = input.value;
-
+                    input.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        if(memberType === "Admin")
+                            members_modifications.setAdmin(id_user);
+                    });
                 }
             });
         });
