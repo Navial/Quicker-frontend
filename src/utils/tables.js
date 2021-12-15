@@ -57,7 +57,7 @@ async function refreshPostsTable() {
     userToken = JSON.parse(window.localStorage.getItem("user")).token;
     const tableTbody = document.getElementById("postsGestionTbody");
     const response = await fetch("/api/posts/", getRequest);
-    console.log(response)
+
     if (!response.ok)
         throw new Error("AdminPage::error: fetch error: fetch error : " + response.status + " : " + response.statusText);
     const posts = await response.json();
