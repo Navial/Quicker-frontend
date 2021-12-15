@@ -41,4 +41,4 @@ function loadToken() {
     userToken = JSON.parse(window.localStorage.getItem("user")).token;
 }
 
-export default {deactivateUser};
+export default {activateUser, deactivateUser};
