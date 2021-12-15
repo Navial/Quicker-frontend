@@ -5,7 +5,7 @@ let userToken;
 const deleteRequest = {
     method: "DELETE",
     headers: {
-        "Authrorisation": userToken
+        Authorization: userToken
     }
 };
 
