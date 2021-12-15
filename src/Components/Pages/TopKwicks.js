@@ -1,6 +1,11 @@
+import Navbar from "../Navbar/Navbar";
+import {Redirect} from "../Router/Router";
+import SendPostHTML from "../Modules/InsertPostModule";
+
 /**
  * Render the HomePage
  */
+
 
 const TopKwicks = async () => {
     const pageDiv = document.querySelector("#page");
@@ -45,13 +50,8 @@ const TopKwicks = async () => {
         const posts = await responsePosts.json();
 
 
-        page.innerHTML = `
-            <div class="newPost">
-                <input type="text" id="textPost">
-                <input type="submit" id="buttonPost" value="Post">
-            </div>
-            <div class="container" id="tableTopKiwcks"></div>  
-        `;
+        SendPostHTML(pageDiv);
+
         let author
         let table = document.getElementById("tableTopKiwcks")
         let date;

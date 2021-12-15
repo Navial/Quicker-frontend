@@ -1,14 +1,12 @@
+import SendPostHTML from "../Modules/InsertPostModule";
+
 /**
  * Render the HomePage
  */
 
 const HomePage = async () => {
     const pageDiv = document.querySelector("#page");
-    pageDiv.innerHTML = `<div class="newPost">
-                <input type="text" id="textPost">
-                <input type="submit" id="buttonPost" value="Post">
-            </div>
-            <div class="container" id="tableTopKiwcks"></div>`;
+    SendPostHTML(pageDiv);
 
     const token = JSON.parse(window.localStorage.getItem("user")).token;
     const request = {
