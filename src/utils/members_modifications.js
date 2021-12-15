@@ -10,7 +10,7 @@ const putRequest = {
 const deleteRequest = {
     method: "DELETE",
     headers: {
-        "Authrorisation": userToken
+        Authorization: userToken
     }
 };
 
