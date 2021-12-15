@@ -1,13 +1,12 @@
 import Tables from "../../utils/tables";
 
-const userToken = JSON.parse(window.localStorage.getItem("user")).token;
+let userToken = "";
 const deleteRequest = {
     method: "DELETE",
     headers: {
         "Authorisation": userToken
     }
 };
-
 
 const adminPagehtml = `
     <div id="adminPage">
@@ -27,6 +26,7 @@ const AdminPage = () => {
     const membersGestionButton = document.getElementById("membersGestionButton");
     postGestionButton.addEventListener("click", showPostsGestion);
     membersGestionButton.addEventListener("click", showMembersGestion);
+    userToken = JSON.parse(window.localStorage.getItem("user")).token;
 }
 
 const postsGestionHtml = `
@@ -44,7 +44,7 @@ const postsGestionHtml = `
                 <th>Suppression</th>
             </tr>
             <tbody id="postsGestionTbody">
-            
+
             </tbody>
         </table>
 `;
@@ -78,7 +78,7 @@ async function showPostsGestion() {
 
 const membersGestionHtml = `
     <h3>Members Gestion</h3>
- 
+
         <table id="membersGestionTable" class="table-bordered">
             <tr>
                 <th>User's Id</th>

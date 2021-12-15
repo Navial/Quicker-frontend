@@ -1,4 +1,4 @@
-const userToken = JSON.parse(window.localStorage.getItem("user")).token;
+let userToken = "";
 const getRequest = {
     method: "GET",
     headers: {
@@ -7,6 +7,7 @@ const getRequest = {
 };
 
 async function refreshMembersTable() {
+    userToken = JSON.parse(window.localStorage.getItem("user")).token;
     try {
         const response = await fetch("/api/users/all", getRequest);
 
@@ -53,6 +54,7 @@ async function refreshMembersTable() {
 }
 
 async function refreshPostsTable() {
+    userToken = JSON.parse(window.localStorage.getItem("user")).token;
     const tableTbody = document.getElementById("postsGestionTbody");
     const response = await fetch("/api/posts/", getRequest);
     console.log(response)
