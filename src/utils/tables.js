@@ -1,3 +1,5 @@
+import user from "../models/User";
+
 let userToken = "";
 const getRequest = {
     method: "GET",
@@ -55,8 +57,43 @@ async function refreshMembersTable() {
                 </tr>
             `;
         });
+
+        const forms = document.querySelectorAll("#membersGestionForm");
+        forms.forEach((form) => {
+            let id_user;
+            let memberStatus;
+            let memberType;
+            form.querySelectorAll("input").forEach((input) => {
+                if (input.id === "id_user")
+                    id_user = input.value;
+                else if (input.id === "memberStatus") {
+                    memberStatus = input.value;
+                    input.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        if (memberStatus === "Deactivate") {
+                            removeUser(id_user);
+                        }
+                    });
+                } else {
+                    memberType = input.value;
+
+                }
+            });
+        });
     } catch (e) {
         console.error(e)
+    }
+}
+
+async function removeUser(id_user) {
+    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+    try {
+        const response = await fetch(`/api/users/${id_user}`, deleteRequest);
+        if (!response.ok)
+            throw new Error("fetch error : " + response.status + " : " + response.statusText);
+        await refreshMembersTable();
+    } catch (e) {
+        console.error(e);
     }
 }
 
