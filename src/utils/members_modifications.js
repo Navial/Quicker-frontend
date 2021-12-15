@@ -20,6 +20,7 @@ async function activateUser(id_user) {
         const response = await fetch(`/api/users/activate/${id_user}`, putRequest);
         if(!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
+        await Tables.refreshMembersTable();
     } catch (e) {
         console.error(e);
     }
