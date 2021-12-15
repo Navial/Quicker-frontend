@@ -54,8 +54,8 @@ const Router = () => {
       NB : for the components that include JS, we want to assure that the JS included 
       is not runned when the JS file is charged by the browser
       therefore, those components have to be either a function or a class*/
-      const componentToRender = routes[uri];
-      if (routes[uri]) {
+      const componentToRender = routes[uri.split("?")[0]];
+      if (routes[uri.split("?")[0]]) {
         componentToRender();
       } else {
         throw Error("The " + uri + " ressource does not exist");
