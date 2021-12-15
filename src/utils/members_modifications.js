@@ -11,7 +11,7 @@ const deleteRequest = {
 
 
 async function deactivateUser(id_user) {
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+    loadToken();
     try {
         const response = await fetch(`/api/users/${id_user}`, deleteRequest);
         if (!response.ok)
@@ -20,6 +20,10 @@ async function deactivateUser(id_user) {
     } catch (e) {
         console.error(e);
     }
+}
+
+function loadToken() {
+    userToken = JSON.parse(window.localStorage.getItem("user")).token;
 }
 
 export default {deactivateUser};

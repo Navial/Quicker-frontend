@@ -134,6 +134,8 @@ async function refreshPostsTable() {
                     e.preventDefault();
                     if (postStatus === "Remove")
                         posts_modifications.removePost(id_post);
+                    else
+                        posts_modifications.activatePost(id_post);
                 });
             }
         });
