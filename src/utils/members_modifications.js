@@ -22,4 +22,8 @@ async function deactivateUser(id_user) {
     }
 }
 
+function loadToken() {
+    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+}
+
 export default {deactivateUser};
