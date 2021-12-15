@@ -54,23 +54,6 @@ async function showPostsGestion() {
     adminTable.innerHTML = postsGestionHtml;
     try {
         await Tables.refreshPostsTable();
-        const forms = document.querySelectorAll("#postsGestionForm");
-        forms.forEach((form) => {
-            let id_post;
-            let postStatus;
-            form.querySelectorAll("input").forEach((input) => {
-                if (input.id === "id_post")
-                    id_post = input.value;
-                else {
-                    postStatus = input.value;
-                    input.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        if (postStatus === "Remove")
-                            removePost(id_post);
-                    });
-                }
-            });
-        });
     } catch (e) {
         console.log(e.message);
     }
@@ -102,6 +85,7 @@ async function showMembersGestion() {
     const adminTable = document.getElementById("adminTable");
     adminTable.innerHTML = membersGestionHtml;
 
+    //TODO
     try {
         await Tables.refreshMembersTable();
         const forms = document.querySelectorAll("#membersGestionForm");
@@ -137,17 +121,6 @@ async function removeUser(id_user) {
         if (!response.ok)
             throw new Error("fetch error : " + responsePosts.status + " : " + responsePosts.statusText);
         await Tables.refreshMembersTable();
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-async function removePost(id_post){
-   try {
-        const response = await fetch(`/api/posts/${id_post}`, deleteRequest);
-        if (!response.ok)
-            throw new Error("fetch error : " + response.status + " : " + response.statusText);
-        await Tables.refreshPostsTable();
     } catch (e) {
         console.error(e);
     }
