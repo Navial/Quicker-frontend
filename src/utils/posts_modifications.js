@@ -6,7 +6,7 @@ const deleteRequest = {
     headers: {
         "Authrorisation": userToken
     }
-}
+};
 
 async function removePost(id_post){
     userToken = JSON.parse(window.localStorage.getItem("user")).token;
