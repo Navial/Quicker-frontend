@@ -85,44 +85,10 @@ async function showMembersGestion() {
     const adminTable = document.getElementById("adminTable");
     adminTable.innerHTML = membersGestionHtml;
 
-    //TODO
     try {
         await Tables.refreshMembersTable();
-        const forms = document.querySelectorAll("#membersGestionForm");
-        forms.forEach((form) => {
-            let id_user;
-            let memberStatus;
-            let memberType;
-            form.querySelectorAll("input").forEach((input) => {
-                if (input.id === "id_user")
-                    id_user = input.value;
-                else if (input.id === "memberStatus") {
-                    memberStatus = input.value;
-                    input.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        if (memberStatus === "Deactivate")
-                            console.log(id_user)
-                        removeUser(id_user);
-                    });
-                } else {
-                    memberType = input.value;
-
-                }
-            });
-        });
     } catch (e) {
         console.log(e.message);
-    }
-}
-
-async function removeUser(id_user) {
-    try {
-        const response = await fetch(`/api/users/${id_user}`, deleteRequest);
-        if (!response.ok)
-            throw new Error("fetch error : " + responsePosts.status + " : " + responsePosts.statusText);
-        await Tables.refreshMembersTable();
-    } catch (e) {
-        console.error(e);
     }
 }
 
