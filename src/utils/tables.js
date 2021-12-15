@@ -82,6 +82,8 @@ async function refreshMembersTable() {
                         e.preventDefault();
                         if(memberType === "Admin")
                             members_modifications.setAdmin(id_user);
+                        else
+                            members_modifications.setNotAdmin(id_user);
                     });
                 }
             });
