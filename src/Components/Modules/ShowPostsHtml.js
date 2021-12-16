@@ -18,7 +18,7 @@ function showPostsHtml(page, posts){
                     <a id="remove_button${post.id_post}" width="50%">Remove</a>
                 </div>
             `;
-        }
+        }else removeButton = "";
 
         //Create row
         let postRow = `
