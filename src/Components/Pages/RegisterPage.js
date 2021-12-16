@@ -1,12 +1,11 @@
 import { Redirect } from "../Router/Router";
-import logoKwicker from "../../img/banniereKiwi.png";
 import Navbar from "../Navbar/Navbar";
 import anime from "animejs";
 
 const registerDiv = `
         <div id="registerPage">
                 <form id="registerForm" class="loginRegisterContainer">
-                    <img src="" alt="Logo Kwicker" id="logoRegister">
+                    <h3 class="loginText">Kwicker</h3>
                     <input class="inputForm fields" type="text" id="lastnameRegister" placeholder="Nom">
                     <input class="inputForm fields" type="text" id="forenameRegister" placeholder="Prénom">
                     <input class="inputForm fields" type="text" id="usernameRegister" placeholder="Nom d'utilisateur">
@@ -14,6 +13,7 @@ const registerDiv = `
                     <input class="inputForm fields" type="password" id="passwordRegister" placeholder="Mot de passe">
                     <input class="inputForm fields" type="password" id="passwordConfirmationRegister" placeholder="Confirmez votre mot de passe">
                     <input class="inputForm submitButton" type="submit" value="S'inscrire" id="registerButton">
+                    <a class="loginText" id="goToLogin">J'ai déjà un compte</a>
                     <div id="errorRegister" class="alert-danger"></div>
                 </form>
         </div>
@@ -29,10 +29,14 @@ function RegisterPage() {
     pageDiv.innerHTML = registerDiv;
     // Créer d'abord l'élément dans le innerHTML puis le querySelector pour séléctionner
     // l'élément qui vient d'être créer
-    const logo = document.querySelector("#logoRegister");
-    logo.src = logoKwicker;
     const form = document.getElementById("registerForm");
+    let goToLogin = document.getElementById("goToLogin");
+    goToLogin.addEventListener("click", e => {
+        e.preventDefault();
+        Redirect("/login");
+    });
     form.addEventListener("submit", register);
+
 }
 
 async function register (e) {

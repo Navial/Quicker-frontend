@@ -39,6 +39,7 @@ async function SendPost(e) {
 
 function SendPostHTML(page) {
     page.innerHTML +=  `
+            
             <div class="newPost">
                 <form id="sendPost">
                     <input type="text" id="textPost">

@@ -13,8 +13,10 @@ p {
     color: #999;
 }
 
-.mainContent{
-    
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
 }
 
 #actionBar{
@@ -28,6 +30,11 @@ p {
 }
 /** ---- PROFILE PAGE ---- */
 
+#contentProfilePage{
+    max-width: 100vw;
+    
+}
+
 #userContainer{
     font-size: x-large;
     padding-bottom: 1em;
@@ -37,7 +44,6 @@ p {
     margin-bottom: 1em;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
-    
     width: 75%;
     margin-left: auto;
     margin-right: auto;
@@ -45,10 +51,10 @@ p {
 #banner{
     background-color: rgb(79, 126, 217);
     padding: 4em;
-    
     width: 75%;
     margin-left: auto;
     margin-right: auto;
+    
 }
 #biography{
     font-size: x-small;
@@ -57,6 +63,11 @@ p {
     font-size: x-small;
 }
 
+.newPost{
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 #post{
     color: rgb(205, 222, 254);
@@ -97,23 +108,15 @@ p {
     width: 23px;
 }
 
-.wrapper {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
-}
-
 
 #sidebar {
-    min-width: 150px;
-    max-width: 250px;
+    width: 12em;
     min-height: 100vh;
     padding-left: 1em;
     padding-top: 1em;
 }
 
 #sidebarContainer{
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
 }
@@ -153,13 +156,6 @@ a, a:hover, a:focus {
 
 /**
     -----------------------------------------------------
-                    Navbar and Footer
-    -----------------------------------------------------
- */
-
-
-/**
-    -----------------------------------------------------
                        HomePage
     -----------------------------------------------------
  */
@@ -168,37 +164,24 @@ a, a:hover, a:focus {
             Ajout d'un kwick
  */
 
-#imageProfile {
-    width: 55px;
-    height: 53px;
-    background-color: cyan;
-    border-radius: 50%;
-}
 
 #textPost{
     width: 50vw;
     height: 50px;
     border-radius: 50px;
-    border-style: none;
-    background-color: white;
     padding-left: 20px;
 }
 
 #buttonPost{
     border-radius: 50px;
-    width: 80px;
+    width: 5em;
     height: 40px;
     background-color: rgb(79,126,217);
     border: none;
+    
+    margin-left: auto;
+    margin-right: auto;
 }
-
-
-/**
-    -----------------------------------------------------
-                       ProfilePage
-    -----------------------------------------------------
- */
-/* ------Banner------*/
 
 /**
     -----------------------------------------------------
@@ -206,6 +189,11 @@ a, a:hover, a:focus {
     -----------------------------------------------------
  */
 
+ .loginText{
+     color: rgb(79,126,217);
+     margin-left: auto;
+     margin-right: auto;
+ }
 
 .loginRegisterContainer{
     display: flex;
@@ -286,11 +274,6 @@ a, a:hover, a:focus {
         border: none;
         background-color: rgb(169, 195, 245);
     }
-}
-
-.newPost{
-    margin: 2vh 0 0 10vw;
-    width: fit-content;
 }
 
 input:focus{
