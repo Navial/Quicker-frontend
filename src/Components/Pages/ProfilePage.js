@@ -1,6 +1,8 @@
 import GetPostsModule from "../Modules/GetPostsModule";
+import {Redirect} from "../Router/Router";
 
 const ProfilePage = async () => {
+    if (!location.search.startsWith("?idUser=")) location.pathname = "/";
 
     // Init
     const pageDiv = document.querySelector("#page");

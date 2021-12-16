@@ -70,10 +70,11 @@ const Router = () => {
       window.location.pathname = "/";
 
     const componentToRender = routes[window.location.pathname];
-    if (!componentToRender)
+    if (!componentToRender) {
       throw Error(
-        "The " + window.location.pathname + " ressource does not exist."
+          "The " + window.location.pathname + " ressource does not exist."
       );
+    }
 
     componentToRender();
   });
