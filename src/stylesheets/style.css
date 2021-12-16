@@ -213,8 +213,10 @@ a, a:hover, a:focus {
     align-content: center;
     justify-content: center;
     position: absolute;
-    margin: 10vw;
-    padding: 5vw;;
+    height: 80vh;
+    width: 35vw;
+    margin: 10vh 35vw;
+    padding: 5vw;
     background-color: rgb(21, 58, 114);
 }
 #logoRegister{
@@ -256,19 +258,10 @@ a, a:hover, a:focus {
     border: none;
 }
 
-.submitButton:not(:focus){
-    animation: animationRegisterFocusFormInput;
-    animation-duration: 0.2s;
+.submitButton{
     width: 200px;
     margin: 15px auto;
     outline: none;
-}
-
-.submitButton:focus{
-    animation: animationRegisterNotFocusFormInput;
-    animation-duration: 0.2s;
-    width: 250px;
-    margin: 15px auto;
 }
 
 @keyframes animationFocusFormInput {
@@ -295,31 +288,6 @@ a, a:hover, a:focus {
     }
 }
 
-@keyframes animationRegisterFocusFormInput {
-    from{
-        width: 200px;
-        border: none;
-        background-color: rgb(169, 195, 245);
-    }
-    to{
-        width: 250px;
-        border: solid red 3px;
-        background-color: rgb(169, 195, 245);
-    }
-}
-
-@keyframes animationRegisterNotFocusFormInput {
-    from{
-        width: 250px;
-        background-color: rgb(169, 195, 245);
-    }
-    to{
-        width: 200px;
-        border: none;
-        background-color: rgb(169, 195, 245);
-    }
-}
-
 .newPost{
     margin: 2vh 0 0 10vw;
     width: fit-content;
@@ -333,4 +301,10 @@ input:focus{
 
 .active {
     background-color: rgb(4, 57, 119);
+}
+
+.alert-danger{
+    background-color: rgb(248,215,218);
+    color: rgb(132,32,41);
+    text-align: center;
 }

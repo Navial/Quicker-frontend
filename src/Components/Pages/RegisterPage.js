@@ -1,12 +1,12 @@
 import { Redirect } from "../Router/Router";
 import logoKwicker from "../../img/banniereKiwi.png";
 import Navbar from "../Navbar/Navbar";
+import anime from "animejs";
 
 const registerDiv = `
         <div id="registerPage">
-            <div class="loginRegisterContainer">
-                <img src="" alt="Logo Kwicker" id="logoRegister">
-                <form id="registerForm">
+                <form id="registerForm" class="loginRegisterContainer">
+                    <img src="" alt="Logo Kwicker" id="logoRegister">
                     <input class="inputForm fields" type="text" id="lastnameRegister" placeholder="Nom">
                     <input class="inputForm fields" type="text" id="forenameRegister" placeholder="Prénom">
                     <input class="inputForm fields" type="text" id="usernameRegister" placeholder="Nom d'utilisateur">
@@ -14,9 +14,8 @@ const registerDiv = `
                     <input class="inputForm fields" type="password" id="passwordRegister" placeholder="Mot de passe">
                     <input class="inputForm fields" type="password" id="passwordConfirmationRegister" placeholder="Confirmez votre mot de passe">
                     <input class="inputForm submitButton" type="submit" value="S'inscrire" id="registerButton">
+                    <div id="errorRegister" class="alert-danger"></div>
                 </form>
-            </div>
-            <div id="errorRegister" class="alert-danger"></div>
         </div>
     `;
 
@@ -41,38 +40,51 @@ async function register (e) {
     const errorLogin = document.getElementById("errorRegister");
     const password = document.getElementById("passwordRegister").value;
     const passwordConfirmation = document.getElementById("passwordConfirmationRegister").value;
+    errorLogin.innerHTML = "";
+    let user;
+
+    try{
     if(password !== passwordConfirmation) {
         errorLogin.innerHTML = "<h2>Les mots de passe ne sont pas identiques</h2>";
         throw new Error("Passwords don't match");
-    } else
-        errorLogin.innerHTML = "";
+    }
 
-    const user = {
+    user = {
         lastname: document.getElementById("lastnameRegister").value,
         forename: document.getElementById("forenameRegister").value,
         username: document.getElementById("usernameRegister").value,
         email: document.getElementById("emailRegister").value,
         password: password,
     }
-    if(!user.lastname){
-        errorLogin.innerHTML = `<h2>Tu dois entrer un nom!</h2>`;
-        throw new Error("No lastname");
-    } else if (!user.forename){
-        errorLogin.innerHTML = `<h2>Tu dois entrer un prénom!</h2>`;
-        throw new Error("No forename");
-    } else if (!user.username){
-        errorLogin.innerHTML = `<h2>Tu dois entrer un pseudo!</h2>`;
-        throw new Error("No username");
-    } else if (!user.email){
-        errorLogin.innerHTML = `<h2>Tu dois entrer un email!</h2>`;
-        throw new Error("No email");
-    } else if (!user.password){
-        errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe!</h2>`;
-        throw new Error("No password");
-    } else {
-        errorLogin.innerHTML = "";
-    }
 
+    //Si erreur dans le formulaire alors fait trembler le formulaire en catchant l'exception lancée
+        if(!user.lastname){
+            errorLogin.innerHTML = `<h2>Tu dois entrer un nom !</h2>`;
+            throw new Error("No lastname");
+        } else if (!user.forename){
+            errorLogin.innerHTML = `<h2>Tu dois entrer un prénom !</h2>`;
+            throw new Error("No forename");
+        } else if (!user.username){
+            errorLogin.innerHTML = `<h2>Tu dois entrer un pseudo !</h2>`;
+            throw new Error("No username");
+        } else if (!user.email){
+            errorLogin.innerHTML = `<h2>Tu dois entrer un email !</h2>`;
+            throw new Error("No email");
+        } else if (!user.password){
+            errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe !</h2>`;
+            throw new Error("No password");
+        }
+    }catch (e) {
+        console.error("LoginPage::error ", e);
+        const xMax = 16;
+        anime({
+            targets: 'form',
+            easing: 'easeInOutSine',
+            duration: 550,
+            translateX: [{value: xMax * -1,}, {value: xMax,},{value: xMax/-2,},{value: xMax/2,}, {value: 0}],
+            scale: [{value:1.05},{value:1, delay: 250} ],
+        });
+    }
     const request = {
         method: "POST",
         body: JSON.stringify(user),
@@ -82,14 +94,10 @@ async function register (e) {
     };
     try {
         const response = await fetch("api/users/register", request);
-
-        if (!response.ok) {
-            errorLogin.innerHTML = "<h2>Problème lors de l'inscription.</h2>";
-            throw new Error("fetch error : " + response.status + " : " + response.statusText);
-        } else {
-            errorLogin.innerHTML = "";
-        }
-
+            if (!response.ok) {
+                errorLogin.innerHTML = "<h2>Problème lors de l'inscription.</h2>";
+                throw new Error("fetch error : " + response.status + " : " + response.statusText);
+            }
         const user = await response.json();
         window.localStorage.setItem("user", JSON.stringify(user));
         Navbar();

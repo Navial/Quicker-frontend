@@ -1,18 +1,19 @@
 import logoKwicker from "../../img/banniereKiwi.png";
 import Navbar from "../Navbar/Navbar";
 import {Redirect} from "../Router/Router";
+import anime from "animejs";
 
 const loginDiv = `
         <div id="loginPage">
-            <div class="loginRegisterContainer" id="loginContainer">
-                <img src="" alt="Logo Kwicker" id="logoRegister">
-                <form id="loginForm">
+            <div id="loginContainer">
+                <form id="loginForm" class="loginRegisterContainer">
+                    <img src="" alt="Logo Kwicker" id="logoRegister">
                     <input class="inputForm fields" type="text" id="usernameLogin" placeholder="Pseudo">
                     <input class="inputForm fields" type="password" id="passwordLogin" placeholder="Mot de passe">
                     <input class="inputForm submitButton" type="submit" value="Se connecter">
+                    <div id="errorLogin" class="alert-danger"></div>
                 </form>
             </div>
-            <div id="errorLogin" class="alert-danger"></div>
         </div>
     `;
 
@@ -34,17 +35,29 @@ async function login(e) {
     const username = document.getElementById("usernameLogin").value;
     const password = document.getElementById("passwordLogin").value;
     const errorLogin = document.getElementById("errorLogin");
+    errorLogin.innerHTML = "";
 
     //Verify the user entered all informations to log in and show an error message if not
-    if (!username) {
-        errorLogin.innerHTML = `<h2>Tu dois entrer un pseudo!</h2>`;
-        throw new Error("No username");
-    } else if (!password) {
-        errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe.</h2>`;
-        throw new Error("No password");
-    } else {
-        errorLogin.innerHTML = "";
+    try{
+        if (!username) {
+            errorLogin.innerHTML = `<h2>Tu dois entrer un pseudo!</h2>`;
+            throw new Error("No username");
+        } else if (!password) {
+            errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe.</h2>`;
+            throw new Error("No password");
+        } else {
+        }
+    }catch (e) {
+        const xMax = 16;
+        anime({
+            targets: 'form',
+            easing: 'easeInOutSine',
+            duration: 550,
+            translateX: [{value: xMax * -1,}, {value: xMax,},{value: xMax/-2,},{value: xMax/2,}, {value: 0}],
+            scale: [{value:1.05},{value:1, delay: 250} ],
+        });
     }
+
 
     const request = {
         method: "POST",
@@ -74,6 +87,14 @@ async function login(e) {
         Redirect("/");
     } catch (e) {
         console.error("LoginPage::error ", e);
+        const xMax = 16;
+        anime({
+            targets: 'form',
+            easing: 'easeInOutSine',
+            duration: 550,
+            translateX: [{value: xMax * -1,}, {value: xMax,},{value: xMax/-2,},{value: xMax/2,}, {value: 0}],
+            scale: [{value:1.05},{value:1, delay: 250} ],
+        });
     }
 }
 
