@@ -3,6 +3,7 @@ import NewPage from "../Pages/NewPage";
 import RegisterPage from "../Pages/RegisterPage"
 import ProfilePage from "../Pages/ProfilePage";
 import TopKwicks from "../Pages/TopKwicks";
+import UserLikedPosts from "../Pages/UserLikedPosts";
 import LoginPage from "../Pages/LoginPage";
 import AdminPage from "../Pages/AdminPage";
 import Logout from "../Pages/Logout";
@@ -14,6 +15,7 @@ const routes = {
   "/register": RegisterPage,
   "/profile" : ProfilePage,
   "/top_kwicks" : TopKwicks,
+  "/liked_posts": UserLikedPosts,
   "/login": LoginPage,
   "/admin_page": AdminPage,
   "/logout": Logout
