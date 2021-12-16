@@ -14,7 +14,7 @@ const UsersPage = async () => {
             pageDiv.innerHTML = "";
             if (tab) {
                 tab.forEach((row) => {
-                    pageDiv.innerHTML += `<a href="" data-uri="/profile?idUser=${row.id_user}">${row.forename} ${row.lastname} ${row.username}</a><br>`;
+                    pageDiv.innerHTML += `<a href="/profile?idUser=${row.id_user}">${row.forename} ${row.lastname} ${row.username}</a><br>`;
                 });
             }
         }
