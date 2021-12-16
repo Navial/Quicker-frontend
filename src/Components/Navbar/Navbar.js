@@ -83,7 +83,7 @@ const Navbar = () => {
 
   const searchBar = document.querySelector("#navbarWrapper").getElementsByTagName("input")[0];
   searchBar.addEventListener("click", (e) => {
-    e.target.dataset.uri = "/"
+    e.target.dataset.uri = "/users"
   });
 
 };

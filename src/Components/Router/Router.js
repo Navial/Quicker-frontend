@@ -7,6 +7,7 @@ import UserLikesPage from "../Pages/UserLikesPage";
 import LoginPage from "../Pages/LoginPage";
 import AdminPage from "../Pages/AdminPage";
 import Logout from "../Pages/Logout";
+import UsersPage from "../Pages/UsersPage";
 
 // Configure your routes here
 const routes = {
@@ -18,7 +19,8 @@ const routes = {
   "/liked_posts": UserLikesPage,
   "/login": LoginPage,
   "/admin_page": AdminPage,
-  "/logout": Logout
+  "/logout": Logout,
+  "/users": UsersPage
 };
 
 /**
