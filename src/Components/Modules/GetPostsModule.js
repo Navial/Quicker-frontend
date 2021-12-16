@@ -1,5 +1,7 @@
+import logout from "../Pages/Logout";
 
-async function GetPosts(sorted = false, profilePosts = null) {
+
+async function GetPosts(page, sorted = false, profilePosts = null) {
     const request = {
         method: "GET",
         headers: {
@@ -16,14 +18,12 @@ async function GetPosts(sorted = false, profilePosts = null) {
             );
         }
         const posts = await responsePosts.json();
-        let html = "";
-
         let htmlImage;
         posts.forEach((post) => {
             // Image handling
             if(post.image == null) htmlImage = "";
             else htmlImage =
-                `<div class="col-sm-auto" id="imageDiv" >
+                `<div id="like_button_form" class="col-sm-auto" id="imageDiv" >
                     <img id="image" src="${post.image}" width="50%">
                  </div>`;
 
@@ -37,15 +37,59 @@ async function GetPosts(sorted = false, profilePosts = null) {
                 +
                 htmlImage
                 +`
-                            <svg id="likeButton" aria-hidden="true" focusable="false" data-prefix="far" data-icon="heart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path></svg>
-							${post.likes}
+                            <input type="button" id="${post.id_post}" value="Like" >
+                            <svg class="likeButton" aria-hidden="true" focusable="false" data-prefix="far" data-icon="heart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path></svg>
+                            <div value="" style="display: inline" id="counter${post.id_post}">${post.likes}</div>
                        </div>`;
-            html += row;
+            page.innerHTML += row;
         });
-        return html;
+
+        const b = document.querySelectorAll('input[type="button"]');
+        [].slice.call(b).forEach(function (el) {
+            el.onclick = sendLike.bind(this, el);
+        });
+
     } catch (e){
         console.error("Error");
     }
 }
+
+async function sendLike(post){
+    const user = JSON.parse(window.localStorage.getItem("user"));
+    const request = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": user.token
+        },
+        body: JSON.stringify(
+            {
+                id_user: user.id_user,
+                id_post: post.id
+            }
+        ),
+    };
+    try {
+        const responsePosts = await fetch(`/api/likes/toggle`, request);
+        if (!responsePosts.ok) {
+            throw new Error(
+                "fetch error : " + responsePosts.status + " : " + responsePosts.statusText
+            );
+        }
+
+        const likeCounter = document.getElementById("counter" + post.id);
+        const likeCounterInt = parseInt(likeCounter.innerHTML);
+        if (responsePosts.status === 201) {
+            likeCounter.innerHTML = likeCounterInt + 1;
+        } else {
+            likeCounter.innerHTML = likeCounterInt - 1;
+        }
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
 
 export default GetPosts;

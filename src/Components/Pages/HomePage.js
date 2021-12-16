@@ -1,15 +1,20 @@
 import SendPostHTML from "../Modules/InsertPostModule";
 import GetPostsModule from "../Modules/GetPostsModule";
+
 /**
  * Render the HomePage
  */
 
 const HomePage = async () => {
+    // Init
     const pageDiv = document.querySelector("#page");
-    // Insert new post bar (init page)
+    pageDiv.innerHTML = ``;
+
+    // Insert new post bar
     SendPostHTML(pageDiv);
 
-    pageDiv.innerHTML += await GetPostsModule();
+    // Get posts sorted by date
+    await GetPostsModule(pageDiv);
 };
 
 export default HomePage;

@@ -6,11 +6,15 @@ import GetPostsModule from "../Modules/GetPostsModule";
  */
 
 const TopKwicks = async () => {
+    // Init
     const pageDiv = document.querySelector("#page");
-    // Insert new post bar (init page)
+    pageDiv.innerHTML = ``;
+
+    // Insert new post bar
     SendPostHTML(pageDiv);
 
-    pageDiv.innerHTML += await GetPostsModule(true);
+    // Get posts sorted by likes
+    await GetPostsModule(pageDiv, true);
 };
 
 export default TopKwicks;
