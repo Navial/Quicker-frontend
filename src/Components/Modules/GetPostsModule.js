@@ -1,7 +1,6 @@
 import showPostsHtml from "./ShowPostsHtmlModule";
 import {Redirect} from "../Router/Router";
-import deletePost from "../../utils/deletePost";
-
+import Posts_modifications from "../../utils/posts_modifications";
 
 async function GetPosts(page, profilePosts = null, isHomepage = false) {
     let request = {
@@ -48,7 +47,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
         // remove post listener
         document.addEventListener("click", async function (e) {
             if (e.target.id.startsWith("remove_button")) {
-                await deletePost(e.target.id.replace("remove_button", ""));
+                await Posts_modifications.removePost(e.target.id.replace("remove_button", ""));
                 e.target.parentNode.parentNode.hidden = true;
             }
         });
