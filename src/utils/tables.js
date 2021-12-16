@@ -10,13 +10,6 @@ const getRequest = {
     }
 };
 
-const deleteRequest = {
-    method: "DELETE",
-    headers: {
-        "Authorisation": userToken
-    }
-};
-
 async function refreshMembersTable() {
     userToken = loadUser().token;
     try {
