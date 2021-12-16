@@ -14,7 +14,7 @@ const HomePage = async () => {
     SendPostHTML(pageDiv);
 
     // Get posts sorted by date
-    await GetPostsModule(pageDiv);
+    await GetPostsModule(pageDiv, null, true);
 };
 
 export default HomePage;

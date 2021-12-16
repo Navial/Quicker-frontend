@@ -9,9 +9,8 @@ const ProfilePage = async () => {
     // Get base user informations
     const idCurrentUser = new URLSearchParams(window.location.search).get("idUser");
     const user = await getBaseInformationsUser(idCurrentUser);
-
-    //
     const userConnected = JSON.parse(window.localStorage.getItem("user"));
+
 
     pageDiv.innerHTML += `
             <div class="mainContent">
@@ -26,7 +25,7 @@ const ProfilePage = async () => {
         `;
 
 
-    // Follow button
+    // Add follow button if other profile
     if (user.id_user !== userConnected.id_user) {
 
         const username = document.getElementById("userName");
@@ -34,11 +33,11 @@ const ProfilePage = async () => {
             username.innerHTML += " (vous suit)";
         }
 
-
         const userDiv = document.getElementById("userContainer");
         const followButton = document.createElement("a");
         followButton.className = "col-sm-10";
         followButton.id = "followButton" + idCurrentUser;
+
         if ((await existFollow(idCurrentUser, userConnected.id_user, userConnected.token)).status === 201) {
             followButton.innerHTML = "Suivi";
         } else {
@@ -46,6 +45,8 @@ const ProfilePage = async () => {
         }
         followButton.type = "button";
         userDiv.appendChild(followButton);
+
+        //
         document.addEventListener("click", async function (e) {
             if (e.target.id === "followButton" + idCurrentUser) {
                 const responseFollow = await toggleFollowUser(idCurrentUser, userConnected);
@@ -59,7 +60,7 @@ const ProfilePage = async () => {
     }
 
     // Get posts sorted by date
-    await GetPostsModule(pageDiv, false, idCurrentUser);
+    await GetPostsModule(pageDiv, idCurrentUser);
 }
 
 async function existFollow(idUserFollowed, idUserFollower, token) {

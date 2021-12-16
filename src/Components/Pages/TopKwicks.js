@@ -14,7 +14,7 @@ const TopKwicks = async () => {
     SendPostHTML(pageDiv);
 
     // Get posts sorted by likes
-    await GetPostsModule(pageDiv, true);
+    await GetPostsModule(pageDiv);
 };
 
 export default TopKwicks;

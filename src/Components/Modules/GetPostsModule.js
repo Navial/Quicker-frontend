@@ -1,16 +1,33 @@
-import logout from "../Pages/Logout";
 
 
-async function GetPosts(page, sorted = false, profilePosts = null) {
-    const request = {
+async function GetPosts(page, profilePosts = null, isHomepage = false) {
+    let request = {
         method: "GET",
         headers: {
             "Authorization": JSON.parse(window.localStorage.getItem("user")).token
         }
     };
 
+    let responsePosts= await fetch(`/api/posts/allPostWithLikesAndUser/` + profilePosts, request);
     try {
-        const responsePosts = await fetch(`/api/posts/allPostWithLikesAndUser/` + sorted + "/" + profilePosts, request);
+        if (isHomepage) {
+            const user = JSON.parse(window.localStorage.getItem("user"));
+            request = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": user.token
+                },
+                body: JSON.stringify(
+                    {
+                        id_user: user.id_user,
+                    }
+                ),
+            };
+
+            responsePosts  = await fetch(`/api/posts/homepage`, request);
+            console.log(responsePosts)
+        }
 
         if (!responsePosts.ok) {
             throw new Error(
