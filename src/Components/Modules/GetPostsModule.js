@@ -1,5 +1,6 @@
 import showPostsHtml from "./ShowPostsHtml";
 import {Redirect} from "../Router/Router";
+import deletePost from "./deletePost";
 
 
 async function GetPosts(page, profilePosts = null, isHomepage = false) {
