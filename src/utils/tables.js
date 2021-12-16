@@ -1,7 +1,8 @@
 import posts_modifications from "./posts_modifications";
 import members_modifications from "./members_modifications";
+import loadUser from "./load_user";
 
-let userToken = "";
+let userToken;
 const getRequest = {
     method: "GET",
     headers: {
@@ -9,15 +10,9 @@ const getRequest = {
     }
 };
 
-const deleteRequest = {
-    method: "DELETE",
-    headers: {
-        "Authorisation": userToken
-    }
-};
-
 async function refreshMembersTable() {
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+    const authenticatedUser = loadUser();
+    userToken = authenticatedUser.token;
     try {
         const response = await fetch("/api/users/all", getRequest);
 
@@ -36,7 +31,7 @@ async function refreshMembersTable() {
             else
                 var memberType = "Admin";
 
-            tableTbody.innerHTML += `
+            let tableTbodyHtml = `
                 <tr>
                     <td>${user.id_user}</td>
                     <td>${user.forename}</td>   
@@ -48,6 +43,9 @@ async function refreshMembersTable() {
                     <td>${user.is_admin}</td>
                     <td>${user.biography}</td>
                     <td>${user.date_creation}</td>
+            `;
+            if(user.id_user !== authenticatedUser.id_user) {
+                tableTbodyHtml += `
                     <td>
                         <form id="membersGestionForm">
                             <input id="id_user" type="hidden" value="${user.id_user}">
@@ -55,8 +53,20 @@ async function refreshMembersTable() {
                             <input id="memberType" type="submit" value="${memberType}">
                         </form>
                     </td>
+                `;
+            }
+            else {
+                tableTbodyHtml += `
+                    <td>
+                        <h4 class="alert-warning">It's your account</h4>
+                    </td>
+                `;
+            }
+            tableTbodyHtml += `
                 </tr>
             `;
+
+            tableTbody.innerHTML += tableTbodyHtml;
         });
 
         const forms = document.querySelectorAll("#membersGestionForm");
@@ -94,7 +104,9 @@ async function refreshMembersTable() {
 }
 
 async function refreshPostsTable() {
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+    const user = loadUser();
+    userToken = user.token;
+
     const tableTbody = document.getElementById("postsGestionTbody");
     const response = await fetch("/api/posts/", getRequest);
 
@@ -108,7 +120,7 @@ async function refreshPostsTable() {
         else
             var postStatus = "Remove";
 
-        tableTbody.innerHTML += `
+        let tableTbodyHtml = `
              <tr>
                 <td>${post.id_post}</td>
                 <td>${post.id_user}</td>   
@@ -118,14 +130,27 @@ async function refreshPostsTable() {
                 <td>${post.is_removed}</td>
                 <td>${post.date_creation}</td>
                 <td>${post.number_of_likes}</td>
+        `;
+        if(user.id_user !== post.id_user) {
+            tableTbodyHtml += `
                 <td>
                     <form id="postsGestionForm">
                         <input id="id_post" type="hidden" value="${post.id_post}">
                         <input type="submit" value="${postStatus}">
                     </form>
                 </td>
+            `;
+        } else {
+            tableTbodyHtml += `
+                <td>
+                    <h4 class="alert-warning">It's your post</h4>
+                </td>
+            `;
+        }
+        tableTbodyHtml += `
             </tr>
         `;
+        tableTbody.innerHTML += tableTbodyHtml;
     });
 
     const forms = document.querySelectorAll("#postsGestionForm");

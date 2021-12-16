@@ -1,19 +1,20 @@
 import showPostsHtml from "./ShowPostsHtmlModule";
 import {Redirect} from "../Router/Router";
 import Posts_modifications from "../../utils/posts_modifications";
+import loadUser from "../../utils/load_user";
 
 async function GetPosts(page, profilePosts = null, isHomepage = false) {
+    const user = loadUser();
     let request = {
         method: "GET",
         headers: {
-            "Authorization": JSON.parse(window.localStorage.getItem("user")).token
+            "Authorization": user.token
         }
     };
 
     let responsePosts= await fetch(`/api/posts/allPostWithLikesAndUser/` + profilePosts, request);
     try {
         if (isHomepage) {
-            const user = JSON.parse(window.localStorage.getItem("user"));
             request = {
                 method: "POST",
                 headers: {
@@ -39,7 +40,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
         showPostsHtml(page, posts);
 
         // like listener
-        const b = document.querySelectorAll('input[type="button"]');
+        const b = document.querySelectorAll('svg');
         [].slice.call(b).forEach(function (el) {
             el.onclick = sendLike.bind(this, el);
         });
@@ -58,7 +59,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
 }
 
 async function sendLike(post){
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = loadUser();
     const request = {
         method: "POST",
         headers: {

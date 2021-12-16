@@ -26,7 +26,8 @@ p {
 }
 
 .likeButton{
-    width: 15px;
+    width: 20px;
+    margin-left: 1 em;
 }
 /** ---- PROFILE PAGE ---- */
 
@@ -75,7 +76,6 @@ p {
     border-radius: 1em;
     margin-bottom: 1em;
     padding: 1em;
-    padding-bottom: 0.2em;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
@@ -86,6 +86,21 @@ p {
     margin-bottom: 0.5em;
     font-size: small;
 }
+
+#postAuthor{
+    font-size: large;
+    font-weight: 500;
+}
+
+.remove_button{
+    font-size: x-small;
+    padding: 2px;
+    background-color: rgb(248,215,218);
+    color: rgb(132,32,41);
+    border-radius: 4px;
+    margin: 3px;
+}
+
 
 #image{
     border-radius: 1em;
