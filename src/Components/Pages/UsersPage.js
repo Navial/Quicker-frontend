@@ -9,7 +9,6 @@ const UsersPage = async () => {
 
     searchBar.addEventListener("keyup", async () => {
         if (searchBar.value !== "") {
-            console.log(searchBar.value)
             const tab = await getAllUsersSimilarTo(searchBar.value);
             pageDiv.innerHTML = "";
             if (tab) {
@@ -21,11 +20,6 @@ const UsersPage = async () => {
     })
 
 }
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 
 async function getAllUsersSimilarTo(search) {
     try {
