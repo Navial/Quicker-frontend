@@ -1,20 +1,20 @@
-import showPostsHtml from "./ShowPostsHtml";
+import showPostsHtml from "./ShowPostsHtmlModule";
 import {Redirect} from "../Router/Router";
-import deletePost from "../../utils/deletePost";
-
+import Posts_modifications from "../../utils/posts_modifications";
+import loadUser from "../../utils/load_user";
 
 async function GetPosts(page, profilePosts = null, isHomepage = false) {
+    const user = loadUser();
     let request = {
         method: "GET",
         headers: {
-            "Authorization": JSON.parse(window.localStorage.getItem("user")).token
+            "Authorization": user.token
         }
     };
 
     let responsePosts= await fetch(`/api/posts/allPostWithLikesAndUser/` + profilePosts, request);
     try {
         if (isHomepage) {
-            const user = JSON.parse(window.localStorage.getItem("user"));
             request = {
                 method: "POST",
                 headers: {
@@ -48,7 +48,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
         // remove post listener
         document.addEventListener("click", async function (e) {
             if (e.target.id.startsWith("remove_button")) {
-                await deletePost(e.target.id.replace("remove_button", ""));
+                await Posts_modifications.removePost(e.target.id.replace("remove_button", ""));
                 e.target.parentNode.parentNode.hidden = true;
             }
         });
@@ -59,7 +59,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
 }
 
 async function sendLike(post){
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = loadUser();
     const request = {
         method: "POST",
         headers: {
