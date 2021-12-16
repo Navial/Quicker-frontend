@@ -1,4 +1,4 @@
-import loadUser from "../../utils/load_user";
+import loadUser from "./load_user";
 
 async function deletePost(idPost){
     const user = loadUser();
