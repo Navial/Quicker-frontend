@@ -1,7 +1,8 @@
 import posts_modifications from "./posts_modifications";
 import members_modifications from "./members_modifications";
+import loadUser from "./load_user";
 
-let userToken = "";
+let userToken;
 const getRequest = {
     method: "GET",
     headers: {
@@ -17,7 +18,7 @@ const deleteRequest = {
 };
 
 async function refreshMembersTable() {
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+    userToken = loadUser().token;
     try {
         const response = await fetch("/api/users/all", getRequest);
 
@@ -94,7 +95,7 @@ async function refreshMembersTable() {
 }
 
 async function refreshPostsTable() {
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
+    userToken = loadUser().token;
     const tableTbody = document.getElementById("postsGestionTbody");
     const response = await fetch("/api/posts/", getRequest);
 
