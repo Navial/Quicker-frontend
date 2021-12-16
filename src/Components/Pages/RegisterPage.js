@@ -90,8 +90,9 @@ async function register (e) {
             errorLogin.innerHTML = "";
         }
 
-        const idUser = await response.json();
-        window.localStorage.setItem("id_user", idUser);
+        const user = await response.json();
+        console.log(user);
+        window.localStorage.setItem("user", user);
         Navbar();
         Redirect("/");
     } catch (e) {
