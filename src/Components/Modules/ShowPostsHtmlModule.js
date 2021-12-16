@@ -1,6 +1,8 @@
+import loadUser from "../../utils/load_user";
+
 function showPostsHtml(page, posts){
     let htmlImage;
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = loadUser();
     posts.forEach((post) => {
         // Image handling
         if(post.image === null)
