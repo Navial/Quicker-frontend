@@ -41,8 +41,4 @@ async function removePost(id_post){
     }
 }
 
-function loadToken() {
-    userToken = JSON.parse(window.localStorage.getItem("user")).token;
-}
-
 export default {activatePost, removePost};
