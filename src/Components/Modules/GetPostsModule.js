@@ -1,4 +1,5 @@
 import showPostsHtml from "./ShowPostsHtml";
+import {Redirect} from "../Router/Router";
 
 
 async function GetPosts(page, profilePosts = null, isHomepage = false) {
@@ -27,7 +28,6 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
             };
 
             responsePosts  = await fetch(`/api/posts/homepage`, request);
-            console.log(responsePosts)
         }
 
         if (!responsePosts.ok) {
@@ -38,9 +38,18 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
         const posts = await responsePosts.json();
         showPostsHtml(page, posts);
 
+        // like listener
         const b = document.querySelectorAll('input[type="button"]');
         [].slice.call(b).forEach(function (el) {
             el.onclick = sendLike.bind(this, el);
+        });
+
+        // remove post listener
+        document.addEventListener("click", async function (e) {
+            if (e.target.id.startsWith("remove_button")) {
+                await deletePost(e.target.id.replace("remove_button", ""));
+                e.target.parentNode.parentNode.hidden = true;
+            }
         });
 
     } catch (e){
