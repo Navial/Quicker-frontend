@@ -10,12 +10,14 @@ const ProfilePage = async () => {
     const idCurrentUser = new URLSearchParams(window.location.search).get("idUser");
     const user = await getBaseInformationsUser(new URLSearchParams(window.location.search).get("idUser"));
     pageDiv.innerHTML += `
-            <div class="mainContent">
-                <div id="banner"></div>
-                <div id="userContainer">
-                    <div class="col-sm-10" id="userName">${user.forename} ${user.lastname} </div>
-                    <div class="col-sm-10" id="biography">Biography : ${user.biography}</div>
-                    <div class="col-sm-10" id="creationDate">Created his account on ${new Date(user.date_creation).toDateString()}</div>
+            <div class="mainContent" id="contentProfilePage">
+                <div id="">
+                    <div id="banner"></div>
+                    <div id="userContainer">
+                        <div class="col-sm-10" id="userName">${user.forename} ${user.lastname} </div>
+                        <div class="col-sm-10" id="biography">Biography : ${user.biography}</div>
+                        <div class="col-sm-10" id="creationDate">Created his account on ${new Date(user.date_creation).toDateString()}</div>
+                    </div>
                 </div>
                 <div class="container" id="tablePost"></div>
             </div>

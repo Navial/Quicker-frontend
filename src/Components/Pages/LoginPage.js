@@ -1,4 +1,3 @@
-import logoKwicker from "../../img/banniereKiwi.png";
 import Navbar from "../Navbar/Navbar";
 import {Redirect} from "../Router/Router";
 import anime from "animejs";
@@ -7,11 +6,12 @@ const loginDiv = `
         <div id="loginPage">
             <div id="loginContainer">
                 <form id="loginForm" class="loginRegisterContainer">
-                    <img src="" alt="Logo Kwicker" id="logoRegister">
+                    <h1 class="loginText">Kwicker</h1>
                     <input class="inputForm fields" type="text" id="usernameLogin" placeholder="Pseudo">
                     <input class="inputForm fields" type="password" id="passwordLogin" placeholder="Mot de passe">
                     <input class="inputForm submitButton" type="submit" value="Se connecter">
                     <div id="errorLogin" class="alert-danger"></div>
+                    <a class="loginText" id="goToRegister">Je n'ai pas encore de compte</a>
                 </form>
             </div>
         </div>
@@ -24,10 +24,12 @@ const loginDiv = `
 function LoginPage() {
     const pageDiv = document.querySelector("#page");
     pageDiv.innerHTML = loginDiv;
-    const logo = document.querySelector("#logoRegister");
-    logo.src = logoKwicker;
     const form = document.getElementById("loginForm");
     form.addEventListener("submit", login);
+    goToRegister.addEventListener("click", e => {
+        e.preventDefault();
+        Redirect("/register");
+    });
 }
 
 async function login(e) {
@@ -54,7 +56,7 @@ async function login(e) {
             easing: 'easeInOutSine',
             duration: 550,
             translateX: [{value: xMax * -1,}, {value: xMax,},{value: xMax/-2,},{value: xMax/2,}, {value: 0}],
-            scale: [{value:1.05},{value:1, delay: 250} ],
+            scale: [{value:1.05},{value:1, delay: 150} ],
         });
     }
 
