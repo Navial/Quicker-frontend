@@ -34,13 +34,13 @@ async function SendPost(e) {
     } catch (e) {
         console.error("SendPost::error ", e);
     }
-    Redirect('/top_kwicks');
+    Redirect(location.pathname);
 }
 
 function SendPostHTML(page) {
-    page.innerHTML =  `
+    page.innerHTML +=  `
             <div class="newPost">
-                <form id="sendPost" method="post">
+                <form id="sendPost">
                     <input type="text" id="textPost">
                     <input type="submit" id="buttonPost" value="Post">
                 </form>
@@ -48,7 +48,8 @@ function SendPostHTML(page) {
             <div class="container" id="tableTopKiwcks"></div> 
             `
     const form = document.getElementById("sendPost");
-    form.addEventListener("submit", SendPost);
+    //document.getElementById("sendPost").addEventListener("submit", SendPost);
+    document.addEventListener("submit", SendPost);
 }
 
 
