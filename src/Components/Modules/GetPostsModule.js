@@ -40,7 +40,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
         showPostsHtml(page, posts);
 
         // like listener
-        const b = document.querySelectorAll('input[type="button"]');
+        const b = document.querySelectorAll('svg');
         [].slice.call(b).forEach(function (el) {
             el.onclick = sendLike.bind(this, el);
         });
