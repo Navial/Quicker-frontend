@@ -1,4 +1,4 @@
-import showPostsHtml from "./ShowPostsHtml";
+import showPostsHtml from "./ShowPostsHtmlModule";
 import {Redirect} from "../Router/Router";
 import deletePost from "../../utils/deletePost";
 
