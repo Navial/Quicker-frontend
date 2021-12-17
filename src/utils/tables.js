@@ -2,17 +2,13 @@ import posts_modifications from "./posts_modifications";
 import members_modifications from "./members_modifications";
 import loadUser from "./load_user";
 
-let userToken;
-const getRequest = {
-    method: "GET",
-    headers: {
-        "Authorisation": userToken
-    }
-};
-
 async function refreshMembersTable() {
-    const authenticatedUser = loadUser();
-    userToken = authenticatedUser.token;
+    const getRequest = {
+        method: "GET",
+        headers: {
+            Authorization: loadUser().token
+        }
+    };
     try {
         const response = await fetch("/api/users/all", getRequest);
 
@@ -104,9 +100,12 @@ async function refreshMembersTable() {
 }
 
 async function refreshPostsTable() {
-    const user = loadUser();
-    userToken = user.token;
-
+    const getRequest = {
+        method: "GET",
+        headers: {
+            Authorization: loadUser().token
+        }
+    };
     const tableTbody = document.getElementById("postsGestionTbody");
     const response = await fetch("/api/posts/", getRequest);
 
