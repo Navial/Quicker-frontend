@@ -17,9 +17,7 @@ function showPostsHtml(page, posts){
         let removeButton = "";
         if (user.id_user === post.id_user) {
             removeButton = `
-                <div id="form_remove_button" class="col-sm-auto" >
-                    <a class="remove_button" id="remove_button${post.id_post}" width="50%">Remove</a>
-                </div>
+              <a type="button" class="remove_button" id="remove_button${post.id_post}" width="50%">Remove post</a>
             `;
         } else removeButton = "";
 
@@ -27,11 +25,14 @@ function showPostsHtml(page, posts){
         let postRow = `
             <div id="post">
                 <div class="col-sm-auto">
-                    <div class="col-sm-5" id="postAuthor"><a id="postusersender${post.id_user}" href="/profile?idUser=${post.id_user}">${post.username}</a>
-                    ${removeButton} 
-                </div>
-                     <div class="col-sm-5" id="creationDate">Posté le ${new Date(post.date_creation).toDateString()}
-                     </div>
+                    <div class="col-sm-5" id="postAuthor">
+                        <a id="postusersender${post.id_user}" href="/profile?idUser=${post.id_user}">
+                            ${post.username}
+                        </a>
+                      ${removeButton}
+                    </div>
+                    <div class="col-sm-5" id="creationDate">Posté le ${new Date(post.date_creation).toDateString()}
+                    </div>
                 </div>
                 <div class="col-sm-auto" id="postText">${post.message}
                 </div>
@@ -110,7 +111,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false, isLikesPo
         document.addEventListener("click", async function (e) {
             if (e.target.id.startsWith("remove_button")) {
                 await Posts_modifications.removePost(e.target.id.replace("remove_button", ""));
-                e.target.parentNode.parentNode.parentNode.parentNode.hidden = true;
+                e.target.parentNode.parentNode.parentNode.hidden = true;
             }
         });
 
