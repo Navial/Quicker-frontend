@@ -3,8 +3,8 @@ import Tables from "../../utils/tables";
 const adminPagehtml = `
     <div id="adminPage">
         <div id="adminButtons">
-            <input id="postsGestionButton" type="button" value="Posts Gestion">
-            <input id="membersGestionButton" type="button" value="Members Gestion">
+            <input class="adminButtonChoice" id="postsGestionButton" type="button" value="Posts Gestion">
+            <input class="adminButtonChoice" id="membersGestionButton" type="button" value="Members Gestion">
         </div>
         <div id="adminTable">
         </div>

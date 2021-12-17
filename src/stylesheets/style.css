@@ -27,7 +27,7 @@ p {
 
 .likeButton{
     width: 20px;
-    margin-left: 1 em;
+    margin-left: 1em;
 }
 /** ---- PROFILE PAGE ---- */
 
@@ -84,12 +84,12 @@ p {
 #postText{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    font-size: small;
+    font-size: 1.1em;
 }
 
 #postAuthor{
-    font-size: large;
-    font-weight: 500;
+    font-size: 1.6em;
+    text-decoration: underline;
 }
 
 .remove_button{
@@ -145,7 +145,7 @@ a, a:hover, a:focus {
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    color: #fff;
+    color: rgb(209, 203, 229);
     transition: all 0.3s;
 }
 
@@ -295,8 +295,6 @@ input:focus{
     outline: none;
 }
 
-
-
 .active {
     background-color: rgb(4, 57, 119);
 }
@@ -402,4 +400,78 @@ li {
 
 #content{
     width: 100%;
+}
+#adminPage{
+    color: white;
+    padding: 10px;
+}
+
+.adminButtonChoice{
+    border-radius: 50px;
+    background-color: rgb(79,126,217);
+    border: none;
+}
+
+.table-bordered{
+    margin: 2vh 3vw;
+    color: rgb(160, 191, 239);
+    width: 80vw;
+}
+
+th, td{
+    padding: 10px;
+}
+
+tr:nth-child(even){
+    background-color: rgb(31, 66, 121);
+}
+
+th{
+    text-decoration: underline rgb(7, 100, 191) 3px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(31, 66, 121);
+}
+
+h3{
+    margin-top: 25px;
+    text-align: center;
+}
+
+.memberTableButton {
+    background-color: rgb(79, 126, 217);
+    border-radius: 2%;
+    border: none;
+    margin-top: 2px;
+}
+
+#postRemoveButton{
+    background-color: rgb(79,126,217);
+    border-radius: 2%;
+    border: none;
+}
+
+.alert-warning{
+    background: none;
+    color: rgb(173, 173, 173);
+}
+
+#userSearchResultList{
+    margin: 2vw auto;
+    list-style-type: none;
+    text-decoration: none;
+    color: white;
+}
+
+.resultUserSearch{
+    color: rgb(190, 182, 231);
+}
+
+.resultUserSearch:hover{
+    color: rgb(190, 182, 231);
+    text-decoration: underline solid white;
+}
+
+#resultSearchTitle{
+    color: rgb(190, 182, 231);
 }

@@ -1,18 +1,15 @@
 import posts_modifications from "./posts_modifications";
 import members_modifications from "./members_modifications";
-import loadUser from "./load_user";
-
-let userToken;
-const getRequest = {
-    method: "GET",
-    headers: {
-        "Authorisation": userToken
-    }
-};
+import load_user from "./load_user";
 
 async function refreshMembersTable() {
-    const authenticatedUser = loadUser();
-    userToken = authenticatedUser.token;
+    const authenticatedUser = load_user.loadUser();
+    const getRequest = {
+        method: "GET",
+        headers: {
+            Authorization: authenticatedUser.token
+        }
+    };
     try {
         const response = await fetch("/api/users/all", getRequest);
 
@@ -49,8 +46,8 @@ async function refreshMembersTable() {
                     <td>
                         <form id="membersGestionForm">
                             <input id="id_user" type="hidden" value="${user.id_user}">
-                            <input id="memberStatus" type="submit" value="${memberStatus}">
-                            <input id="memberType" type="submit" value="${memberType}">
+                            <input class="memberTableButton" id="memberStatus" type="submit" value="${memberStatus}">
+                            <input class="memberTableButton" id="memberType" type="submit" value="${memberType}">
                         </form>
                     </td>
                 `;
@@ -104,9 +101,13 @@ async function refreshMembersTable() {
 }
 
 async function refreshPostsTable() {
-    const user = loadUser();
-    userToken = user.token;
-
+    const user = load_user.loadUser();
+    const getRequest = {
+        method: "GET",
+        headers: {
+            Authorization: user.token
+        }
+    };
     const tableTbody = document.getElementById("postsGestionTbody");
     const response = await fetch("/api/posts/", getRequest);
 
@@ -136,7 +137,7 @@ async function refreshPostsTable() {
                 <td>
                     <form id="postsGestionForm">
                         <input id="id_post" type="hidden" value="${post.id_post}">
-                        <input type="submit" value="${postStatus}">
+                        <input id="postRemoveButton" type="submit" value="${postStatus}">
                     </form>
                 </td>
             `;
@@ -165,7 +166,7 @@ async function refreshPostsTable() {
                 input.addEventListener("click", (e) => {
                     e.preventDefault();
                     if (postStatus === "Remove")
-                        posts_modifications.removePost(id_post);
+                        posts_modifications.removeAdminPost(id_post);
                     else
                         posts_modifications.activatePost(id_post);
                 });
