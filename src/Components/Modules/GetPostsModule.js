@@ -49,7 +49,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
         document.addEventListener("click", async function (e) {
             if (e.target.id.startsWith("remove_button")) {
                 await Posts_modifications.removePost(e.target.id.replace("remove_button", ""));
-                e.target.parentNode.parentNode.hidden = true;
+                e.target.parentNode.parentNode.parentNode.parentNode.hidden = true;
             }
         });
 

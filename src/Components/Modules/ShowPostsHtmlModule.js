@@ -23,7 +23,7 @@ function showPostsHtml(page, posts){
                     <a class="remove_button" id="remove_button${post.id_post}" width="50%">Remove</a>
                 </div>
             `;
-        }else removeButton = "";
+        } else removeButton = "";
 
 
         let likeButton = " ";
