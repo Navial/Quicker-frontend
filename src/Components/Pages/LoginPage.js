@@ -47,7 +47,6 @@ async function login(e) {
         } else if (!password) {
             errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe.</h2>`;
             throw new Error("No password");
-        } else {
         }
     }catch (e) {
         const xMax = 16;
