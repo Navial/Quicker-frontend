@@ -1,8 +1,8 @@
-import loadUser from "../../utils/load_user";
 import showPostsHtml from "./ShowPostsHtmlModule";
+import load_user from "../../utils/load_user";
 
 async function getLikedPosts (page) {
-    const user = loadUser();
+    const user = load_user.loadUser();
     const request = {
         "method": "GET",
         headers: {
