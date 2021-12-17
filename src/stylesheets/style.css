@@ -27,7 +27,7 @@ p {
 
 .likeButton{
     width: 20px;
-    margin-left: 1 em;
+    margin-left: 1em;
 }
 /** ---- PROFILE PAGE ---- */
 
@@ -84,12 +84,12 @@ p {
 #postText{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    font-size: small;
+    font-size: 1.1em;
 }
 
 #postAuthor{
-    font-size: large;
-    font-weight: 500;
+    font-size: 1.6em;
+    text-decoration: underline;
 }
 
 .remove_button{
@@ -145,7 +145,7 @@ a, a:hover, a:focus {
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    color: #fff;
+    color: rgb(209, 203, 229);
     transition: all 0.3s;
 }
 
