@@ -5,6 +5,16 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 1em;
+    background-color: rgb(169, 195, 245);
+    border-radius: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(79, 126, 217);
+    border-radius: 0.5em;
+}
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
@@ -210,6 +220,7 @@ a, a:hover, a:focus {
     border-bottom-left-radius: 40px;
     border-top-left-radius: 40px;
     border-top-style: none;
+    padding-left: 20px;
 }
 
 #textPost:focus {
@@ -250,24 +261,24 @@ a, a:hover, a:focus {
     height: 50px;
     width: 25%;
     color: #fff;
-    background: rgb(79,126,217);
+    background: #043977;
     border-bottom-right-radius: 40px;
     border-top-right-radius: 40px;
     text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
 }
 
 #buttonPost:hover{
-    background: #e54040;
+    background: rgb(79,126,217);
 }
 
 #buttonPost:focus:before,
 #buttonPost:active:before{
-    border-right-color: #c42f2f;
+    border-right-color: rgb(79,126,217);
 }
 
 #buttonPost:active,
 #buttonPost:focus{
-    background: rgb(79,126,217);
+    background: #043977;
     outline: 0;
 }
 
@@ -387,6 +398,19 @@ input:focus{
 /** MESSAGING */
 #openedConv{
     height: 93vh;
+    padding: 0;
+    width: 80%;
+}
+
+.messages{
+    top: 0;
+    overflow:auto;
+    height: 90%;
+}
+
+.row{
+    padding: 0;
+    width: 100%;
 }
 
 .messagePageContainer {
@@ -402,8 +426,8 @@ input:focus{
     background-color: rgb(29, 62, 111);
     border-right: 2px solid rgb(20, 49, 92);
     height: 100vh;
-    position: sticky;
     padding: 0;
+    position: relative;
 }
 
 .contacts{
@@ -422,14 +446,16 @@ li {
 	list-style-type: none;
 }
 
-
-
 .headConv{
-    margin-bottom: 1em;
     padding: 1em;
-    width: 100%;
+    width: 101%;
     background-color: rgb(21, 58, 114);
 }
+
+.recipient{
+    color: rgb(169, 195, 245);
+}
+
 .self{
     background-color: rgb(40, 84, 150);
     width: 60%;
@@ -437,6 +463,7 @@ li {
     border-radius: 1em;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    margin-right: 0.5em;
 }
 
 .other{
@@ -448,29 +475,37 @@ li {
     margin-bottom: 0.5em;
 }
 
-.textarea{
-    width: 45%;
-    position:sticky;
+.containerInput{
+    padding: 0;
+    width: 100%;
+    position: relative;
 }
 #textarea{
-    width: 40%;
+    width: 70%;
     height: 3em;
     border-radius: 1em;
     border: none;
-    margin: 1em;
     padding: 10px;
-    position: fixed;
     bottom: 0;
+    margin-left: 10%;
+
 }
 
-#sendMessageButton{
+/* BOUTON */
+.submit-msg-btn{
     background-color: rgb(169, 195, 245);
     height: 2.8em;
     width:  2.8em;
     padding: 10px;
     border: none;
     border-radius: 1.4em;
+    margin-left: 0.5em;
+    position: absolute;
+    top: 5%;
 }
+
+
+
 /** TESTS */
 #wrapperDiv{
     width: 100%;
