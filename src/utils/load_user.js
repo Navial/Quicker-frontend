@@ -5,4 +5,5 @@ function loadUser () {
 function getToken() {
     return loadUser().token;
 }
+
 export default {loadUser, getToken};
