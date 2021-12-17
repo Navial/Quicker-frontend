@@ -295,8 +295,6 @@ input:focus{
     outline: none;
 }
 
-
-
 .active {
     background-color: rgb(4, 57, 119);
 }
@@ -321,6 +319,7 @@ input:focus{
 .table-bordered{
     margin: 2vh 3vw;
     color: rgb(160, 191, 239);
+    width: 80vw;
 }
 
 th, td{
@@ -359,4 +358,24 @@ h3{
 .alert-warning{
     background: none;
     color: rgb(173, 173, 173);
+}
+
+#userSearchResultList{
+    margin: 2vw auto;
+    list-style-type: none;
+    text-decoration: none;
+    color: white;
+}
+
+.resultUserSearch{
+    color: rgb(190, 182, 231);
+}
+
+.resultUserSearch:hover{
+    color: rgb(190, 182, 231);
+    text-decoration: underline solid white;
+}
+
+#resultSearchTitle{
+    color: rgb(190, 182, 231);
 }

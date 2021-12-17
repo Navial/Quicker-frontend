@@ -8,12 +8,21 @@ const UsersPage = async () => {
     searchBar.addEventListener("keyup", async () => {
         if (searchBar.value !== "") {
             const tab = await getAllUsersSimilarTo(searchBar.value.toLowerCase());
-            pageDiv.innerHTML = "";
+            pageDiv.innerHTML = `
+                    <h3 id="resultSearchTitle">Résultats de recherche pour ${searchBar.value}</h3>
+                    <ul id="userSearchResultList">
+            `;
             if (tab) {
                 tab.forEach((row) => {
-                    pageDiv.innerHTML += `<a href="/profile?idUser=${row.id_user}">${row.forename} ${row.lastname} ${row.username}</a><br>`;
+                    pageDiv.innerHTML += `<li><a class="resultUserSearch" href="/profile?idUser=${row.id_user}">${row.forename} ${row.lastname} ${row.username}</a></li>`;
                 });
             }
+            // else if(tab.length ===0){
+            //     pageDiv.innerHTML += `<li><p>Aucun résultat à afficher</p></li>`
+            // }
+            pageDiv.innerHTML += `
+                    </ul>
+            `;
         }
     });
 
