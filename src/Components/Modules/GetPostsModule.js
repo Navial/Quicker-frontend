@@ -54,7 +54,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
         });
 
     } catch (e){
-        console.error("Error");
+        console.error(e);
     }
 }
 
