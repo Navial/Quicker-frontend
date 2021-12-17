@@ -1,5 +1,3 @@
-import SendPostHTML from "../Modules/InsertPostModule";
-import getLikedPosts from "../Modules/GetLikedPostsModule";
 
 const UsersPage = async () => {
     const pageDiv = document.getElementById("page");
@@ -17,7 +15,7 @@ const UsersPage = async () => {
                 });
             }
         }
-    })
+    });
 
 }
 
