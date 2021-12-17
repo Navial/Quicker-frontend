@@ -9,7 +9,7 @@ const UsersPage = async () => {
 
     searchBar.addEventListener("keyup", async () => {
         if (searchBar.value !== "") {
-            const tab = await getAllUsersSimilarTo(searchBar.value);
+            const tab = await getAllUsersSimilarTo(searchBar.value.toLowerCase());
             pageDiv.innerHTML = "";
             if (tab) {
                 tab.forEach((row) => {
