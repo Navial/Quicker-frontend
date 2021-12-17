@@ -27,7 +27,7 @@ function showPostsHtml(page, posts){
         let postRow = `
             <div id="post">
                 <div class="col-sm-auto">
-                    <div class="col-sm-5" id="postAuthor"><a href="/profile?idUser=${post.id_user}">${post.username}</a>
+                    <div class="col-sm-5" id="postAuthor"><a id="postusersender${post.id_user}" href="/profile?idUser=${post.id_user}">${post.username}</a>
                     ${removeButton} 
                 </div>
                      <div class="col-sm-5" id="creationDate">Posté le ${new Date(post.date_creation).toDateString()}

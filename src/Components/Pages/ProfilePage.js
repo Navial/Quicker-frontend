@@ -19,7 +19,10 @@ const ProfilePage = async () => {
                 <div id="">
                     <div id="banner"></div>
                     <div id="userContainer">
-                        <div class="col-sm-10" id="userName">${user.forename} ${user.lastname} </div>
+                        <div class="col-sm-10" id="userName">${user.forename} ${user.lastname} 
+                            <div id="followSign"></div>
+                            <div type="button" id="followButton"></div>
+                        </div>
                         <div class="col-sm-10" id="biography">Biography : ${user.biography}</div>
                         <div class="col-sm-10" id="creationDate">Created his account on ${new Date(user.date_creation).toDateString()}</div>
                     </div>
@@ -32,27 +35,24 @@ const ProfilePage = async () => {
     // Add follow button if other profile
     if (user.id_user !== userConnected.id_user) {
 
-        const username = document.getElementById("userName");
+        const followSign = document.getElementById("followSign");
         if ((await existFollow(userConnected.id_user, idCurrentUser, userConnected.token)).status === 201) {
-            username.innerHTML += " (vous suit)";
+            followSign.innerHTML += "vous suit";
+        } else {
+            followSign.hidden = true;
         }
 
-        const userDiv = document.getElementById("userContainer");
-        const followButton = document.createElement("a");
-        followButton.className = "col-sm-10";
-        followButton.id = "followButton" + idCurrentUser;
+        const followButton = document.getElementById("followButton");
 
         if ((await existFollow(idCurrentUser, userConnected.id_user, userConnected.token)).status === 201) {
             followButton.innerHTML = "Suivi";
         } else {
             followButton.innerHTML = "Suivre";
         }
-        followButton.type = "button";
-        userDiv.appendChild(followButton);
 
         //
         document.addEventListener("click", async function (e) {
-            if (e.target.id === "followButton" + idCurrentUser) {
+            if (e.target.id === "followButton") {
                 const responseFollow = await toggleFollowUser(idCurrentUser, userConnected);
                 if (responseFollow.status === 201) {
                     e.target.innerHTML = "Suivi"

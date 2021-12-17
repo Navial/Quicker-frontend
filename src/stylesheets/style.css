@@ -562,3 +562,27 @@ h3{
 #resultSearchTitle{
     color: rgb(190, 182, 231);
 }
+
+
+#followSign {
+    font-size: small;
+    background-color: #4f7ed9;
+    padding: 1px 4px 1px 4px;
+    border-radius: 5px;
+    display: inline;
+    vertical-align: middle;
+}
+
+#followButton {
+    font-size: small;
+    background-color: #2c5096;
+    border-radius: 5px;
+    padding: 1px 4px 1px 4px;
+    display: inline;
+    text-align: end;
+    vertical-align: middle;
+}
+
+#followButton:hover {
+    background-color: #153058;
+}
