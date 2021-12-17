@@ -32,17 +32,18 @@ const ProfilePage = async () => {
         `;
 
 
+    const followSign = document.getElementById("followSign");
+    const followButton = document.getElementById("followButton");
+
     // Add follow button if other profile
     if (user.id_user !== userConnected.id_user) {
-
-        const followSign = document.getElementById("followSign");
+        followSign.hidden = true;
         if ((await existFollow(userConnected.id_user, idCurrentUser, userConnected.token)).status === 201) {
+            followSign.hidden = false;
             followSign.innerHTML += "vous suit";
         } else {
             followSign.hidden = true;
         }
-
-        const followButton = document.getElementById("followButton");
 
         if ((await existFollow(idCurrentUser, userConnected.id_user, userConnected.token)).status === 201) {
             followButton.innerHTML = "Suivi";
@@ -61,6 +62,9 @@ const ProfilePage = async () => {
                 }
             }
         });
+    } else {
+        followButton.hidden = true;
+        followSign.hidden = true;
     }
 
     // Get posts sorted by date
