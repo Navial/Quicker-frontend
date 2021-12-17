@@ -1,24 +1,13 @@
 import Tables from "./tables";
 import loadUser from "./load_user";
 
-let userToken;
-
-const putRequest = {
-    "method": "PUT",
-    headers: {
-        Authorization: userToken
-    }
-};
-
-const deleteRequest = {
-    method: "DELETE",
-    headers: {
-        Authorization: userToken
-    }
-};
-
 async function activatePost(id_post) {
-    userToken = loadUser().token;
+    const putRequest = {
+        "method": "PUT",
+        headers: {
+            Authorization: loadUser().token
+        }
+    };
     try {
         const response = await fetch(`/api/posts/activate/${id_post}`, putRequest);
         if(!response.ok)
@@ -30,7 +19,12 @@ async function activatePost(id_post) {
 }
 
 async function removePost(id_post){
-    userToken = loadUser().token;
+    const deleteRequest = {
+        method: "DELETE",
+        headers: {
+            Authorization: loadUser().token
+        }
+    };
     try {
         const response = await fetch(`/api/posts/${id_post}`, deleteRequest);
         if (!response.ok)
