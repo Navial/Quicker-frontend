@@ -1,11 +1,11 @@
 import Tables from "./tables";
-import loadUser from "./load_user";
+import load_user from "./load_user";
 
 async function activatePost(id_post) {
     const putRequest = {
         "method": "PUT",
         headers: {
-            Authorization: loadUser().token
+            Authorization: load_user.getToken()
         }
     };
     try {
@@ -22,7 +22,7 @@ async function removePost(id_post){
     const deleteRequest = {
         method: "DELETE",
         headers: {
-            Authorization: loadUser().token
+            Authorization: load_user.getToken()
         }
     };
     try {
