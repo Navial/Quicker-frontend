@@ -1,9 +1,9 @@
 import posts_modifications from "./posts_modifications";
 import members_modifications from "./members_modifications";
-import loadUser from "./load_user";
+import load_user from "./load_user";
 
 async function refreshMembersTable() {
-    const authenticatedUser = loadUser();
+    const authenticatedUser = load_user.loadUser();
     const getRequest = {
         method: "GET",
         headers: {
@@ -101,7 +101,7 @@ async function refreshMembersTable() {
 }
 
 async function refreshPostsTable() {
-    const user = loadUser();
+    const user = load_user.loadUser();
     const getRequest = {
         method: "GET",
         headers: {
