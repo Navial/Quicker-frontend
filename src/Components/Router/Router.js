@@ -8,6 +8,7 @@ import LoginPage from "../Pages/LoginPage";
 import AdminPage from "../Pages/AdminPage";
 import Logout from "../Pages/Logout";
 import UsersPage from "../Pages/UsersPage";
+import Messages from "../Pages/MessagesPage";
 
 // Configure your routes here
 const routes = {
@@ -20,7 +21,8 @@ const routes = {
   "/login": LoginPage,
   "/admin_page": AdminPage,
   "/logout": Logout,
-  "/users": UsersPage
+  "/users": UsersPage,
+  "/messages": Messages
 };
 
 /**

@@ -306,3 +306,100 @@ input:focus{
     color: rgb(132,32,41);
     text-align: center;
 }
+
+
+/** MESSAGING */
+#openedConv{
+    height: 93vh;
+}
+
+.messagePageContainer {
+    background-color: rgb(29, 62, 111);
+    width: 65%;
+    margin-left: 15%;
+    margin-right: 70%;
+    height: 100vh;
+}
+/** CONTACTS */
+#userConvs{
+    width: 20%;
+    background-color: rgb(29, 62, 111);
+    border-right: 2px solid rgb(20, 49, 92);
+    height: 100vh;
+    position: sticky;
+    padding: 0;
+}
+
+.contacts{
+    width: 100%;
+    padding: 0;
+}
+
+.contact{
+    border-bottom: 2px solid rgb(20, 49, 92);
+    width: 100%;
+    padding: 0.5em;
+}
+
+/** MESSAGES */
+li {
+	list-style-type: none;
+}
+
+
+
+.headConv{
+    margin-bottom: 1em;
+    padding: 1em;
+    width: 100%;
+    background-color: rgb(21, 58, 114);
+}
+.self{
+    background-color: rgb(40, 84, 150);
+    width: 60%;
+    padding: 1em;
+    border-radius: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.other{
+    background-color: rgb(40, 84, 150);
+    width: 60%;
+    padding: 1em;
+    border-radius: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.textarea{
+    width: 45%;
+    position:sticky;
+}
+#textarea{
+    width: 40%;
+    height: 3em;
+    border-radius: 1em;
+    border: none;
+    margin: 1em;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+}
+
+#sendMessageButton{
+    background-color: rgb(169, 195, 245);
+    height: 2.8em;
+    width:  2.8em;
+    padding: 10px;
+    border: none;
+    border-radius: 1.4em;
+}
+/** TESTS */
+#wrapperDiv{
+    width: 100%;
+}
+
+#content{
+    width: 100%;
+}
