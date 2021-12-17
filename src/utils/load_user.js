@@ -2,4 +2,7 @@ function loadUser () {
     return JSON.parse(window.localStorage.getItem("user"));
 }
 
-export default loadUser;
+function getToken() {
+    return loadUser().token;
+}
+export default {loadUser, getToken};
