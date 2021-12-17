@@ -100,10 +100,11 @@ async function refreshMembersTable() {
 }
 
 async function refreshPostsTable() {
+    const user = loadUser();
     const getRequest = {
         method: "GET",
         headers: {
-            Authorization: loadUser().token
+            Authorization: user.token
         }
     };
     const tableTbody = document.getElementById("postsGestionTbody");
