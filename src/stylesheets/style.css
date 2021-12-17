@@ -64,12 +64,6 @@ p {
     font-size: x-small;
 }
 
-.newPost{
-    margin-top: 1em;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 #post{
     color: rgb(205, 222, 254);
     background-color: rgb(4, 57, 119);
@@ -179,23 +173,107 @@ a, a:hover, a:focus {
             Ajout d'un kwick
  */
 
+/*Clearing Floats*/
+.newPost:before, .newPost:after{
+    content:"";
+    display:table;
+}
 
-#textPost{
-    width: 50vw;
+.newPost:after{
+    clear:both;
+}
+
+.newPost{
+    zoom:1;
+}
+/* Form wrapper styling */
+
+.newPost {
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    /*width: 450px;*/
+    /*margin: 150px auto 50px auto;*/
+    border-radius: 40px;
+    /*background: transparent;*/
+}
+
+/* Form text input */
+
+#textPost {
+    width: 75%;
     height: 50px;
-    border-radius: 50px;
+    float: left;
+    border: 0;
+    background: #fff;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;
+    border-top-style: none;
+}
+
+#textPost:focus {
+    outline: 0;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.8) inset;
+}
+
+#textPost::-webkit-input-placeholder {
+    color: #999;
+    font-weight: normal;
+    font-style: italic;
     padding-left: 20px;
 }
 
-#buttonPost{
-    border-radius: 50px;
-    width: 5em;
-    height: 40px;
-    background-color: rgb(79,126,217);
-    border: none;
-    
-    margin-left: auto;
-    margin-right: auto;
+#textPost:-moz-placeholder {
+
+    color: #999;
+    font-weight: normal;
+    font-style: italic;
+}
+
+#textPost:-ms-input-placeholder {
+    color: #999;
+    font-weight: normal;
+    font-style: italic;
+    border-style: none;
+}
+
+/* Form submit button */
+#buttonPost {
+    overflow: visible;
+    position: relative;
+    float: right;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    height: 50px;
+    width: 25%;
+    color: #fff;
+    background: rgb(79,126,217);
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
+    text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+}
+
+#buttonPost:hover{
+    background: #e54040;
+}
+
+#buttonPost:focus:before,
+#buttonPost:active:before{
+    border-right-color: #c42f2f;
+}
+
+#buttonPost:active,
+#buttonPost:focus{
+    background: rgb(79,126,217);
+    outline: 0;
+}
+
+#buttonPost::-moz-focus-inner { /* remove extra button spacing for Mozilla Firefox */
+    border: 0;
+    padding: 0;
 }
 
 /**
@@ -465,6 +543,15 @@ h3{
 
 .resultUserSearch{
     color: rgb(190, 182, 231);
+}
+
+.resultUserSearchWrapper {
+    margin-bottom: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 5px;
+    background-color: #043977;
+    padding: 20px;
 }
 
 .resultUserSearch:hover{
