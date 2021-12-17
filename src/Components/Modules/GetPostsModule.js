@@ -1,10 +1,10 @@
 import showPostsHtml from "./ShowPostsHtmlModule";
 import {Redirect} from "../Router/Router";
 import Posts_modifications from "../../utils/posts_modifications";
-import loadUser from "../../utils/load_user";
+import load_user from "../../utils/load_user";
 
 async function GetPosts(page, profilePosts = null, isHomepage = false) {
-    const user = loadUser();
+    const user = load_user.loadUser();
     let request = {
         method: "GET",
         headers: {
@@ -60,7 +60,7 @@ async function GetPosts(page, profilePosts = null, isHomepage = false) {
 }
 
 async function isLiked(post){
-    const user = loadUser();
+    const user = load_user.loadUser();
     if (!post) return;
 
     let request = {
@@ -86,7 +86,7 @@ async function isLiked(post){
 }
 
 async function sendLike(post){
-    const user = loadUser();
+    const user = load_user.loadUser();
     const request = {
         method: "POST",
         headers: {
