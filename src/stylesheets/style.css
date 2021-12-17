@@ -306,3 +306,57 @@ input:focus{
     color: rgb(132,32,41);
     text-align: center;
 }
+
+#adminPage{
+    color: white;
+    padding: 10px;
+}
+
+.adminButtonChoice{
+    border-radius: 50px;
+    background-color: rgb(79,126,217);
+    border: none;
+}
+
+.table-bordered{
+    margin: 2vh 3vw;
+    color: rgb(160, 191, 239);
+}
+
+th, td{
+    padding: 10px;
+}
+
+tr:nth-child(even){
+    background-color: rgb(31, 66, 121);
+}
+
+th{
+    text-decoration: underline rgb(7, 100, 191) 3px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(31, 66, 121);
+}
+
+h3{
+    margin-top: 25px;
+    text-align: center;
+}
+
+.memberTableButton {
+    background-color: rgb(79, 126, 217);
+    border-radius: 2%;
+    border: none;
+    margin-top: 2px;
+}
+
+#postRemoveButton{
+    background-color: rgb(79,126,217);
+    border-radius: 2%;
+    border: none;
+}
+
+.alert-warning{
+    background: none;
+    color: rgb(173, 173, 173);
+}

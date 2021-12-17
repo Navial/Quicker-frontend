@@ -49,8 +49,8 @@ async function refreshMembersTable() {
                     <td>
                         <form id="membersGestionForm">
                             <input id="id_user" type="hidden" value="${user.id_user}">
-                            <input id="memberStatus" type="submit" value="${memberStatus}">
-                            <input id="memberType" type="submit" value="${memberType}">
+                            <input class="memberTableButton" id="memberStatus" type="submit" value="${memberStatus}">
+                            <input class="memberTableButton" id="memberType" type="submit" value="${memberType}">
                         </form>
                     </td>
                 `;
@@ -136,7 +136,7 @@ async function refreshPostsTable() {
                 <td>
                     <form id="postsGestionForm">
                         <input id="id_post" type="hidden" value="${post.id_post}">
-                        <input type="submit" value="${postStatus}">
+                        <input id="postRemoveButton" type="submit" value="${postStatus}">
                     </form>
                 </td>
             `;
