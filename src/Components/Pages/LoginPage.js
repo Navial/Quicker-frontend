@@ -44,7 +44,8 @@ async function login(e) {
         if (!username) {
             errorLogin.innerHTML = `<h2>Tu dois entrer un pseudo!</h2>`;
             throw new Error("No username");
-        } else if (!password) {
+        }
+        if (!password) {
             errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe.</h2>`;
             throw new Error("No password");
         }
