@@ -166,7 +166,7 @@ async function refreshPostsTable() {
                 input.addEventListener("click", (e) => {
                     e.preventDefault();
                     if (postStatus === "Remove")
-                        posts_modifications.removePost(id_post);
+                        posts_modifications.removeAdminPost(id_post);
                     else
                         posts_modifications.activatePost(id_post);
                 });
