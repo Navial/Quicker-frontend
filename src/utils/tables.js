@@ -3,10 +3,11 @@ import members_modifications from "./members_modifications";
 import loadUser from "./load_user";
 
 async function refreshMembersTable() {
+    const authenticatedUser = loadUser();
     const getRequest = {
         method: "GET",
         headers: {
-            Authorization: loadUser().token
+            Authorization: authenticatedUser.token
         }
     };
     try {
