@@ -17,7 +17,6 @@ async function getLikedPosts (page) {
         const posts = await response.json();
         if (posts.length === 0)
             return;
-        console.log(posts);
         showPostsHtml(page, posts);
     } catch (e){
         console.error(e);
