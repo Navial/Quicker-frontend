@@ -1,21 +1,14 @@
 import Tables from "./tables";
-
-let userToken;
-const putRequest = {
-    method: "PUT",
-    headers: {
-        Authorization: userToken
-    }
-}
-const deleteRequest = {
-    method: "DELETE",
-    headers: {
-        Authorization: userToken
-    }
-};
+import load_user from "./load_user";
 
 async function setAdmin(id_user) {
-    getToken();
+    const putRequest = {
+        method: "PUT",
+        headers: {
+            Authorization: load_user.getToken()
+        }
+    };
+
     try {
         const response = await fetch(`/api/users/setadmin/${id_user}`, putRequest);
 
@@ -28,7 +21,12 @@ async function setAdmin(id_user) {
 }
 
 async function setNotAdmin(id_user) {
-    getToken();
+    const putRequest = {
+        method: "PUT",
+        headers: {
+            Authorization: load_user.getToken()
+        }
+    };
     try {
         const response = await fetch(`/api/users/setnotadmin/${id_user}`, putRequest);
         if(!response.ok)
@@ -40,7 +38,12 @@ async function setNotAdmin(id_user) {
 }
 
 async function activateUser(id_user) {
-    getToken();
+    const putRequest = {
+        method: "PUT",
+        headers: {
+            Authorization: load_user.getToken()
+        }
+    };
     try {
         const response = await fetch(`/api/users/activate/${id_user}`, putRequest);
         if(!response.ok)
@@ -52,7 +55,12 @@ async function activateUser(id_user) {
 }
 
 async function deactivateUser(id_user) {
-    getToken();
+    const deleteRequest = {
+        method: "DELETE",
+        headers: {
+            Authorization: load_user.getToken()
+        }
+    };
     try {
         const response = await fetch(`/api/users/${id_user}`, deleteRequest);
         if (!response.ok)
