@@ -1,7 +1,7 @@
-import loadUser from "../../utils/load_user";
+import load_user from "../../utils/load_user";
 
 function showPostsHtml(page, posts){
-    const user = loadUser();
+    const user = load_user.loadUser();
     let htmlImage;
     posts.forEach(post => {
         // Image handling
