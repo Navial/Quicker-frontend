@@ -30,15 +30,14 @@ async function refreshMembersTable() {
 
             let tableTbodyHtml = `
                 <tr>
-                    <td>${user.id_user}</td>
-                    <td>${user.forename}</td>   
-                    <td>${user.lastname}</td>    
+<!--                    <td>${user.id_user}</td>-->
+                    <td>${user.forename} ${user.lastname}</td>   
                     <td>${user.email}</td>
                     <td>${user.username}</td>
                     <td>${user.image}</td>
                     <td>${user.is_active}</td>
                     <td>${user.is_admin}</td>
-                    <td>${user.biography}</td>
+<!--                    <td>${user.biography}</td>-->
                     <td>${user.date_creation}</td>
             `;
             if(user.id_user !== authenticatedUser.id_user) {
@@ -123,11 +122,11 @@ async function refreshPostsTable() {
 
         let tableTbodyHtml = `
              <tr>
-                <td>${post.id_post}</td>
+<!--                <td>${post.id_post}</td>-->
                 <td>${post.id_user}</td>   
                 <td>${post.image}</td>    
                 <td>${post.message}</td>
-                <td>${post.parent_post}</td>
+<!--                <td>${post.parent_post}</td>-->
                 <td>${post.is_removed}</td>
                 <td>${post.date_creation}</td>
                 <td>${post.number_of_likes}</td>

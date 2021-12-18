@@ -298,7 +298,6 @@ a, a:hover, a:focus {
     align-content: center;
     justify-content: center;
     position: absolute;
-    /*height: 80vh;*/
     height: 600px;
     width: 35vw;
     margin: 10vh 35vw;
