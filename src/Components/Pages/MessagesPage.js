@@ -1,4 +1,5 @@
 import load_user from "../../utils/load_user";
+import ApiModule from "../Modules/ApiModule";
 
 /**
  * Render the Messages
@@ -88,8 +89,8 @@ const Messages = async () => {
 
 
 
-   pageDiv.innerHTML = `
-    <div class="messagePageContainer" >
+        pageDiv.innerHTML = `
+            <div class="messagePageContainer" >
         
         <div class="row" >
             <div class="col-md-2" id="userConvs" >
@@ -112,9 +113,25 @@ const Messages = async () => {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </div>
     `;
 
+=======
+        </div>
+        `;
+        const sendMessageButton = document.getElementById("sendMessageButton");
+        sendMessageButton.addEventListener("click", (e) => {
+            const body = {
+                id_sender: load_user.loadUser().id_user,
+                id_recipient: new URLSearchParams(window.location.search).get("idUser"),
+                message: document.getElementById("textarea").value
+            }
+            console.log(body)
+            ApiModule.sendMessage(body);
+            //TODO refresh messages
+        });
+>>>>>>> 96f948b81361506e9d0710b2237a4bf8e56b5551
     } catch (e) {
         console.error(e);
     }
