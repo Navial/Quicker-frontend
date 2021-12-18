@@ -4,6 +4,7 @@ import "./stylesheets/style.css"; // If you prefer to style your app with vanill
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Navbar/Footer";
 import { Router } from "./Components/Router/Router";
+import load_user from "./utils/load_user";
 
 const actuelRoot = window.location.pathname;
 const isConnected = window.localStorage.length !== 0;
@@ -18,7 +19,8 @@ const adminPage = [
     "/admin_page"
 ]
 
-const user = JSON.parse(window.localStorage.getItem("user"));
+const user = load_user.loadUser();
+
 if (unloggedPage.findIndex(s => s === actuelRoot) < 0) {
     if (!isConnected) {
         window.location.replace(window.location.origin + "/login");
