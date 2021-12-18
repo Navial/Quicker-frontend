@@ -549,6 +549,12 @@ li {
     width: 80vw;
 }
 
+@media screen and (max-width: 1350px) {
+    .table-bordered{
+        display: none;
+    }
+}
+
 th, td{
     padding: 10px;
 }

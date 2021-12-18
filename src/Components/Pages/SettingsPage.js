@@ -76,8 +76,11 @@ const SettingsPage = async () => {
             user.biography = bio;
             error = false;
         }
-        if (error) errorSettings.innerHTML = notificationModule("alert-danger mb-0", "You have to change an element")
-
+        if (error) {
+            errorSettings.innerHTML = notificationModule("alert-danger mb-0", "You have to change an element")
+        } else {
+            errorSettings.innerHTML = notificationModule("alert-primary mb-0", "Modification taken into account")
+        }
     });
 }
 
