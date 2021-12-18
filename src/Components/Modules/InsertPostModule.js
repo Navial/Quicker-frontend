@@ -8,13 +8,13 @@ async function SendPost(e) {
 
     const user = load_user.loadUser();
     const token = user.token;
-    const idUser = user.user_id;
+    const idUser = user.id_user;
 
     const request = {
         method: "POST",
         body: JSON.stringify(
             {
-                user_id: idUser,
+                id_user: idUser,
                 image: null,
                 message: message,
                 parent_post: null

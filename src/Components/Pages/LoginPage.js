@@ -1,16 +1,17 @@
 import Navbar from "../Navbar/Navbar";
 import {Redirect} from "../Router/Router";
 import anime from "animejs";
+import notificationModule from "../Modules/NotificationModule";
 
 const loginDiv = `
         <div id="loginPage">
             <div id="loginContainer">
                 <form id="loginForm" class="loginRegisterContainer">
                     <h1 class="loginText">Kwicker</h1>
+                    <div id="errorLogin"></div>
                     <input class="inputForm fields" type="text" id="usernameLogin" placeholder="Pseudo">
                     <input class="inputForm fields" type="password" id="passwordLogin" placeholder="Mot de passe">
                     <input class="inputForm submitButton" type="submit" value="Se connecter">
-                    <div id="errorLogin" class="alert-danger"></div>
                     <a class="loginText" id="goToRegister" type="button">Je n'ai pas encore de compte</a>
                 </form>
             </div>
@@ -40,13 +41,13 @@ async function login(e) {
     errorLogin.innerHTML = "";
 
     //Verify the user entered all informations to log in and show an error message if not
+    console.log(notificationModule("alert-danger", "Enter a username"))
     try {
-        if (!username || (username && !password)) {
-            errorLogin.innerHTML = `<h2>You must enter a username</h2>`;
+        if (!username) {
+            errorLogin.innerHTML = notificationModule("alert-danger", "Enter a username");
             throw new Error("No username");
-        }
-        if (!password) {
-            errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe.</h2>`;
+        } else if (!password) {
+            errorLogin.innerHTML = notificationModule("alert-danger", "Enter a password");
             throw new Error("No password");
         }
 
@@ -66,11 +67,11 @@ async function login(e) {
         const response = await fetch("api/users/login", request);
         if (!response.ok) {
             if (response.status === 403)
-                errorLogin.innerHTML = `<h2>Wrong password</h2>`;
+                errorLogin.innerHTML = notificationModule("alert-danger", "Wrong password");
             else if (response.status === 404)
-                errorLogin.innerHTML = `<h2>Wrong username`
+                errorLogin.innerHTML = notificationModule("alert-danger", "Wrong username");
             else
-                errorLogin.innerHTML = "<h2>Connection Issue</h2>";
+                errorLogin.innerHTML = notificationModule("alert-danger", "Connection issue");
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         } else {
             errorLogin.innerHTML = "";

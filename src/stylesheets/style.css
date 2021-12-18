@@ -15,12 +15,12 @@ body{
     background: rgb(79, 126, 217);
     border-radius: 0.5em;
 }
-p {
+p{
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+    color: rgb(223, 227, 235);
 }
 
 .wrapper {
@@ -39,6 +39,11 @@ p {
     width: 20px;
     margin-left: 1em;
 }
+
+.userName{
+    font-size: 1em;
+}
+
 /** ---- PROFILE PAGE ---- */
 
 #contentProfilePage{
@@ -400,11 +405,11 @@ input:focus{
     background-color: rgb(4, 57, 119);
 }
 
-.alert-danger{
-    background-color: rgb(248,215,218);
-    color: rgb(132,32,41);
-    text-align: center;
-}
+/*.alert-danger{*/
+/*    background-color: rgb(248,215,218);*/
+/*    color: rgb(132,32,41);*/
+/*    text-align: center;*/
+/*}*/
 
 
 /** MESSAGING */

@@ -1,4 +1,5 @@
 import load_user from "../../utils/load_user";
+import ApiModule from "../Modules/ApiModule";
 
 /**
  * Render the Messages
@@ -6,18 +7,16 @@ import load_user from "../../utils/load_user";
 
 const Messages = async () => {
     // Init
-    const userId = load_user.loadUser().user_id;
-    console.log(userId);
-
-    const user = await getBaseInformationsUser(userId);
+    const pageDiv = document.querySelector("#page");
 
     // Get base user informations
+    const userId = load_user.loadUser().id_user;
+    const user = await getBaseInformationsUser(userId);
+
+    // Get base recipient informations
     const idRecipient = new URLSearchParams(window.location.search).get("idUser");
-
     const recipient = await getBaseInformationsUser(idRecipient);
-    console.log(recipient);
 
-    const pageDiv = document.querySelector("#page");
 
     let request = {
         method: "GET",
@@ -26,69 +25,81 @@ const Messages = async () => {
         }
     };
     try {
-        const reponseMessages = await fetch(`/api/messages/` + userId + `/` + idRecipient , request);
+
+        //Get messages from dm
+        const reponseMessages = await fetch(`/api/messages/getMessages/${userId}/${idRecipient}`, request);
         if (!reponseMessages.ok) {
             throw new Error(
                 "fetch error : " + reponseMessages.status + " : " + reponseMessages.statusText
             );
         }
+        const reponseContacts = await fetch(`/api/messages/recipients/${userId}` , request);
+        if (!reponseContacts.ok) {
+            throw new Error(
+                "fetch error : " + reponseContacts.status + " : " + reponseContacts.statusText
+            );
+        }
+
+        const contacts = await reponseContacts.json();
 
         const messages = await reponseMessages.json();
+
+
+        // Create the html for the messages
         let messagesHtml = "";
         messages.forEach(message => {
-            if(message.sender_id === user.user_id){
+            const date = new Date(message.date_creation);
+            let dateString = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()} at ${date.getUTCHours()}:`;
+            dateString += `${date.getUTCMinutes()}`;
+
+            if(message.id_sender === user.id_user){
                 messagesHtml += `<div align="right">
-                                   <li className="other">
-                                        <div align="left" className="msg">
-                                            <p>${user.username}</p>`;
+                                   <li class="other">
+                                        <div align="left" class="msg">
+                                            <p class="userName">${user.username}</p>`;
             }else{
                 messagesHtml += `<div align="left">
-                                    <li className="self">
-                                        <div align="left" className="msg">
-                                            <p>${recipient.username}</p>`;
+                                    <li class="self">
+                                        <div align="left" class="msg">
+                                            <p class="userName">${recipient.username}</p>`;
             }
 
             messagesHtml +=
                 `
                     <p>${message.message}</p>
-                    <time>20:18</time>
+                    <p>${dateString}</p>
                 </div>
             </li>
         </div>`
         });
 
+        //Create contacts bar
+        let contactHtml = "";
+        let contact ;
+        for(const idContact of contacts) {
+            contact = await getBaseInformationsUser(idContact.id_recipient);
+            console.log("contact" + contact)
+            contactHtml += `
+                <div class="contact">
+                    <li>
+                        <p class="userName">${contact.username}  </p>
+                    </li>
+                </div>`
+        }
 
-   pageDiv.innerHTML = `
-    <div class="messagePageContainer" >
+
+
+        pageDiv.innerHTML = `
+            <div class="messagePageContainer" >
         
         <div class="row" >
             <div class="col-md-2" id="userConvs" >
                 <ol class="contacts"> 
-                    <div class="contact" > 
-                        <li >
-                            <p> LePirelot </p>
-                        </li>
-                    </div>
-                    <div class="contact" > 
-                        <li >
-                            <p> François </p>
-                        </li>
-                    </div>
-                    <div class="contact" > 
-                        <li >
-                            <p> Souli </p>
-                        </li>
-                    </div>
-                    
-                    <div class="contact" > 
-                        <li >
-                            <p> Guillaume </p>
-                        </li>
-                    </div>
+                    ${contactHtml}
                 </ol>
             </div>
             <div class="col-md-9" id="openedConv">
-                <div class="headConv"><h3 class="recipient">LePirelot</h3> </div>
+                <div class="headConv"><h3 class="recipient">${recipient.username}</h3> </div>
                 <div class="messages"> 
                     <ol class="chat">
                         ${messagesHtml}
@@ -104,6 +115,17 @@ const Messages = async () => {
         </div>
     </div>
     `;
+        const sendMessageButton = document.getElementById("sendMessageButton");
+        sendMessageButton.addEventListener("click", (e) => {
+            const body = {
+                id_sender: load_user.loadUser().id_user,
+                id_recipient: new URLSearchParams(window.location.search).get("idUser"),
+                message: document.getElementById("textarea").value
+            }
+            console.log(body)
+            ApiModule.sendMessage(body);
+            //TODO refresh messages
+        });
     } catch (e) {
         console.error(e);
     }

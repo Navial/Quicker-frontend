@@ -1,7 +1,7 @@
 import Tables from "./tables";
 import load_user from "./load_user";
 
-async function activatePost(post_id) {
+async function activatePost(id_post) {
     const putRequest = {
         "method": "PUT",
         headers: {
@@ -9,7 +9,7 @@ async function activatePost(post_id) {
         }
     };
     try {
-        const response = await fetch(`/api/posts/activate/${post_id}`, putRequest);
+        const response = await fetch(`/api/posts/activate/${id_post}`, putRequest);
         if(!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         await Tables.refreshPostsTable();
@@ -18,7 +18,7 @@ async function activatePost(post_id) {
     }
 }
 
-async function removeAdminPost(post_id){
+async function removeAdminPost(id_post){
     const deleteRequest = {
         method: "DELETE",
         headers: {
@@ -26,7 +26,7 @@ async function removeAdminPost(post_id){
         }
     };
     try {
-        const response = await fetch(`/api/posts/admin/${post_id}`, deleteRequest);
+        const response = await fetch(`/api/posts/admin/${id_post}`, deleteRequest);
         if (!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         if(window.location.pathname === "/admin_page")
@@ -35,7 +35,7 @@ async function removeAdminPost(post_id){
         console.error(e);
     }
 }
-async function removePost(post_id){
+async function removePost(id_post){
     const deleteRequest = {
         method: "DELETE",
         headers: {
@@ -43,7 +43,7 @@ async function removePost(post_id){
         }
     };
     try {
-        const response = await fetch(`/api/posts/${post_id}`, deleteRequest);
+        const response = await fetch(`/api/posts/${id_post}`, deleteRequest);
         if (!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         if(window.location.pathname === "/admin_page")
