@@ -3,6 +3,13 @@ import {Redirect} from "../Router/Router";
 import load_user from "../../utils/load_user";
 
 const ProfilePage = async () => {
+    // Get base user informations
+    const actualUser = await getBaseInformationsUser(load_user.loadUser());
+    let biography = actualUser.biography;
+    if (biography === null) {
+        actualUser.biography = "";
+    }
+
     const pageDivHtml = `
         <div class="mainContent" id="contentProfilePage">
             <div id="">
@@ -42,14 +49,6 @@ const ProfilePage = async () => {
     const pageDiv = document.querySelector("#page");
     pageDiv.innerHTML = pageDivHtml;
 
-    // Get base user informations
-    const actualUser = await getBaseInformationsUser(load_user.loadUser());
-    let biography = actualUser.biography;
-    if (biography === null) {
-        actualUser.biography = "";
-    }
-
-
     document.getElementById("submitChangeModify").addEventListener("click", async function(e) {
         e.preventDefault()
         const lastname = document.getElementById("lastnamechange");
@@ -72,6 +71,7 @@ const ProfilePage = async () => {
         const status = document.getElementById("statusMessageSettings");
         if(done) {
             status.innerHTML = `<h4 class="alert">Done!</h4>`;
+            pageDiv.innerHTML = pageDivHtml;
         } else {
             status.innerHTML = `<h4 class="alert">Nothing changed</h4>`;
         }
