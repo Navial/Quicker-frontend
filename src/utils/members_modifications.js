@@ -1,7 +1,7 @@
 import Tables from "./tables";
 import load_user from "./load_user";
 
-async function setAdmin(id_user) {
+async function setAdmin(user_id) {
     const putRequest = {
         method: "PUT",
         headers: {
@@ -10,7 +10,7 @@ async function setAdmin(id_user) {
     };
 
     try {
-        const response = await fetch(`/api/users/setadmin/${id_user}`, putRequest);
+        const response = await fetch(`/api/users/setadmin/${user_id}`, putRequest);
 
         if(!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
@@ -20,7 +20,7 @@ async function setAdmin(id_user) {
     }
 }
 
-async function setNotAdmin(id_user) {
+async function setNotAdmin(user_id) {
     const putRequest = {
         method: "PUT",
         headers: {
@@ -28,7 +28,7 @@ async function setNotAdmin(id_user) {
         }
     };
     try {
-        const response = await fetch(`/api/users/setnotadmin/${id_user}`, putRequest);
+        const response = await fetch(`/api/users/setnotadmin/${user_id}`, putRequest);
         if(!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         await Tables.refreshMembersTable();
@@ -37,7 +37,7 @@ async function setNotAdmin(id_user) {
     }
 }
 
-async function activateUser(id_user) {
+async function activateUser(user_id) {
     const putRequest = {
         method: "PUT",
         headers: {
@@ -45,7 +45,7 @@ async function activateUser(id_user) {
         }
     };
     try {
-        const response = await fetch(`/api/users/activate/${id_user}`, putRequest);
+        const response = await fetch(`/api/users/activate/${user_id}`, putRequest);
         if(!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         await Tables.refreshMembersTable();
@@ -54,7 +54,7 @@ async function activateUser(id_user) {
     }
 }
 
-async function deactivateUser(id_user) {
+async function deactivateUser(user_id) {
     const deleteRequest = {
         method: "DELETE",
         headers: {
@@ -62,7 +62,7 @@ async function deactivateUser(id_user) {
         }
     };
     try {
-        const response = await fetch(`/api/users/${id_user}`, deleteRequest);
+        const response = await fetch(`/api/users/${user_id}`, deleteRequest);
         if (!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         await Tables.refreshMembersTable();

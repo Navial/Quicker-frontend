@@ -23,15 +23,15 @@
 //         console.log("oui")
 //         let done = false;
 //         if (lastname.value !== actualUser.lastname) {
-//             done = await putLastName(lastname.value, actualUser.id_user);
+//             done = await putLastName(lastname.value, actualUser.user_id);
 //         }
 //
 //         if (forename.value !== actualUser.forename) {
-//             done = await putForeName(forename.value, actualUser.id_user);
+//             done = await putForeName(forename.value, actualUser.user_id);
 //         }
 //
 //         if (biography.value !== actualUser.biography) {f
-//             done = await putBiography(biography.value, actualUser.id_user);
+//             done = await putBiography(biography.value, actualUser.user_id);
 //         }
 //         if(done) {
 //             actualUser = await getBaseInformationsUser(load_user.loadUser());
@@ -90,7 +90,7 @@
 //                 "Authorization": actualUser.token
 //             }
 //         };
-//         const responseUserInfo = await fetch("/api/users/profile/" + actualUser.id_user, request);
+//         const responseUserInfo = await fetch("/api/users/profile/" + actualUser.user_id, request);
 //         if (!responseUserInfo.ok) {
 //             throw new Error(
 //                 "fetch error : " + responseUserInfo.status + " : " + responseUserInfo.statusText
@@ -199,7 +199,7 @@ const ProfilePage = async () => {
 
     // Get base user informations
     const actualUser = load_user.loadUser();
-    const user = await getBaseInformationsUser(actualUser.id_user);
+    const user = await getBaseInformationsUser(actualUser.user_id);
     let biography = user.biography;
     if (biography === null) {
         biography = "";
@@ -246,15 +246,15 @@ const ProfilePage = async () => {
         const biography = document.getElementById("biographychangeform");
 
         if (lastname.value !== user.lastname) {
-            putLastName(lastname.value, actualUser.id_user);
+            putLastName(lastname.value, actualUser.user_id);
         }
 
         if (forename.value !== user.forename) {
-            putForeName(forename.value, actualUser.id_user);
+            putForeName(forename.value, actualUser.user_id);
         }
 
         if (biography.value !== "" || biography.value !== user.biography) {
-            putBiography(biography.value, actualUser.id_user);
+            putBiography(biography.value, actualUser.user_id);
         }
 
     });
