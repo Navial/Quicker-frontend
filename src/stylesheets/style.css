@@ -316,7 +316,7 @@ a, a:hover, a:focus {
     border-radius: 50px;
     text-align: center;
     height: 50px;
-    width: 25vw;
+    width: 20vw;
     border: none;
 }
 
@@ -331,7 +331,7 @@ a, a:hover, a:focus {
 .fields:focus{
     animation-name: animationFocusFormInput;
     animation-duration: 0.2s;
-    width: 350px;
+    width: 25vw;
     background-color: rgb(169, 195, 245);
     outline: none;
 
@@ -370,23 +370,23 @@ a, a:hover, a:focus {
 
 @keyframes animationFocusFormInput {
     from{
-        width: 300px;
+        width: 20vw;
         border: none;
         background-color: rgb(169, 195, 245);
     }
     to{
-        width: 350px;
+        width: 25vw;
         background-color: rgb(169, 195, 245);
     }
 }
 
 @keyframes animationNotFocusFormInput {
     from{
-        width: 350px;
+        width: 25vw;
         background-color: rgb(169, 195, 245);
     }
     to{
-        width: 300px;
+        width: 20vw;
         border: none;
         background-color: rgb(169, 195, 245);
     }
