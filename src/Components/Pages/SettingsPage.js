@@ -253,7 +253,7 @@ const ProfilePage = async () => {
             putForeName(forename.value, actualUser.id_user);
         }
 
-        if (biography.value !== "" || biography.value !== user.biography) {
+        if (biography.value !== "" && biography.value !== user.biography) {
             putBiography(biography.value, actualUser.id_user);
         }
 
