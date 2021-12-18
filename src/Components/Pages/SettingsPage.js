@@ -2,42 +2,41 @@ import GetPostsModule from "../Modules/GetPostsModule";
 import {Redirect} from "../Router/Router";
 import load_user from "../../utils/load_user";
 
-const pageDivHtml = `
-    <div class="mainContent" id="contentProfilePage">
-        <div id="">
-            <div id="banner">
-                <p style="text-align: center; font-size: 30px; color: #cdc7e2;">Settings</p>
-            </div>
-            <div id="userContainer">
-            <form>
-              <div class="row">
-                <div class="col">
-                  <label for="fornamechange">Firstname</label>
-                  <input type="text" id="fornamechange" class="form-control change-form" value="${actualUser.forename}">
-                </div>
-                <div class="col">
-                  <label for="fornamechange">Lastname</label>
-                  <input type="text" id="lastnamechange" class="form-control change-form" value="${actualUser.lastname}">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                    <label for="fornamechange">Biography</label>
-                    <textarea placeholder="Your biography" maxlength="300" id="biographychangeform" type="form-control" rows="3" class="form-control change-form">${actualUser.biography}</textarea>
-                </div>
-              </div>
-              <div class="text-center">
-                <button id="submitChangeModify" type="submit" class="btn btn-primary mb-3 mt-5" id="tablePost" >Confirm changes</button>
-              </div>
-              <div id="statusMessageSettings"></div>
-            </form>
-            </div>
-        </div>
-        <div class="container" id="tablePost"></div>
-    </div>
-`;
-
 const ProfilePage = async () => {
+    const pageDivHtml = `
+        <div class="mainContent" id="contentProfilePage">
+            <div id="">
+                <div id="banner">
+                    <p style="text-align: center; font-size: 30px; color: #cdc7e2;">Settings</p>
+                </div>
+                <div id="userContainer">
+                <form>
+                  <div class="row">
+                    <div class="col">
+                      <label for="fornamechange">Firstname</label>
+                      <input type="text" id="fornamechange" class="form-control change-form" value="${actualUser.forename}">
+                    </div>
+                    <div class="col">
+                      <label for="fornamechange">Lastname</label>
+                      <input type="text" id="lastnamechange" class="form-control change-form" value="${actualUser.lastname}">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                        <label for="fornamechange">Biography</label>
+                        <textarea placeholder="Your biography" maxlength="300" id="biographychangeform" type="form-control" rows="3" class="form-control change-form">${actualUser.biography}</textarea>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button id="submitChangeModify" type="submit" class="btn btn-primary mb-3 mt-5" id="tablePost" >Confirm changes</button>
+                  </div>
+                  <div id="statusMessageSettings"></div>
+                </form>
+                </div>
+            </div>
+            <div class="container" id="tablePost"></div>
+        </div>
+    `;
 
     // Init
     const pageDiv = document.querySelector("#page");
