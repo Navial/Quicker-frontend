@@ -40,44 +40,38 @@ async function login(e) {
     errorLogin.innerHTML = "";
 
     //Verify the user entered all informations to log in and show an error message if not
-    try{
-        if (!username) {
-            errorLogin.innerHTML = `<h2>Tu dois entrer un pseudo!</h2>`;
+    try {
+        if (!username || (username && !password)) {
+            errorLogin.innerHTML = `<h2>You must enter a username</h2>`;
             throw new Error("No username");
         }
         if (!password) {
             errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe.</h2>`;
             throw new Error("No password");
         }
-    }catch (e) {
-        const xMax = 16;
-        anime({
-            targets: 'form',
-            easing: 'easeInOutSine',
-            duration: 550,
-            translateX: [{value: xMax * -1,}, {value: xMax,},{value: xMax/-2,},{value: xMax/2,}, {value: 0}],
-            scale: [{value:1.05},{value:1, delay: 150} ],
-        });
-    }
 
 
-    const request = {
-        method: "POST",
-        body: JSON.stringify(
-            {
-                username: username,
-                password: password
+        const request = {
+            method: "POST",
+            body: JSON.stringify(
+                {
+                    username: username,
+                    password: password
+                }
+            ),
+            headers: {
+                "Content-Type": "application/json"
             }
-        ),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
-    try {
+        };
         const response = await fetch("api/users/login", request);
-
         if (!response.ok) {
-            errorLogin.innerHTML = "<h2>Problème lors de la connexion.</h2>";
+            console.log(response)
+            if (response.status === 403)
+                errorLogin.innerHTML = `<h2>Wrong password</h2>`;
+            else if (response.status === 404)
+                errorLogin.innerHTML = `<h2>Wrong username`
+            else
+                errorLogin.innerHTML = "<h2>Connection Issue</h2>";
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         } else {
             errorLogin.innerHTML = "";
@@ -94,8 +88,8 @@ async function login(e) {
             targets: 'form',
             easing: 'easeInOutSine',
             duration: 550,
-            translateX: [{value: xMax * -1,}, {value: xMax,},{value: xMax/-2,},{value: xMax/2,}, {value: 0}],
-            scale: [{value:1.05},{value:1, delay: 250} ],
+            translateX: [{value: xMax * -1,}, {value: xMax,}, {value: xMax / -2,}, {value: xMax / 2,}, {value: 0}],
+            scale: [{value: 1.05}, {value: 1, delay: 250}],
         });
     }
 }
