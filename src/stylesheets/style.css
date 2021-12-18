@@ -592,9 +592,13 @@ h3{
     padding: 20px;
 }
 
+.resultUserSearchWrapper:hover{
+    background-color: #285496;
+}
+
+
 .resultUserSearch:hover{
     color: rgb(190, 182, 231);
-    text-decoration: underline solid white;
 }
 
 #resultSearchTitle{
