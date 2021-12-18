@@ -21,6 +21,9 @@ function showPostsHtml(page, posts){
             `;
         } else removeButton = "";
 
+        const date = new Date(post.date_creation)
+        let dateString = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()} at ${date.getUTCHours()}:`;
+        dateString += `${date.getUTCMinutes()}:${date.getUTCSeconds()} UTC`;
         //Create row
         let postRow = `
             <div id="post">
@@ -31,7 +34,7 @@ function showPostsHtml(page, posts){
                         </a>
                       ${removeButton}
                     </div>
-                    <div class="col-sm-5" id="creationDate">Posté le ${new Date(post.date_creation).toDateString()}
+                    <div class="col-sm-5" id="creationDate">Posted on ${dateString}
                     </div>
                 </div>
                 <div class="col-sm-auto" id="postText">${post.message}
