@@ -77,11 +77,12 @@ const Router = () => {
     if(user && !user.is_admin && window.location.pathname === "/admin_page")
       window.location.pathname = "/";
 
-    const componentToRender = routes[window.location.pathname];
+    let componentToRender = routes[window.location.pathname];
     if (!componentToRender) {
-      throw Error(
-          "The " + window.location.pathname + " ressource does not exist."
-      );
+      // throw Error(
+      //     "The " + window.location.pathname + " ressource does not exist."
+      // );
+      componentToRender = routes["/"]
     }
 
     componentToRender();

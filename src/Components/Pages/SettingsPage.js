@@ -21,6 +21,7 @@ const ProfilePage = async () => {
                     <div id="banner">
                         <p style="text-align: center; font-size: 30px; color: #cdc7e2;">Settings</p>
                     </div>
+                 
                     <div id="userContainer">
                     <form>
                       <div class="row">
@@ -53,9 +54,8 @@ const ProfilePage = async () => {
         e.preventDefault()
         const lastname = document.getElementById("lastnamechange");
         const forename = document.getElementById("fornamechange");
-        const username = document.getElementById("usernamechange");
         const biography = document.getElementById("biographychangeform");
-        console.log("oui")
+
         if (lastname.value !== user.lastname) {
             putLastName(lastname.value, actualUser.id_user);
         }
