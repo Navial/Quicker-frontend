@@ -509,11 +509,12 @@ li {
 }
 #adminPage{
     color: white;
-    padding: 10px;
+    padding: 0;
+    width: 50vw;
 }
 
 .adminButtonChoice{
-    border-radius: 50px;
+    border-radius: 5%;
     background-color: rgb(79,126,217);
     border: none;
 }
@@ -628,4 +629,11 @@ h3{
     vertical-align: middle;
     margin: 10px;
     text-decoration: none;
+}
+
+
+.messageColumnAdmin{
+    max-width: 15vw;
+    overflow: auto;
+    justify-content: center;
 }

@@ -27,11 +27,11 @@ const postsGestionHtml = `
 <!--                <th>Post's Id</th>-->
                 <th>User's Id</th>
                 <th>Image</th>
-                <th>Message</th>
+                <th class="messageColumnAdmin">Message</th>
 <!--                <th>Parent Post's Id</th>-->
                 <th>Removed</th>
                 <th>Creation Date</th>
-                <th>Number of Likes</th>
+                <th>Likes</th>
                 <th>Suppression</th>
             </tr>
             <tbody id="postsGestionTbody">

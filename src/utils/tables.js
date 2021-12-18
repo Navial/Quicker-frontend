@@ -125,7 +125,7 @@ async function refreshPostsTable() {
 <!--                <td>${post.id_post}</td>-->
                 <td>${post.id_user}</td>   
                 <td>${post.image}</td>    
-                <td>${post.message}</td>
+                <td class="messageColumnAdmin">${post.message}</td>
 <!--                <td>${post.parent_post}</td>-->
                 <td>${post.is_removed}</td>
                 <td>${post.date_creation}</td>
