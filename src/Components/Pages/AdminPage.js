@@ -60,7 +60,7 @@ const membersGestionHtml = `
 <!--                <th>Lastname</th>-->
                 <th>Email</th>
                 <th>Username</th>
-                <th>Image</th>
+<!--                <th>Image</th>-->
                 <th>Active</th>
                 <th>Admin</th>
 <!--                <th>Biography</th>-->

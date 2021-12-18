@@ -21,9 +21,11 @@ function showPostsHtml(page, posts){
             `;
         } else removeButton = "";
 
-        const date = new Date(post.date_creation)
-        let dateString = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()} at ${date.getUTCHours()}:`;
-        dateString += `${date.getUTCMinutes()}:${date.getUTCSeconds()} UTC`;
+        const date = new Date(post.date_creation);
+        const fuseau = 2;
+
+        let dateString = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()} at ${date.getUTCHours() + fuseau}:`;
+        dateString += `${date.getUTCMinutes()}`;
         //Create row
         let postRow = `
             <div id="post">

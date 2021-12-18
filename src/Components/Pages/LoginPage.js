@@ -65,7 +65,6 @@ async function login(e) {
         };
         const response = await fetch("api/users/login", request);
         if (!response.ok) {
-            console.log(response)
             if (response.status === 403)
                 errorLogin.innerHTML = `<h2>Wrong password</h2>`;
             else if (response.status === 404)

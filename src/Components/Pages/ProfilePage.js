@@ -13,6 +13,8 @@ const ProfilePage = async () => {
     const user = await getBaseInformationsUser(idCurrentUser);
     const userConnected = JSON.parse(window.localStorage.getItem("user"));
 
+    let biographyDisplay = user.biography;
+    if (!user.biography) biographyDisplay = "";
 
     pageDiv.innerHTML += `
             <div class="mainContent" id="contentProfilePage">
@@ -23,13 +25,14 @@ const ProfilePage = async () => {
                             <div id="followSign"></div>
                             <div type="button" id="followButton"></div>
                         </div>
-                        <div class="col-sm-10" id="biography">Biography : ${user.biography}</div>
+                        <div class="col-sm-10" id="biography">Biography : ${biographyDisplay}</div>
                         <div class="col-sm-10" id="creationDate">Created his account on ${new Date(user.date_creation).toDateString()}</div>
                     </div>
                 </div>
                 <div class="container" id="tablePost"></div>
             </div>
         `;
+    if (biographyDisplay === "") document.getElementById("biography").hidden = true;
 
 
     const followSign = document.getElementById("followSign");

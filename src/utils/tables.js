@@ -34,7 +34,7 @@ async function refreshMembersTable() {
                     <td>${user.forename} ${user.lastname}</td>   
                     <td>${user.email}</td>
                     <td>${user.username}</td>
-                    <td>${user.image}</td>
+                    <!--<td>${user.image}</td>-->
                     <td>${user.is_active}</td>
                     <td>${user.is_admin}</td>
 <!--                    <td>${user.biography}</td>-->

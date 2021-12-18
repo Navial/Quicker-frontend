@@ -27,7 +27,6 @@ async function removeAdminPost(id_post){
     };
     try {
         const response = await fetch(`/api/posts/admin/${id_post}`, deleteRequest);
-        console.log(response)
         if (!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         if(window.location.pathname === "/admin_page")
@@ -45,7 +44,6 @@ async function removePost(id_post){
     };
     try {
         const response = await fetch(`/api/posts/${id_post}`, deleteRequest);
-        console.log(response)
         if (!response.ok)
             throw new Error("fetch error : " + response.status + " : " + response.statusText);
         if(window.location.pathname === "/admin_page")
