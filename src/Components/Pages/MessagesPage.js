@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import load_user from "../../utils/load_user";
 
 /**
  * Render the Messages
@@ -6,8 +6,51 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Messages = async () => {
     // Init
+    const user = load_user.loadUser();
+    // Get base user informations
+    const idRecipient = new URLSearchParams(window.location.search).get("idUser");
+    const recipient = await getBaseInformationsUser(idRecipient);
+
     const pageDiv = document.querySelector("#page");
-    pageDiv.innerHTML = `
+
+    let request = {
+        method: "GET",
+        headers: {
+            "Authorization": user.token
+        }
+    };
+    try {
+        const reponseMessages = await fetch(`/api/messages/` + user.id_user + `/` + idRecipient , request);
+        if (!reponseMessages.ok) {
+            throw new Error(
+                "fetch error : " + reponseMessages.status + " : " + reponseMessages.statusText
+            );
+        }
+
+        const messages = await reponseMessages.json();
+        let messagesHtml = "";
+
+        messages.forEach(message => {
+            if(message.id_user === user.id_user){
+                messagesHtml += `<div align="left">
+                                    <li className="self">`;
+            }else{
+                messagesHtml += `<div align="right">
+                                   <li className="other">`;
+            }
+
+            messagesHtml +=
+                `<div align="left" className="msg">
+                    <p>${recipient.username}</p>
+                    <p>${message.message}</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+        </div>`
+        });
+
+
+   pageDiv.innerHTML = `
     <div class="messagePageContainer" >
         
         <div class="row" >
@@ -40,60 +83,7 @@ const Messages = async () => {
                 <div class="headConv"><h3 class="recipient">LePirelot</h3> </div>
                 <div class="messages"> 
                     <ol class="chat">
-                    <div align="left">
-                        <li class="other">
-                          <div align="left" class="msg">
-                            <p>LePirelot</p>
-                            <p>message other</p>
-                            <time>20:18</time>
-                          </div>
-                        </li>
-                    </div>
-                    <div align="left">
-                        <li class="other">
-                          <div align="left" class="msg">
-                            <p>LePirelot</p>
-                            <p>message other</p>
-                            <time>20:18</time>
-                          </div>
-                        </li>
-                    </div>
-                    <div align="right">
-                        <li class="self">
-                          <div align="right" class="msg">
-                            <p>Vivi</p>
-                            <p>Message sefl</p>
-                            <time>18:09</time>
-                          </div>
-                        </li>
-                    </div>
-                    <div align="left">
-                        <li class="other">
-                          <div align="left" class="msg">
-                            <p>LePirelot</p>
-                            <p>message other</p>
-                            <time>20:18</time>
-                          </div>
-                        </li>
-                    </div>
-                    <div align="right">
-                        <li class="self">
-                          <div align="right" class="msg">
-                            <p>Vivi</p>
-                            <p>Message sefl</p>
-                            <time>18:09</time>
-                          </div>
-                        </li>
-                    </div>
-                    <div align="left">
-                        <li class="other">
-                          <div align="left" class="msg">
-                            <p class="">LePirelot</p>
-                            <p>message other</p>
-                            <time>20:18</time>
-                          </div>
-                        </li>
-                    </div>
+                        ${messagesHtml}
                     </ol>
                 </div>
                 <div class="containerInput">
@@ -106,7 +96,32 @@ const Messages = async () => {
         </div>
     </div>
     `;
-
+    } catch (e) {
+        console.error(e);
+    }
 };
+
+
+async function getBaseInformationsUser(idUser) {
+    try {
+        const token = JSON.parse(window.localStorage.getItem("user")).token;
+        const request = {
+            method: "GET",
+            headers: {
+                "Authorization": token
+            }
+        };
+        const responseUserInfo = await fetch("/api/users/profile/" + idUser, request);
+        if (!responseUserInfo.ok) {
+            throw new Error(
+                "fetch error : " + responseUserInfo.status + " : " + responseUserInfo.statusText
+            );
+        }
+        return await responseUserInfo.json();
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 
 export default Messages;
