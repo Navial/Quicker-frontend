@@ -94,7 +94,7 @@ p {
 
 #postAuthor{
     font-size: 1.6em;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 
 
@@ -647,7 +647,7 @@ h3{
     display: inline;
     vertical-align: middle;
     margin: 10px;
-    text-decoration: none;
+    text-decoration: dashed;
 }
 
 

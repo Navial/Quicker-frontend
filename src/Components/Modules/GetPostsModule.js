@@ -17,7 +17,7 @@ function showPostsHtml(page, posts){
         let removeButton = "";
         if (user.id_user === post.id_user) {
             removeButton = `
-              <a type="button" class="remove_button" id="remove_button${post.id_post}" width="50%">Remove post</a>
+              <a type="button" class="remove_button" id="remove_button${post.id_post}">Remove post</a>
             `;
         } else removeButton = "";
 
