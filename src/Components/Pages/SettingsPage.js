@@ -12,7 +12,7 @@ const ProfilePage = async () => {
     const actualUser = await getBaseInformationsUser(load_user.loadUser());
     let biography = actualUser.biography;
     if (biography === null) {
-        biography = "";
+        actualUser.biography = "";
     }
     pageDiv.innerHTML += `
             <div class="mainContent" id="contentProfilePage">
@@ -35,7 +35,7 @@ const ProfilePage = async () => {
                       <div class="row">
                         <div class="col">
                             <label for="fornamechange">Biography</label>
-                            <textarea placeholder="Your biography" maxlength="300" id="biographychangeform" type="form-control" rows="3" class="form-control change-form">${biography}</textarea>
+                            <textarea placeholder="Your biography" maxlength="300" id="biographychangeform" type="form-control" rows="3" class="form-control change-form">${actualUser.biography}</textarea>
                         </div>
                       </div>
                       <div class="text-center">
@@ -65,16 +65,15 @@ const ProfilePage = async () => {
             done = await putForeName(forename.value, actualUser.id_user);
         }
 
-        if (biography.value !== "" || biography.value !== actualUser.biography) {
+        if (biography.value !== actualUser.biography) {f
             done = await putBiography(biography.value, actualUser.id_user);
         }
         const status = document.getElementById("statusMessageSettings");
         if(done) {
             status.innerHTML = `<h4 class="alert">Done!</h4>`;
         } else {
-            status.innerHTML = `<h4 class="alert-danger">Something went wrong.</h4>`;
+            status.innerHTML = `<h4 class="alert">Nothing changed</h4>`;
         }
-
     });
 }
 
