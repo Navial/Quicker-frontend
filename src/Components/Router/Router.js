@@ -11,7 +11,7 @@ import UsersPage from "../Pages/UsersPage";
 import Messages from "../Pages/MessagesPage";
 import SettingsPage from "../Pages/SettingsPage";
 import load_user from "../../utils/load_user";
-//
+
 // Configure your routes here
 const routes = {
   "/": HomePage,

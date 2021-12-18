@@ -1,5 +1,4 @@
 /**
- *
  * Render the Navbar which is styled by using Bootstrap
  * Each item in the Navbar is tightly coupled with the Router configuration :
  * - the URI associated to a page shall be given in the attribute "data-uri" of the Navbar

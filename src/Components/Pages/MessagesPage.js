@@ -1,4 +1,3 @@
-//
 import load_user from "../../utils/load_user";
 
 /**
@@ -7,7 +6,7 @@ import load_user from "../../utils/load_user";
 
 const Messages = async () => {
     // Init
-    const userId = load_user.loadUser().user_id;
+    const userId = load_user.loadUser().id_user;
     console.log(userId);
 
     const user = await getBaseInformationsUser(userId);
@@ -37,7 +36,7 @@ const Messages = async () => {
         const messages = await reponseMessages.json();
         let messagesHtml = "";
         messages.forEach(message => {
-            if(message.sender_id === user.user_id){
+            if(message.id_sender === user.id_user){
                 messagesHtml += `<div align="right">
                                    <li className="other">
                                         <div align="left" className="msg">

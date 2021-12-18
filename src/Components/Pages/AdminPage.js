@@ -1,4 +1,3 @@
-//
 import Tables from "../../utils/tables";
 
 const adminPagehtml = `
