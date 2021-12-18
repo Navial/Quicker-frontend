@@ -531,11 +531,11 @@ li {
 #content{
     width: 100%;
 }
-#adminPage{
-    color: white;
-    padding: 0;
-    width: 50vw;
-}
+/*#adminPage{*/
+/*    color: white;*/
+/*    padding: 0;*/
+/*    width: 50vw;*/
+/*}*/
 
 .adminButtonChoice{
     border-radius: 5%;
@@ -572,6 +572,7 @@ th{
 h3{
     margin-top: 25px;
     text-align: center;
+    color: white;
 }
 
 .memberTableButton {
@@ -660,4 +661,9 @@ h3{
     max-width: 15vw;
     overflow: auto;
     justify-content: center;
+}
+
+.adminHandlingButton {
+    background-color: #1f4279;
+    border-color: #1f4279;
 }
