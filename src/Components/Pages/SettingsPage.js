@@ -9,9 +9,8 @@ const ProfilePage = async () => {
     pageDiv.innerHTML = ``;
 
     // Get base user informations
-    const actualUser = load_user.loadUser();
-    const user = await getBaseInformationsUser(actualUser.id_user);
-    let biography = user.biography;
+    const actualUser = await getBaseInformationsUser(load_user.loadUser());
+    let biography = actualUser.biography;
     if (biography === null) {
         biography = "";
     }
@@ -26,11 +25,11 @@ const ProfilePage = async () => {
                       <div class="row">
                         <div class="col">
                           <label for="fornamechange">Firstname</label>
-                          <input type="text" id="fornamechange" class="form-control change-form" value="${user.forename}">
+                          <input type="text" id="fornamechange" class="form-control change-form" value="${actualUser.forename}">
                         </div>
                         <div class="col">
                           <label for="fornamechange">Lastname</label>
-                          <input type="text" id="lastnamechange" class="form-control change-form" value="${user.lastname}">
+                          <input type="text" id="lastnamechange" class="form-control change-form" value="${actualUser.lastname}">
                         </div>
                       </div>
                       <div class="row">
@@ -58,15 +57,15 @@ const ProfilePage = async () => {
         const biography = document.getElementById("biographychangeform");
         console.log("oui")
         let done = false;
-        if (lastname.value !== user.lastname) {
+        if (lastname.value !== actualUser.lastname) {
             done = await putLastName(lastname.value, actualUser.id_user);
         }
 
-        if (forename.value !== user.forename) {
+        if (forename.value !== actualUser.forename) {
             done = await putForeName(forename.value, actualUser.id_user);
         }
 
-        if (biography.value !== "" || biography.value !== user.biography) {
+        if (biography.value !== "" || biography.value !== actualUser.biography) {
             done = await putBiography(biography.value, actualUser.id_user);
         }
         const status = document.getElementById("statusMessageSettings");
@@ -80,16 +79,16 @@ const ProfilePage = async () => {
 }
 
 
-async function getBaseInformationsUser(idUser) {
+async function getBaseInformationsUser(actualUser) {
     try {
-        const token = load_user.getToken();
+        const token = actualUser.token
         const request = {
             method: "GET",
             headers: {
                 "Authorization": token
             }
         };
-        const responseUserInfo = await fetch("/api/users/profile/" + idUser, request);
+        const responseUserInfo = await fetch("/api/users/profile/" + actualUser.id_user, request);
         if (!responseUserInfo.ok) {
             throw new Error(
                 "fetch error : " + responseUserInfo.status + " : " + responseUserInfo.statusText
