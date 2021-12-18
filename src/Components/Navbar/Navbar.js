@@ -4,6 +4,8 @@
 // we change the name of the imported Bootstrap's 'Navbar' component
 // import { Navbar as BootstrapNavbar} from "bootstrap";
 
+import load_user from "../../utils/load_user";
+
 /**
  * Render the Navbar which is styled by using Bootstrap
  * Each item in the Navbar is tightly coupled with the Router configuration :
@@ -12,7 +14,7 @@
  */
 
 const Navbar = () => {
-  const user = JSON.parse(window.localStorage.getItem("user"));
+  const user = load_user.loadUser();
   const navbarWrapper = document.querySelector("#navbarWrapper");
     navbarWrapper.innerHTML = `
       <div id="sidebarContainer">

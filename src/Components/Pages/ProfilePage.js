@@ -1,5 +1,6 @@
 import GetPostsModule from "../Modules/GetPostsModule";
 import {Redirect} from "../Router/Router";
+import load_user from "../../utils/load_user";
 
 const ProfilePage = async () => {
     if (!location.search.startsWith("?idUser=")) location.pathname = "/";
@@ -11,7 +12,7 @@ const ProfilePage = async () => {
     // Get base user informations
     const idCurrentUser = new URLSearchParams(window.location.search).get("idUser");
     const user = await getBaseInformationsUser(idCurrentUser);
-    const userConnected = JSON.parse(window.localStorage.getItem("user"));
+    const userConnected = load_user.loadUser();
 
     let biographyDisplay = user.biography;
     if (!user.biography) biographyDisplay = "";
@@ -130,7 +131,7 @@ async function toggleFollowUser(idUserFollowed, userFollower) {
 
 async function getBaseInformationsUser(idUser) {
     try {
-        const token = JSON.parse(window.localStorage.getItem("user")).token;
+        const token = load_user.getToken();
         const request = {
             method: "GET",
             headers: {

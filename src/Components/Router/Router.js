@@ -10,6 +10,7 @@ import Logout from "../Pages/Logout";
 import UsersPage from "../Pages/UsersPage";
 import Messages from "../Pages/MessagesPage";
 import SettingsPage from "../Pages/SettingsPage";
+import load_user from "../../utils/load_user";
 
 // Configure your routes here
 const routes = {
@@ -52,7 +53,7 @@ const Router = () => {
 
     if (uri) {
       e.preventDefault();
-      const user = JSON.parse(window.localStorage.getItem("user"));
+      const user = load_user.loadUser();
       if(user && !user.is_admin && uri === "/admin_page")
         uri = "/";
       /* use Web History API to add current page URL to the user's navigation history 
@@ -73,7 +74,7 @@ const Router = () => {
 
   /* Route the right component when the page is loaded / refreshed */
   window.addEventListener("load", (e) => {
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = load_user.loadUser();
     if(user && !user.is_admin && window.location.pathname === "/admin_page")
       window.location.pathname = "/";
 
@@ -90,7 +91,7 @@ const Router = () => {
 
   // Route the right component when the user use the browsing history
   window.addEventListener("popstate", () => {
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = load_user.loadUser();
     if(user && !user.is_admin && window.location.pathname === "/admin_page")
       window.location.pathname = "/";
 

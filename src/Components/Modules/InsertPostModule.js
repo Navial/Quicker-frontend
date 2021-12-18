@@ -1,11 +1,12 @@
 import {Redirect} from "../Router/Router";
+import load_user from "../../utils/load_user";
 
 async function SendPost(e) {
     e.preventDefault();
     const message = document.getElementById("textPost").value;
     if (message.length === 0) return;
 
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = load_user.loadUser();
     const token = user.token;
     const idUser = user.id_user;
 

@@ -1,3 +1,5 @@
+import load_user from "../../utils/load_user";
+
 const UsersPage = async () => {
     const pageDiv = document.getElementById("page");
     pageDiv.innerHTML = "";
@@ -30,7 +32,7 @@ const UsersPage = async () => {
 
 async function getAllUsersSimilarTo(search) {
     try {
-        const token = JSON.parse(window.localStorage.getItem("user")).token;
+        const token = load_user.getToken();
         const request = {
             method: "GET",
             headers: {
