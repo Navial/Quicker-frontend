@@ -33,12 +33,13 @@ const ProfilePage = async () => {
         if (biography.value !== actualUser.biography) {f
             done = await putBiography(biography.value, actualUser.id_user);
         }
-        const status = document.getElementById("statusMessageSettings");
         if(done) {
-            status.innerHTML = `<h4 class="alert">Done!</h4>`;
             actualUser = await getBaseInformationsUser(load_user.loadUser());
             pageDiv.innerHTML = getPageDivHtml(actualUser);
+            const status = document.getElementById("statusMessageSettings");
+            status.innerHTML = `<h4 class="alert">Done!</h4>`;
         } else {
+            const status = document.getElementById("statusMessageSettings");
             status.innerHTML = `<h4 class="alert">Nothing changed</h4>`;
         }
     });
