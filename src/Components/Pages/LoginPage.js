@@ -11,7 +11,7 @@ const loginDiv = `
                     <input class="inputForm fields" type="password" id="passwordLogin" placeholder="Mot de passe">
                     <input class="inputForm submitButton" type="submit" value="Se connecter">
                     <div id="errorLogin" class="alert-danger"></div>
-                    <a class="loginText" id="goToRegister">Je n'ai pas encore de compte</a>
+                    <a class="loginText" id="goToRegister" type="button">Je n'ai pas encore de compte</a>
                 </form>
             </div>
         </div>

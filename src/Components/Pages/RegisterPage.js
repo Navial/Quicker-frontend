@@ -13,7 +13,7 @@ const registerDiv = `
                     <input class="inputForm fields" type="password" id="passwordRegister" placeholder="Mot de passe">
                     <input class="inputForm fields" type="password" id="passwordConfirmationRegister" placeholder="Confirmez votre mot de passe">
                     <input class="inputForm submitButton" type="submit" value="S'inscrire" id="registerButton">
-                    <a class="loginText" id="goToLogin">J'ai déjà un compte</a>
+                    <a class="loginText" type="button" id="goToLogin">J'ai déjà un compte</a>
                     <div id="errorRegister" class="alert-danger"></div>
                 </form>
         </div>

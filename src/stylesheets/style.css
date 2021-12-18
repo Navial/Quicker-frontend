@@ -304,6 +304,7 @@ a, a:hover, a:focus {
     padding: 5vw;
     background-color: rgb(21, 58, 114);
 }
+
 #logoRegister{
     height: 20vh;
     width: 30vw;
@@ -347,6 +348,24 @@ a, a:hover, a:focus {
     width: 15vw;
     margin: 15px auto;
     outline: none;
+}
+
+@media screen and (max-width: 900px) {
+    .loginRegisterContainer{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        width: 80vw;
+        margin: 10vh 10vw;
+    }
+    .inputForm{
+        width: 60vw;
+        border: none;
+    }
+    .submitButton{
+        width: 40vw;
+    }
 }
 
 @keyframes animationFocusFormInput {
