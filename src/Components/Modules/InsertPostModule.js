@@ -42,7 +42,7 @@ function SendPostHTML(page) {
             
             <div class="newPost">
                 <form id="sendPost">
-                    <input type="text" placeholder="Entrez un message" id="textPost">
+                    <input type="text" placeholder="Entrez un message" autocomplete="off" id="textPost">
                     <input type="submit" id="buttonPost" value="Post">
                 </form>
             </div>
