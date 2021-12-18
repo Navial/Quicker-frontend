@@ -6,21 +6,27 @@ import load_user from "../../utils/load_user";
 
 const Messages = async () => {
     // Init
-    const user = load_user.loadUser();
+    const userId = load_user.loadUser().id_user;
+    console.log(userId);
+
+    const user = await getBaseInformationsUser(userId);
+
     // Get base user informations
     const idRecipient = new URLSearchParams(window.location.search).get("idUser");
+
     const recipient = await getBaseInformationsUser(idRecipient);
+    console.log(recipient);
 
     const pageDiv = document.querySelector("#page");
 
     let request = {
         method: "GET",
         headers: {
-            "Authorization": user.token
+            "Authorization": load_user.getToken()
         }
     };
     try {
-        const reponseMessages = await fetch(`/api/messages/` + user.id_user + `/` + idRecipient , request);
+        const reponseMessages = await fetch(`/api/messages/` + userId + `/` + idRecipient , request);
         if (!reponseMessages.ok) {
             throw new Error(
                 "fetch error : " + reponseMessages.status + " : " + reponseMessages.statusText
@@ -29,19 +35,21 @@ const Messages = async () => {
 
         const messages = await reponseMessages.json();
         let messagesHtml = "";
-
         messages.forEach(message => {
-            if(message.id_user === user.id_user){
-                messagesHtml += `<div align="left">
-                                    <li className="self">`;
-            }else{
+            if(message.id_sender === user.id_user){
                 messagesHtml += `<div align="right">
-                                   <li className="other">`;
+                                   <li className="other">
+                                        <div align="left" className="msg">
+                                            <p>${user.username}</p>`;
+            }else{
+                messagesHtml += `<div align="left">
+                                    <li className="self">
+                                        <div align="left" className="msg">
+                                            <p>${recipient.username}</p>`;
             }
 
             messagesHtml +=
-                `<div align="left" className="msg">
-                    <p>${recipient.username}</p>
+                `
                     <p>${message.message}</p>
                     <time>20:18</time>
                 </div>
