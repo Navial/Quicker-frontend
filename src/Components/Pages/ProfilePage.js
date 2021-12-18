@@ -27,7 +27,7 @@ const ProfilePage = async () => {
                             <div type="button" id="followButton"></div>
                         </div>
                         <div class="col-sm-10" id="biography">Biography : ${biographyDisplay}</div>
-                        <div class="col-sm-10" id="creationDate">Created his account on ${new Date(user.date_creation).toDateString()}</div>
+                        <div class="col-sm-10" id="creationDate">Created his account on ${new Date(user.creation_date).toDateString()}</div>
                     </div>
                 </div>
                 <div class="container" id="tablePost"></div>
@@ -40,16 +40,16 @@ const ProfilePage = async () => {
     const followButton = document.getElementById("followButton");
 
     // Add follow button if other profile
-    if (user.id_user !== userConnected.id_user) {
+    if (user.user_id !== userConnected.user_id) {
         followSign.hidden = true;
-        if ((await existFollow(userConnected.id_user, idCurrentUser, userConnected.token)).status === 201) {
+        if ((await existFollow(userConnected.user_id, idCurrentUser, userConnected.token)).status === 201) {
             followSign.hidden = false;
             followSign.innerHTML += "vous suit";
         } else {
             followSign.hidden = true;
         }
 
-        if ((await existFollow(idCurrentUser, userConnected.id_user, userConnected.token)).status === 201) {
+        if ((await existFollow(idCurrentUser, userConnected.user_id, userConnected.token)).status === 201) {
             followButton.innerHTML = "Suivi";
         } else {
             followButton.innerHTML = "Suivre";
@@ -85,8 +85,8 @@ async function existFollow(idUserFollowed, idUserFollower, token) {
             },
             body: JSON.stringify(
                 {
-                    id_user_followed: idUserFollowed,
-                    id_user_follower: idUserFollower
+                    user_followed_id: idUserFollowed,
+                    user_follower_id: idUserFollower
                 }
             ),
         };
@@ -112,8 +112,8 @@ async function toggleFollowUser(idUserFollowed, userFollower) {
             },
             body: JSON.stringify(
                 {
-                    id_user_followed: idUserFollowed,
-                    id_user_follower: userFollower.id_user
+                    user_followed_id: idUserFollowed,
+                    user_follower_id: userFollower.user_id
                 }
             ),
         };

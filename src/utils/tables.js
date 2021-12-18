@@ -30,7 +30,7 @@ async function refreshMembersTable() {
 
             let tableTbodyHtml = `
                 <tr>
-<!--                    <td>${user.id_user}</td>-->
+<!--                    <td>${user.user_id}</td>-->
                     <td>${user.forename} ${user.lastname}</td>   
                     <td>${user.email}</td>
                     <td>${user.username}</td>
@@ -38,13 +38,13 @@ async function refreshMembersTable() {
                     <td>${user.is_active}</td>
                     <td>${user.is_admin}</td>
 <!--                    <td>${user.biography}</td>-->
-                    <td>${user.date_creation}</td>
+                    <td>${user.creation_date}</td>
             `;
-            if(user.id_user !== authenticatedUser.id_user) {
+            if(user.user_id !== authenticatedUser.user_id) {
                 tableTbodyHtml += `
                     <td>
                         <form id="membersGestionForm">
-                            <input id="id_user" type="hidden" value="${user.id_user}">
+                            <input id="user_id" type="hidden" value="${user.user_id}">
                             <input class="memberTableButton" id="memberStatus" type="submit" value="${memberStatus}">
                             <input class="memberTableButton" id="memberType" type="submit" value="${memberType}">
                         </form>
@@ -67,29 +67,29 @@ async function refreshMembersTable() {
 
         const forms = document.querySelectorAll("#membersGestionForm");
         forms.forEach((form) => {
-            let id_user;
+            let user_id;
             let memberStatus;
             let memberType;
             form.querySelectorAll("input").forEach((input) => {
-                if (input.id === "id_user")
-                    id_user = input.value;
+                if (input.id === "user_id")
+                    user_id = input.value;
                 else if (input.id === "memberStatus") {
                     memberStatus = input.value;
                     input.addEventListener("click", (e) => {
                         e.preventDefault();
                         if (memberStatus === "Deactivate")
-                            members_modifications.deactivateUser(id_user);
+                            members_modifications.deactivateUser(user_id);
                         else
-                            members_modifications.activateUser(id_user);
+                            members_modifications.activateUser(user_id);
                     });
                 } else {
                     memberType = input.value;
                     input.addEventListener("click", (e) => {
                         e.preventDefault();
                         if(memberType === "Admin")
-                            members_modifications.setAdmin(id_user);
+                            members_modifications.setAdmin(user_id);
                         else
-                            members_modifications.setNotAdmin(id_user);
+                            members_modifications.setNotAdmin(user_id);
                     });
                 }
             });
@@ -122,20 +122,20 @@ async function refreshPostsTable() {
 
         let tableTbodyHtml = `
              <tr>
-<!--                <td>${post.id_post}</td>-->
-                <td>${post.id_user}</td>   
+<!--                <td>${post.post_id}</td>-->
+                <td>${post.user_id}</td>   
                 <td>${post.image}</td>    
-                <td class="messageColumnAdmin">${post.message}</td>
+                <td clfass="messageColumnAdmin">${post.message}</td>
 <!--                <td>${post.parent_post}</td>-->
                 <td>${post.is_removed}</td>
-                <td>${post.date_creation}</td>
+                <td>${post.creation_date}</td>
                 <td>${post.number_of_likes}</td>
         `;
-        if(user.id_user !== post.id_user) {
+        if(user.user_id !== post.user_id) {
             tableTbodyHtml += `
                 <td>
                     <form id="postsGestionForm">
-                        <input id="id_post" type="hidden" value="${post.id_post}">
+                        <input id="post_id" type="hidden" value="${post.post_id}">
                         <input id="postRemoveButton" type="submit" value="${postStatus}">
                     </form>
                 </td>
@@ -155,19 +155,19 @@ async function refreshPostsTable() {
 
     const forms = document.querySelectorAll("#postsGestionForm");
     forms.forEach((form) => {
-        let id_post;
+        let post_id;
         let postStatus;
         form.querySelectorAll("input").forEach((input) => {
-            if (input.id === "id_post")
-                id_post = input.value;
+            if (input.id === "post_id")
+                post_id = input.value;
             else {
                 postStatus = input.value;
                 input.addEventListener("click", (e) => {
                     e.preventDefault();
                     if (postStatus === "Remove")
-                        posts_modifications.removeAdminPost(id_post);
+                        posts_modifications.removeAdminPost(post_id);
                     else
-                        posts_modifications.activatePost(id_post);
+                        posts_modifications.activatePost(post_id);
                 });
             }
         });
