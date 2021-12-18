@@ -4,13 +4,48 @@ import load_user from "../../utils/load_user";
 
 const ProfilePage = async () => {
     // Get base user informations
-    const actualUser = await getBaseInformationsUser(load_user.loadUser());
+    let actualUser = await getBaseInformationsUser(load_user.loadUser());
     let biography = actualUser.biography;
     if (biography === null) {
         actualUser.biography = "";
     }
 
-    const pageDivHtml = `
+    // Init
+    const pageDiv = document.querySelector("#page");
+    pageDiv.innerHTML = getPageDivHtml(actualUser);
+
+    document.getElementById("submitChangeModify").addEventListener("click", async function(e) {
+        e.preventDefault()
+        const lastname = document.getElementById("lastnamechange");
+        const forename = document.getElementById("fornamechange");
+        const username = document.getElementById("usernamechange");
+        const biography = document.getElementById("biographychangeform");
+        console.log("oui")
+        let done = false;
+        if (lastname.value !== actualUser.lastname) {
+            done = await putLastName(lastname.value, actualUser.id_user);
+        }
+
+        if (forename.value !== actualUser.forename) {
+            done = await putForeName(forename.value, actualUser.id_user);
+        }
+
+        if (biography.value !== actualUser.biography) {f
+            done = await putBiography(biography.value, actualUser.id_user);
+        }
+        const status = document.getElementById("statusMessageSettings");
+        if(done) {
+            status.innerHTML = `<h4 class="alert">Done!</h4>`;
+            actualUser = await getBaseInformationsUser(load_user.loadUser());
+            pageDiv.innerHTML = getPageDivHtml(actualUser);
+        } else {
+            status.innerHTML = `<h4 class="alert">Nothing changed</h4>`;
+        }
+    });
+}
+
+function getPageDivHtml(actualUser) {
+    return `
         <div class="mainContent" id="contentProfilePage">
             <div id="">
                 <div id="banner">
@@ -44,48 +79,14 @@ const ProfilePage = async () => {
             <div class="container" id="tablePost"></div>
         </div>
     `;
-
-    // Init
-    const pageDiv = document.querySelector("#page");
-    pageDiv.innerHTML = pageDivHtml;
-
-    document.getElementById("submitChangeModify").addEventListener("click", async function(e) {
-        e.preventDefault()
-        const lastname = document.getElementById("lastnamechange");
-        const forename = document.getElementById("fornamechange");
-        const username = document.getElementById("usernamechange");
-        const biography = document.getElementById("biographychangeform");
-        console.log("oui")
-        let done = false;
-        if (lastname.value !== actualUser.lastname) {
-            done = await putLastName(lastname.value, actualUser.id_user);
-        }
-
-        if (forename.value !== actualUser.forename) {
-            done = await putForeName(forename.value, actualUser.id_user);
-        }
-
-        if (biography.value !== actualUser.biography) {f
-            done = await putBiography(biography.value, actualUser.id_user);
-        }
-        const status = document.getElementById("statusMessageSettings");
-        if(done) {
-            status.innerHTML = `<h4 class="alert">Done!</h4>`;
-            pageDiv.innerHTML = pageDivHtml;
-        } else {
-            status.innerHTML = `<h4 class="alert">Nothing changed</h4>`;
-        }
-    });
 }
-
 
 async function getBaseInformationsUser(actualUser) {
     try {
-        const token = actualUser.token
         const request = {
             method: "GET",
             headers: {
-                "Authorization": token
+                "Authorization": actualUser.token
             }
         };
         const responseUserInfo = await fetch("/api/users/profile/" + actualUser.id_user, request);
