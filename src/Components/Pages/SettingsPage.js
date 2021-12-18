@@ -42,6 +42,7 @@ const ProfilePage = async () => {
                       <div class="text-center">
                         <button id="submitChangeModify" type="submit" class="btn btn-primary mb-3 mt-5" id="tablePost" >Confirm changes</button>
                       </div>
+                      <div id="statusMessageSettings"></div>
                     </form>
                     </div>
                 </div>
@@ -49,23 +50,30 @@ const ProfilePage = async () => {
             </div>
         `;
 
-    document.getElementById("submitChangeModify").addEventListener("click", function(e) {
+    document.getElementById("submitChangeModify").addEventListener("click", async function(e) {
         e.preventDefault()
         const lastname = document.getElementById("lastnamechange");
         const forename = document.getElementById("fornamechange");
         const username = document.getElementById("usernamechange");
         const biography = document.getElementById("biographychangeform");
         console.log("oui")
+        let done = false;
         if (lastname.value !== user.lastname) {
-            putLastName(lastname.value, actualUser.id_user);
+            done = await putLastName(lastname.value, actualUser.id_user);
         }
 
         if (forename.value !== user.forename) {
-            putForeName(forename.value, actualUser.id_user);
+            done = await putForeName(forename.value, actualUser.id_user);
         }
 
         if (biography.value !== "" || biography.value !== user.biography) {
-            putBiography(biography.value, actualUser.id_user);
+            done = await putBiography(biography.value, actualUser.id_user);
+        }
+        const status = document.getElementById("statusMessageSettings");
+        if(done) {
+            status.innerHTML = `<h4 class="alert">Done!</h4>`;
+        } else {
+            status.innerHTML = `<h4 class="alert-danger">Something went wrong.</h4>`;
         }
 
     });
@@ -114,9 +122,10 @@ async function putLastName(lastname, idUser) {
                 "fetch error : " + responseUserInfo.status + " : " + responseUserInfo.statusText
             );
         }
-        return await responseUserInfo.json();
+        return true;
     } catch (e) {
         console.log(e)
+        return false;
     }
 }
 
@@ -141,9 +150,10 @@ async function putForeName(forename, idUser) {
                 "fetch error : " + responseUserInfo.status + " : " + responseUserInfo.statusText
             );
         }
-        return await responseUserInfo.json();
+        return true;
     } catch (e) {
         console.log(e)
+        return false;
     }
 }
 
@@ -168,9 +178,10 @@ async function putBiography(biography, idUser) {
                 "fetch error : " + responseUserInfo.status + " : " + responseUserInfo.statusText
             );
         }
-        return await responseUserInfo.json();
+        return true;
     } catch (e) {
-        console.log(e)
+        console.log(e);
+        return false;
     }
 }
 
