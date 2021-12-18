@@ -31,7 +31,7 @@ function showPostsHtml(page, posts){
             <div id="post">
                 <div class="col-sm-auto">
                     <div class="col-sm-5" id="postAuthor">
-                        <a id="postusersender${post.id_user}" href="/profile?idUser=${post.id_user}">
+                        <a class="userName" id="postusersender${post.id_user}" href="/profile?idUser=${post.id_user}">
                             ${post.username}
                         </a>
                       ${removeButton}
