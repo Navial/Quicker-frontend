@@ -9,6 +9,7 @@ import AdminPage from "../Pages/AdminPage";
 import Logout from "../Pages/Logout";
 import UsersPage from "../Pages/UsersPage";
 import Messages from "../Pages/MessagesPage";
+import SettingsPage from "../Pages/SettingsPage";
 
 // Configure your routes here
 const routes = {
@@ -22,6 +23,7 @@ const routes = {
   "/admin_page": AdminPage,
   "/logout": Logout,
   "/users": UsersPage,
+  "/settings": SettingsPage,
   "/messages": Messages
 };
 

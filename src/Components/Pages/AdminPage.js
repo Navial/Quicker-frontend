@@ -24,14 +24,14 @@ const postsGestionHtml = `
     <h3>Posts Gestion</h3>
         <table id="postsGestionTable" class="table-bordered">
             <tr>
-                <th>Post's Id</th>
+<!--                <th>Post's Id</th>-->
                 <th>User's Id</th>
                 <th>Image</th>
-                <th>Message</th>
-                <th>Parent Post's Id</th>
-                <th>Removed (True/False)</th>
+                <th class="messageColumnAdmin">Message</th>
+<!--                <th>Parent Post's Id</th>-->
+                <th>Removed</th>
                 <th>Creation Date</th>
-                <th>Number of Likes</th>
+                <th>Likes</th>
                 <th>Suppression</th>
             </tr>
             <tbody id="postsGestionTbody">
@@ -55,17 +55,17 @@ const membersGestionHtml = `
 
         <table id="membersGestionTable" class="table-bordered">
             <tr>
-                <th>User's Id</th>
-                <th>Forename</th>
-                <th>Lastname</th>
+<!--                <th>User's Id</th>-->
+                <th>Forename/Lastname</th>
+<!--                <th>Lastname</th>-->
                 <th>Email</th>
                 <th>Username</th>
                 <th>Image</th>
-                <th>Active (True/False)</th>
-                <th>Admin (True/False)</th>
-                <th>Biography</th>
+                <th>Active</th>
+                <th>Admin</th>
+<!--                <th>Biography</th>-->
                 <th>Creation Date</th>
-                <th>Modifications</th>
+                <th></th>
             </tr>
             <tbody id="membersGestionTbody">
             </tbody>
