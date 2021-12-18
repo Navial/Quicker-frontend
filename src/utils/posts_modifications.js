@@ -1,6 +1,6 @@
 import Tables from "./tables";
 import load_user from "./load_user";
-
+//
 async function activatePost(id_post) {
     const putRequest = {
         "method": "PUT",

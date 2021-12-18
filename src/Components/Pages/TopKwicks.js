@@ -4,7 +4,7 @@ import GetPostsModule from "../Modules/GetPostsModule";
 /**
  * Render the TopKwicks
  */
-
+//
 const TopKwicks = async () => {
     // Init
     const pageDiv = document.querySelector("#page");

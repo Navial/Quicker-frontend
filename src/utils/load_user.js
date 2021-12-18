@@ -2,7 +2,7 @@ function loadUser () {
     console.log("oui")
     return JSON.parse(window.localStorage.getItem("user"));
 }
-
+//
 function getToken() {
     return loadUser().token;
 }

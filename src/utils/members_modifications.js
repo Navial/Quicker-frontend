@@ -1,6 +1,6 @@
 import Tables from "./tables";
 import load_user from "./load_user";
-
+//
 async function setAdmin(id_user) {
     const putRequest = {
         method: "PUT",

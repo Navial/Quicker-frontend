@@ -1,5 +1,5 @@
 import load_user from "../../utils/load_user";
-
+//
 const UsersPage = async () => {
     const pageDiv = document.getElementById("page");
     pageDiv.innerHTML = "";

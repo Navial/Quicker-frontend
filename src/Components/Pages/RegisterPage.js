@@ -1,7 +1,7 @@
 import { Redirect } from "../Router/Router";
 import Navbar from "../Navbar/Navbar";
 import anime from "animejs";
-
+//
 const registerDiv = `
         <div id="registerPage">
                 <form id="registerForm" class="loginRegisterContainer">

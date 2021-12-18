@@ -3,6 +3,7 @@
 // Here, because our JS component 'Navbar' has the same name as Navbar Bootstrap's component
 // we change the name of the imported Bootstrap's 'Navbar' component
 // import { Navbar as BootstrapNavbar} from "bootstrap";
+//
 
 import load_user from "../../utils/load_user";
 

@@ -128,7 +128,7 @@ async function toggleFollowUser(idUserFollowed, userFollower) {
         console.log(e)
     }
 }
-
+//
 async function getBaseInformationsUser(idUser) {
     try {
         const token = load_user.getToken();
