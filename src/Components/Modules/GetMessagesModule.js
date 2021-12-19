@@ -1,12 +1,12 @@
 import ApiModule from "./ApiModule";
 import load_user from "../../utils/load_user";
-
+var conversation;
 /**
  * Create the message page
  * @param page
  */
 
-const messagePageHtml = `
+let messagePageHtml = `
                 <div class="messagePageContainer" >
             
             <div class="row" >
@@ -33,18 +33,17 @@ const messagePageHtml = `
 
 
 async function createMessagePage() {
-    const page = document.querySelector("#page");
-    const userId = load_user.loadUser().id_user;
+    let page = document.querySelector("#page");
+    let userId = load_user.loadUser().id_user;
     try {
         //Load all informations
-        let conversation = await ApiModule.getTheLatestConversation(userId);
-        const user = await ApiModule.getBaseInformationsUser(userId);
+        conversation = await ApiModule.getTheLatestConversation(userId);
+        let user = await ApiModule.getBaseInformationsUser(userId);
 
-        const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
-        const other = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
+        let recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
+        let other = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
 
-        const sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
-        const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
+        let sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
 
         //To determinate if the user is the sender or recipient
         if(userId === conversation.id_recipient) {
@@ -62,18 +61,15 @@ async function createMessagePage() {
             document.querySelector(".senderHeadConv").innerHTML = sender.username;
         }
 
-        //Show messages and contacts for the first time on reload
-        await refreshMessages(user, messages)
-        await refreshContactBar(contacts)
-
+        await loadInformations();
         //Periodic function to reload informations and content
         setInterval(async function (){
-            const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
-            if(userId === recipient.id_user)
+            let recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
+            if(load_user.loadUser().id_user === recipient.id_user)
                 contacts = await ApiModule.getSender(recipient.id_user);
             else
                 contacts = await ApiModule.getRecipients(user.id_user);
-            const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
+            let messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
 
             await refreshMessages(user, messages)
             await refreshContactBar(contacts);
@@ -86,8 +82,25 @@ async function createMessagePage() {
     }
 }
 
+async function loadInformations() {
+    let recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
+    let sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
+    let messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
+    let user = await ApiModule.getBaseInformationsUser(load_user.loadUser().id_user);
+
+    //To determinate if the user is the sender or recipient
+    if(load_user.loadUser().id_user === conversation.id_recipient) {
+        var contacts = await ApiModule.getSender(recipient.id_user);
+    }
+    else
+        var contacts = await ApiModule.getRecipients(sender.id_user);
+    //Show messages and contacts for the first time on reload
+    await refreshMessages(user, messages)
+    await refreshContactBar(contacts)
+}
+
 async function refreshMessages(user, messages) {
-    const chats = document.querySelector(".chat");
+    let chats = document.querySelector(".chat");
     chats.innerHTML = await createMessagesHtml(user, messages);
 }
 
@@ -95,8 +108,8 @@ async function refreshMessages(user, messages) {
 async function createMessagesHtml(user, messages) {
     // Create the html for the messages
     let messagesHtml = "";
-    for (const message of messages) {
-        const date = new Date(message.date_creation);
+    for (let message of messages) {
+        let date = new Date(message.date_creation);
         let dateString = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()} at ${date.getUTCHours()}:`;
         dateString += `${date.getUTCMinutes()}`;
 
@@ -138,11 +151,12 @@ async function createContactBarHtml(contacts) {
         else
             contact = await ApiModule.getBaseInformationsUser(contact.id_recipient);
         contactHtml += `
-                <div class="contact">
+                <div class="contactLink" id=${contact.id_user}>
                     <li>
-                        <a href="/messages?idUser=${contact.id_user}" class="userName">${contact.username}  </a>
+                        <a href="" class="userName">${contact.username}  </a>
                     </li>
                 </div>`
+
     }
     return contactHtml;
 }
@@ -153,25 +167,33 @@ async function createContactBarHtml(contacts) {
  * @returns {Promise<void>}
  */
 async function refreshContactBar(contacts) {
-    const contactsHtml = document.querySelector(".contacts");
+    let contactsHtml = document.querySelector(".contacts");
     contactsHtml.innerHTML = await createContactBarHtml(contacts);
+    document.querySelectorAll(".contactLink").forEach((link) => {
+        link.addEventListener("click", async (e) => {
+            e.preventDefault();
+            conversation = await ApiModule.getConversation(link.id);
+            await loadInformations();
+        });
+    });
+
 }
 
 /**
  * Create the feature to send a message when clicking on send image
  */
 function createSendMessageFeature (user , other) {
-    const sendMessageButton = document.getElementById("sendMessageButton");
+    let sendMessageButton = document.getElementById("sendMessageButton");
     sendMessageButton.addEventListener("click", async (e) => {
-        const textArea = document.getElementById("textarea");
-        const body = {
+        let textArea = document.getElementById("textarea");
+        let body = {
             id_sender: user.id_user,
             id_recipient: other.id_user,
             message: textArea.value
         };
         textArea.value = "";
         await ApiModule.sendMessage(body);
-        const messages = await ApiModule.getMessages(user.id_user, other.id_user);
+        let messages = await ApiModule.getMessages(user.id_user, other.id_user);
         await refreshMessages(user, messages);
     });
 }

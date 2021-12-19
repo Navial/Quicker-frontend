@@ -228,6 +228,25 @@ async function getTheLatestConversation(id_sender) {
     return await response.json();
 }
 
+/**
+ * get the latest id_recipient linked to the lastest message sent by  the current user
+ * @param id_sender
+ * @returns {number}
+ */
+async function getConversation(id_user) {
+    const request = {
+        method: "GET",
+        headers: {
+            Authorization: load_user.getToken()
+        }
+    };
+    const response = await fetch(`/api/messages/conversationWith/${id_user}`, request);
+    if(!response.ok) {
+        throw new Error("fetch error : " + response.status + " : " + response.statusText);
+    }
+    return await response.json();
+}
+
 export default {
     sendMessage,
     getPosts,
@@ -237,5 +256,6 @@ export default {
     getMessages,
     getRecipients,
     getSender,
-    getTheLatestConversation
+    getTheLatestConversation,
+    getConversation
 };
