@@ -9,11 +9,11 @@ async function createMessagePage() {
     const page = document.querySelector("#page");
     const userId = load_user.loadUser().id_user;
     try {
-        let idRecipient = new URLSearchParams(window.location.search).get("idUser");
+        let idRecipient = window.localStorage.getItem("idRecipientMessagePage");
         if (!idRecipient) {
             //don't remove await, ide is wrong
             idRecipient = await ApiModule.getTheLatestConversationIdRecipient(userId);
-            window.location += `?idUser=${idRecipient}`;
+            window.localStorage.setItem("idRecipientMessagePage", idRecipient);
         }
 
         const recipient = await ApiModule.getBaseInformationsUser(idRecipient);
@@ -136,7 +136,7 @@ function createSendMessageFeature (user, recipient, message) {
     sendMessageButton.addEventListener("click", async (e) => {
         const body = {
             id_sender: load_user.loadUser().id_user,
-            id_recipient: new URLSearchParams(window.location.search).get("idUser"),
+            id_recipient: window.localStorage.getItem("idRecipientMessagePage"),
             message: document.getElementById("textarea").value
         }
         await ApiModule.sendMessage(body);
