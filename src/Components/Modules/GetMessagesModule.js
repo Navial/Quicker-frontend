@@ -41,7 +41,7 @@ async function createMessagePage() {
         const user = await ApiModule.getBaseInformationsUser(userId);
 
         const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
-        const other = await ApiModule.getBaseInformationsUser(conversation.id_sender);
+        const other = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
 
         const sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
         const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
@@ -163,11 +163,13 @@ async function refreshContactBar(contacts) {
 function createSendMessageFeature (user , other) {
     const sendMessageButton = document.getElementById("sendMessageButton");
     sendMessageButton.addEventListener("click", async (e) => {
+        const textArea = document.getElementById("textarea");
         const body = {
             id_sender: user.id_user,
             id_recipient: other.id_user,
-            message: document.getElementById("textarea").value
+            message: textArea.value
         };
+        textArea.value = "";
         await ApiModule.sendMessage(body);
         const messages = await ApiModule.getMessages(user.id_user, other.id_user);
         await refreshMessages(user, messages);
