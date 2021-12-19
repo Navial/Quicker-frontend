@@ -44,12 +44,13 @@ async function createMessagePage() {
         const sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
 
         //To determinate if the user is the sender or recipient
-        if(userId === conversation.id_recipient)
-            var contacts = await ApiModule.getSender(sender.id_user);
+        if(userId === conversation.id_recipient) {
+            var contacts = await ApiModule.getSender(recipient.id_user);
+        }
         else
-            var contacts = await ApiModule.getRecipients(user.id_user);
+            var contacts = await ApiModule.getRecipients(sender.id_user);
 
-        const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user)
+        const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
 
         page.innerHTML = messagePageHtml;
 
@@ -67,11 +68,11 @@ async function createMessagePage() {
         //Periodic function to reload informations and content
         setInterval(async function (){
             const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
-            if(userId === conversation.id_recipient)
-                contacts = await ApiModule.getSender(conversation.id_recipient);
+            if(userId === recipient.id_user)
+                contacts = await ApiModule.getSender(recipient.id_user);
             else
-                contacts = await ApiModule.getRecipients(userId);
-            const messages = await ApiModule.getMessages(conversation.id_sender, conversation.id_recipient);
+                contacts = await ApiModule.getRecipients(user.id_user);
+            const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
 
             refreshMessages(user, recipient, messages)
             await refreshContactBar(contacts);
@@ -128,9 +129,12 @@ function createMessagesHtml(user, recipient, messages) {
 async function createContactBarHtml(contacts) {
     //Create contacts bar
     let contactHtml = "";
-    let contact;
-    for (const idContact of contacts) {
-        contact = await ApiModule.getBaseInformationsUser(idContact.id_recipient);
+    for (let contact of contacts) {
+        console.log(contact)
+        if(contact.id_sender)
+            contact = await ApiModule.getBaseInformationsUser(contact.id_sender);
+        else
+            contact = await ApiModule.getBaseInformationsUser(contact.id_recipient);
         contactHtml += `
                 <div class="contact">
                     <li>
