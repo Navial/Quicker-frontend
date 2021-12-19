@@ -1,6 +1,7 @@
 import GetPostsModule from "../Modules/GetPostsModule";
 import {Redirect} from "../Router/Router";
 import load_user from "../../utils/load_user";
+import createSendMessageButton from "../../utils/messages";
 
 const ProfilePage = async () => {
     if (!location.search.startsWith("?idUser=")) location.pathname = "/";
@@ -38,6 +39,8 @@ const ProfilePage = async () => {
 
     const followSign = document.getElementById("followSign");
     const followButton = document.getElementById("followButton");
+    const banner = document.getElementById("banner");
+    banner.innerHTML = createSendMessageButton();
 
     // Add follow button if other profile
     if (user.id_user !== userConnected.id_user) {

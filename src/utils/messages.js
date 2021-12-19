@@ -5,4 +5,4 @@ function createSendMessageButton() {
                         </button>`;
 }
 
-export default {createSendMessageButton};
+export default createSendMessageButton;
