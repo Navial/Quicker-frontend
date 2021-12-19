@@ -88,7 +88,7 @@ async function getBaseInformationsUser(idUser) {
         }
         return await responseUserInfo.json();
     } catch (e) {
-        console.log(e)
+        console.log(e);
     }
 }
 
