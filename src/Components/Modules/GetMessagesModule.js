@@ -79,7 +79,7 @@ async function createMessagePage() {
         },5000)
 
         //Create the send message feature
-        createSendMessageFeature(user, recipient, message);
+        createSendMessageFeature(sender, recipient);
     } catch (e) {
         console.error(e);
     }
@@ -94,7 +94,6 @@ function refreshMessages(sender, recipient, messages) {
 function createMessagesHtml(sender, recipient, messages) {
     // Create the html for the messages
     let messagesHtml = "";
-    console.log(messages)
     messages.forEach(message => {
         const date = new Date(message.date_creation);
         let dateString = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()} at ${date.getUTCHours()}:`;
@@ -131,7 +130,6 @@ async function createContactBarHtml(contacts) {
     //Create contacts bar
     let contactHtml = "";
     for (let contact of contacts) {
-        console.log(contact)
         if(contact.id_sender)
             contact = await ApiModule.getBaseInformationsUser(contact.id_sender);
         else
@@ -159,16 +157,18 @@ async function refreshContactBar(contacts) {
 /**
  * Create the feature to send a message when clicking on send image
  */
-function createSendMessageFeature (user, recipient, message) {
+function createSendMessageFeature (convSender, recipient) {
     const sendMessageButton = document.getElementById("sendMessageButton");
+    const sender = load_user.loadUser()
     sendMessageButton.addEventListener("click", async (e) => {
         const body = {
-            id_sender: load_user.loadUser().id_user,
-            id_recipient: new URLSearchParams(window.location.search).get("idUser"),
+            id_sender: sender.id_user,
+            id_recipient: recipient.id_user,
             message: document.getElementById("textarea").value
         }
         await ApiModule.sendMessage(body);
-        refreshMessages(sender, recipient, messages)
+        const messages = await ApiModule.getMessages(convSender.id_user, recipient.id_user);
+        refreshMessages(convSender, recipient, messages);
     });
 }
 
