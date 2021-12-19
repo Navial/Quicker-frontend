@@ -9,15 +9,12 @@ async function createMessagePage() {
     const page = document.querySelector("#page");
     const userId = load_user.loadUser().id_user;
     try {
-        let idRecipient = new URLSearchParams(window.location.search).get("idUser");
-        if (!idRecipient) {
+        let conversation = await ApiModule.getTheLatestConversation(userId);
             //don't remove await, ide is wrong
-            idRecipient = await ApiModule.getTheLatestConversationIdRecipient(userId);
-            window.location += `?idUser=${idRecipient}`;
-        }
-        const recipient = await ApiModule.getBaseInformationsUser(idRecipient);
+        const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
         const contacts = await ApiModule.getContacts(userId);
-        const messages = await ApiModule.getMessages(userId, idRecipient);
+        const messages = await ApiModule.getMessages(conversation.id_sender, conversation.id_recipient)
+
         const user = await ApiModule.getBaseInformationsUser(userId);
 
         page.innerHTML = `
@@ -47,9 +44,9 @@ async function createMessagePage() {
         refreshMessages(user, recipient, messages)
         await refreshContactBar(contacts)
         setInterval(async function (){
-            const recipient = await ApiModule.getBaseInformationsUser(idRecipient);
+            const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
             const contacts = await ApiModule.getContacts(userId);
-            const messages = await ApiModule.getMessages(userId, idRecipient);
+            const messages = await ApiModule.getMessages(userId, conversation.id_recipient);
             refreshMessages(user, recipient, messages)
             await refreshContactBar(contacts);
         },5000)

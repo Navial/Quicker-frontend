@@ -166,7 +166,7 @@ async function sendLike(post) {
     }
 }
 
-async function getMessages(userId, idRecipient) {
+async function getMessages(id_sender, id_recipient) {
     const request = {
         method: "GET",
         headers: {
@@ -174,7 +174,7 @@ async function getMessages(userId, idRecipient) {
         }
     };
     //Get messages from dm
-    const response = await fetch(`/api/messages/getMessages/${userId}/${idRecipient}`, request);
+    const response = await fetch(`/api/messages/getMessages/${id_sender}/${id_recipient}`, request);
     if (!response.ok) {
         throw new Error("fetch error : " + response.status + " : " + response.statusText);
     }
@@ -200,7 +200,7 @@ async function getContacts(userId) {
  * @param id_sender
  * @returns {number}
  */
-async function getTheLatestConversationIdRecipient(id_sender) {
+async function getTheLatestConversation(id_sender) {
     const request = {
         method: "GET",
         headers: {
@@ -222,5 +222,5 @@ export default {
     sendLike,
     getMessages,
     getContacts,
-    getTheLatestConversationIdRecipient,
+    getTheLatestConversation
 };
