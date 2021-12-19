@@ -54,7 +54,11 @@ async function createMessagePage() {
         page.innerHTML = messagePageHtml;
 
         //Insert the username of sender into the html
-        document.querySelector(".senderHeadConv").innerHTML = sender.username;
+        if(sender.id_user === user.id_user){
+            document.querySelector(".senderHeadConv").innerHTML = recipient.username;
+        } else {
+            document.querySelector(".senderHeadConv").innerHTML = sender.username;
+        }
 
         //Show messages and contacts for the first time on reload
         refreshMessages(user, recipient, messages)
