@@ -113,8 +113,9 @@ const Redirect = (uri) => {
   //   uri = "/";
   window.history.pushState({}, uri, window.location.origin + uri);
   // render the requested component
-  const componentToRender = routes[uri];
-  if (routes[uri]) {
+  const page = uri.split("?")[0];
+  const componentToRender = routes[page];
+  if (routes[page]) {
     componentToRender();
   } else {
     throw Error("The " + uri + " ressource does not exist");

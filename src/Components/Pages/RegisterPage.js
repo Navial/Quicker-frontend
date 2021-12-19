@@ -53,7 +53,6 @@ async function register (e) {
         errorLogin.innerHTML = notificationModule("alert-danger", "Passwords doesn't match");
         throw new Error("Passwords don't match");
     }
-        console.log("oui")
     user = {
         lastname: document.getElementById("lastnameRegister").value,
         forename: document.getElementById("forenameRegister").value,

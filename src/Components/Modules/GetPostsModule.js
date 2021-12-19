@@ -1,6 +1,7 @@
 import Posts_modifications from "../../utils/posts_modifications";
 import load_user from "../../utils/load_user";
 import ApiModule from "./ApiModule";
+import {Redirect} from "../Router/Router";
 
 function showPostsHtml(page, posts){
     const user = load_user.loadUser();
@@ -32,7 +33,8 @@ function showPostsHtml(page, posts){
             <div id="post">
                 <div class="col-sm-auto">
                     <div class="col-sm-5" id="postAuthor">
-                        <a class="userName" id="postusersender${post.id_post}" href="/profile?idUser=${post.id_user}">
+<!--                    /profile?idUser=${post.id_user}-->
+                        <a class="userName" id="postusersender${post.id_user}" data-uri="/" href="#">
                             ${post.username}
                         </a>
                       ${removeButton}
@@ -49,11 +51,14 @@ function showPostsHtml(page, posts){
             </div>
         `;
         page.innerHTML += postRow;
-
-        // document.querySelector("#postusersender" + post.id_post).addEventListener('click', function() {
-        //     console.log(post.id_user);
-        // });
     });
+
+    for (const item of document.getElementsByClassName("userName")) {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            Redirect('/profile?idUser=' + item.id.replace("postusersender", ""));
+        })
+    }
 }
 
 async function GetPosts(page, profilePosts = null, isHomepage = false, isLikesPost = false) {
