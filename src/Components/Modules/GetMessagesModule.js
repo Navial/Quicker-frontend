@@ -163,7 +163,7 @@ function createSendMessageFeature (convSender, recipient) {
     sendMessageButton.addEventListener("click", async (e) => {
         const body = {
             id_sender: sender.id_user,
-            id_recipient: recipient.id_user,
+            id_recipient: convSender.id_user,
             message: document.getElementById("textarea").value
         }
         await ApiModule.sendMessage(body);
