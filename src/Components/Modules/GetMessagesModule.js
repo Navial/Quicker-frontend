@@ -9,10 +9,11 @@ async function createMessagePage() {
     const page = document.querySelector("#page");
     const userId = load_user.loadUser().id_user;
     try {
+        //Load the latest conversation
         let conversation = await ApiModule.getTheLatestConversation(userId);
-        console.log(conversation)
-            //don't remove await, ide is wrong
+
         const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
+        const sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
         if(userId === conversation.id_recipient)
             var contacts = await ApiModule.getSender(conversation.id_recipient);
         else
@@ -30,7 +31,7 @@ async function createMessagePage() {
                     </ol>
                 </div>
                 <div class="col-md-9" id="openedConv">
-                    <div class="headConv"><h3 class="recipient">${recipient.username}</h3> </div>
+                    <div class="headConv"><h3 class="recipient">${sender.username}</h3> </div>
                     <div class="messages"> 
                         <ol class="chat">
                         </ol>
