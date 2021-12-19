@@ -47,10 +47,10 @@ async function createMessagePage() {
         </div>
         `;
         refreshMessages(user, recipient, messages)
-        refreshContactBar(contacts);
-        setInterval(function (){
-            refreshMessages(user, recipient, messages);
-            refreshContactBar(contacts);
+        await refreshContactBar(contacts)
+        setInterval(async function (){
+            refreshMessages(user, recipient, messages)
+            await refreshContactBar(contacts);
         },5000)
         createSendMessageFeature();
     } catch (e) {
@@ -125,9 +125,9 @@ async function createContactBarHtml(contacts) {
  */
 async function refreshContactBar(contacts) {
     const contactsHtml = document.querySelectorAll(".contacts");
-    contactsHtml.forEach((contactHtml) => {
-        createContactBarHtml(contacts);
-    })
+    for (const contactHtml of contactsHtml) {
+        contactHtml.innerHTML = await createContactBarHtml(contacts);
+    }
 }
 
 /**
