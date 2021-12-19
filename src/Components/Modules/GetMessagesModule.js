@@ -1,11 +1,13 @@
 import ApiModule from "./ApiModule";
 import load_user from "../../utils/load_user";
+import {msg} from "@babel/core/lib/config/validation/option-assertions";
 
 /**
  * Create the message page
  * @param page
  */
-async function createMessagePage(page) {
+async function createMessagePage() {
+    const page = document.querySelector("#page");
     const userId = load_user.loadUser().id_user;
     try {
         let idRecipient = new URLSearchParams(window.location.search).get("idUser");
@@ -26,14 +28,12 @@ async function createMessagePage(page) {
             <div class="row" >
                 <div class="col-md-2" id="userConvs" >
                     <ol class="contacts"> 
-                        ${await createContactBarHtml(contacts)}
                     </ol>
                 </div>
                 <div class="col-md-9" id="openedConv">
                     <div class="headConv"><h3 class="recipient">${recipient.username}</h3> </div>
                     <div class="messages"> 
                         <ol class="chat">
-                            ${createMessagesHtml(user, recipient, messages)}
                         </ol>
                     </div>
                     <div class="containerInput">
@@ -46,11 +46,25 @@ async function createMessagePage(page) {
             </div>
         </div>
         `;
+        refreshMessages(user, recipient, messages)
+        refreshContactBar(contacts);
+        setInterval(function (){
+            refreshMessages(user, recipient, messages);
+            refreshContactBar(contacts);
+        },5000)
         createSendMessageFeature();
     } catch (e) {
         console.error(e);
     }
 }
+
+function refreshMessages(user, recipient, messages) {
+    const chats = document.querySelectorAll(".chat");
+    chats.forEach((chat) => {
+        chat.innerHTML = createMessagesHtml(user, recipient, messages);
+    });
+}
+
 
 function createMessagesHtml(user, recipient, messages) {
     // Create the html for the messages
@@ -94,7 +108,6 @@ async function createContactBarHtml(contacts) {
     let contact;
     for (const idContact of contacts) {
         contact = await ApiModule.getBaseInformationsUser(idContact.id_recipient);
-        console.log("contact" + contact)
         contactHtml += `
                 <div class="contact">
                     <li>
@@ -103,6 +116,18 @@ async function createContactBarHtml(contacts) {
                 </div>`
     }
     return contactHtml;
+}
+
+/**
+ * Refresh the contacts bar
+ * @param contacts
+ * @returns {Promise<void>}
+ */
+async function refreshContactBar(contacts) {
+    const contactsHtml = document.querySelectorAll(".contacts");
+    contactsHtml.forEach((contactHtml) => {
+        createContactBarHtml(contacts);
+    })
 }
 
 /**

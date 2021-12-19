@@ -5,11 +5,9 @@ import createMessagePage from "../Modules/GetMessagesModule"
  */
 
 const Messages = async () => {
-    setTimeout("location.reload(true)", 30000); //TODO change the 1st parameter for reload conversation only
-    // Init
-    const pageDiv = document.querySelector("#page");
+    //setTimeout("location.reload(true)", 5000); //TODO change the 1st parameter for reload conversation only
     try {
-        await createMessagePage(pageDiv);
+        await createMessagePage();
     } catch (e) {
         console.error(e);
     }
