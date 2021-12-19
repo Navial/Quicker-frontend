@@ -5,24 +5,8 @@ import load_user from "../../utils/load_user";
  * Create the message page
  * @param page
  */
-async function createMessagePage() {
-    const page = document.querySelector("#page");
-    const userId = load_user.loadUser().id_user;
-    try {
-        //Load the latest conversation
-        let conversation = await ApiModule.getTheLatestConversation(userId);
 
-        const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
-        const sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
-        if(userId === conversation.id_recipient)
-            var contacts = await ApiModule.getSender(conversation.id_recipient);
-        else
-            var contacts = await ApiModule.getRecipients(userId);
-        const messages = await ApiModule.getMessages(conversation.id_sender, conversation.id_recipient)
-
-        const user = await ApiModule.getBaseInformationsUser(userId);
-
-        page.innerHTML = `
+const messagePageHtml = `
                 <div class="messagePageContainer" >
             
             <div class="row" >
@@ -31,7 +15,7 @@ async function createMessagePage() {
                     </ol>
                 </div>
                 <div class="col-md-9" id="openedConv">
-                    <div class="headConv"><h3 class="recipient">${sender.username}</h3> </div>
+                    <div class="headConv"><h3 class="senderHeadConv"></h3> </div>
                     <div class="messages"> 
                         <ol class="chat">
                         </ol>
@@ -46,8 +30,37 @@ async function createMessagePage() {
             </div>
         </div>
         `;
+
+
+async function createMessagePage() {
+    const page = document.querySelector("#page");
+    const userId = load_user.loadUser().id_user;
+    try {
+        //Load all informations
+        let conversation = await ApiModule.getTheLatestConversation(userId);
+        const user = await ApiModule.getBaseInformationsUser(userId);
+
+        const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
+        const sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
+
+        //To determinate if the user is the sender or recipient
+        if(userId === conversation.id_recipient)
+            var contacts = await ApiModule.getSender(sender.id_user);
+        else
+            var contacts = await ApiModule.getRecipients(user.id_user);
+
+        const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user)
+
+        page.innerHTML = messagePageHtml;
+
+        //Insert the username of sender into the html
+        document.querySelector(".senderHeadConv").innerHTML = sender.username;
+
+        //Show messages and contacts for the first time on reload
         refreshMessages(user, recipient, messages)
         await refreshContactBar(contacts)
+
+        //Periodic function to reload informations and content
         setInterval(async function (){
             const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
             if(userId === conversation.id_recipient)
@@ -59,6 +72,8 @@ async function createMessagePage() {
             refreshMessages(user, recipient, messages)
             await refreshContactBar(contacts);
         },10000)
+
+        //Create the send message feature
         createSendMessageFeature(user, recipient, messages);
     } catch (e) {
         console.error(e);
