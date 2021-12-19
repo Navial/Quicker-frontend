@@ -6,6 +6,7 @@ import ApiModule from "../Modules/ApiModule";
  */
 
 const Messages = async () => {
+    setTimeout("location.reload(true)", 30000); //TODO change the 1st parameter for reload conversation only
     // Init
     const pageDiv = document.querySelector("#page");
 
