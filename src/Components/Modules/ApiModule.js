@@ -18,9 +18,7 @@ async function sendMessage(body) {
         throw new Error("fetch error : " + response.status + " : " + response.statusText);
 }
 
-<<<<<<< HEAD
 export default {sendMessage};
-=======
 /**
  * getPosts
  * @param profilePosts
@@ -227,4 +225,3 @@ export default {
     getContacts,
     getTheLatestConversationIdRecipient,
 };
->>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
