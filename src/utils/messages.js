@@ -24,4 +24,4 @@ function createSendMessageFeature (user , other) {
     });
 }
 
-export default createSendMessageButton;
+export default {createSendMessageButton, createSendMessageFeature};
