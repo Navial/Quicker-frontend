@@ -49,7 +49,10 @@ async function createMessagePage() {
         await refreshContactBar(contacts)
         setInterval(async function (){
             const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
-            const contacts = await ApiModule.getContacts(userId);
+            if(userId === conversation.id_recipient)
+                contacts = await ApiModule.getSender(conversation.id_recipient);
+            else
+                contacts = await ApiModule.getRecipients(userId);
             const messages = await ApiModule.getMessages(conversation.id_sender, conversation.id_recipient);
 
             refreshMessages(user, recipient, messages)
