@@ -69,6 +69,30 @@ async function getPosts(profilePosts = null, isHomepage = false, isLikesPost = f
 }
 
 /**
+ * Request the db to get user informations
+ * @param idUser
+ * @returns {Promise<any>}
+ */
+async function getBaseInformationsUser(idUser) {
+    try {
+        const token = JSON.parse(window.localStorage.getItem("user")).token;
+        const request = {
+            method: "GET",
+            headers: {
+                "Authorization": token
+            }
+        };
+        const responseUserInfo = await fetch("/api/users/profile/" + idUser, request);
+        if (!responseUserInfo.ok) {
+            throw new Error("fetch error : " + responseUserInfo.status + " : " + responseUserInfo.statusText);
+        }
+        return await responseUserInfo.json();
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+/**
  * verify if the post is liked
  * @param post
  * @returns {Promise<void>}
@@ -193,9 +217,10 @@ async function getTheLatestConversationIdRecipient(id_sender) {
 export default {
     sendMessage,
     getPosts,
+    getBaseInformationsUser,
     isLiked,
     sendLike,
     getMessages,
     getContacts,
-    getTheLatestConversationIdRecipient
+    getTheLatestConversationIdRecipient,
 };
