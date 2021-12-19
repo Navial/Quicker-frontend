@@ -21,7 +21,6 @@ function createSendMessageFeature (user , other) {
         };
         textArea.value = "";
         await ApiModule.sendMessage(body);
-        const messages = await ApiModule.getMessages(user.id_user, other.id_user);
     });
 }
 
