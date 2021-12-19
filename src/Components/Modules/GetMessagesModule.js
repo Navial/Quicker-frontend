@@ -15,7 +15,6 @@ async function createMessagePage() {
             idRecipient = await ApiModule.getTheLatestConversationIdRecipient(userId);
             window.location += `?idUser=${idRecipient}`;
         }
-
         const recipient = await ApiModule.getBaseInformationsUser(idRecipient);
         const contacts = await ApiModule.getContacts(userId);
         const messages = await ApiModule.getMessages(userId, idRecipient);
