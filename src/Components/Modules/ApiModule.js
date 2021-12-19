@@ -161,11 +161,30 @@ async function getContacts(userId) {
     const request = {
         method: "GET",
         headers: {
-            "Authorization": load_user.getToken()
+            Authorization: load_user.getToken()
         }
     };
     const response = await fetch(`/api/messages/recipients/${userId}`, request);
     if (!response.ok) {
+        throw new Error("fetch error : " + response.status + " : " + response.statusText);
+    }
+    return await response.json();
+}
+
+/**
+ * get the latest id_recipient linked to the lastest message sent by  the current user
+ * @param id_sender
+ * @returns {number}
+ */
+async function getTheLatestConversationIdRecipient(id_sender) {
+    const request = {
+        method: "GET",
+        headers: {
+            Authorization: load_user.getToken()
+        }
+    };
+    const response = await fetch(`/api/messages/lastConversationWith/${id_sender}`, request);
+    if(!response.ok) {
         throw new Error("fetch error : " + response.status + " : " + response.statusText);
     }
     return await response.json();
@@ -177,5 +196,6 @@ export default {
     isLiked,
     sendLike,
     getMessages,
-    getContacts
+    getContacts,
+    getTheLatestConversationIdRecipient
 };

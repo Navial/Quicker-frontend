@@ -14,10 +14,13 @@ const Messages = async () => {
     const user = await getBaseInformationsUser(userId);
 
     // Get base recipient informations
-    const idRecipient = new URLSearchParams(window.location.search).get("idUser");
-    const recipient = await getBaseInformationsUser(idRecipient);
-
+    let idRecipient = new URLSearchParams(window.location.search).get("idUser");
     try {
+        if (!idRecipient) {
+            idRecipient = await ApiModule.getTheLatestConversationIdRecipient(userId);
+            window.location += `?idUser=${idRecipient}`;
+        }
+        const recipient = await getBaseInformationsUser(idRecipient);
         const contacts = await ApiModule.getContacts(userId);
         const messages = await ApiModule.getMessages(userId, idRecipient);
 
@@ -127,6 +130,5 @@ async function getBaseInformationsUser(idUser) {
         console.log(e)
     }
 }
-
 
 export default Messages;
