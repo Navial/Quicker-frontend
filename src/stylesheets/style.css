@@ -248,7 +248,13 @@ a, a:hover, a:focus {
     border-style: none;
 }
 
-/* Form submit button */
+/***************************************************************************************
+* Title: CodePen Home Button inside Input
+* Author: Noor
+* Date: ?
+* Code version: 1.0
+* Availability: https://codepen.io/NoorA1125/pen/movOEN
+***************************************************************************************/
 #buttonPost {
     overflow: visible;
     position: relative;
@@ -405,12 +411,15 @@ input:focus{
     background-color: rgb(4, 57, 119);
 }
 
+<<<<<<< HEAD
 .alert-danger{
     background-color: rgb(248,215,218);
     color: rgb(132,32,41);
     text-align: center;
 }
 
+=======
+>>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
 
 /** MESSAGING */
 #openedConv{
@@ -531,11 +540,14 @@ li {
 #content{
     width: 100%;
 }
+<<<<<<< HEAD
 #adminPage{
     color: white;
     padding: 0;
     width: 50vw;
 }
+=======
+>>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
 
 .adminButtonChoice{
     border-radius: 5%;

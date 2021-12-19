@@ -8,6 +8,10 @@ const UserLikesPage = async () => {
     //Insert a new post bar
     SendPostHTML(pageDiv);
 
+<<<<<<< HEAD
+=======
+    // pageDiv.innerHTML += `<h4 class="alert-danger">Your liked posts</h4>`;
+>>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
     await getPostsModule(pageDiv, null, false, true);
 }
 

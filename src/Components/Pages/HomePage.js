@@ -13,6 +13,10 @@ const HomePage = async () => {
     // Insert new post bar
     SendPostHTML(pageDiv);
 
+<<<<<<< HEAD
+=======
+    // pageDiv.innerHTML += `<h4 class="alert-danger">Posts from kwickers you follow</h4>`;
+>>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
     // Get posts sorted by date
     await GetPostsModule(pageDiv, null, true);
 };

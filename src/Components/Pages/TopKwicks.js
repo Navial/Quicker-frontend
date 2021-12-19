@@ -12,7 +12,11 @@ const TopKwicks = async () => {
 
     // Insert new post bar
     SendPostHTML(pageDiv);
+<<<<<<< HEAD
 
+=======
+    // pageDiv.innerHTML += `<h4 class="alert-danger">Top Kwicks</h4>`;
+>>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
     // Get posts sorted by likes
     await GetPostsModule(pageDiv);
 };
