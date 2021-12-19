@@ -41,7 +41,10 @@ async function createMessagePage() {
         const user = await ApiModule.getBaseInformationsUser(userId);
 
         const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
+        const other = await ApiModule.getBaseInformationsUser(conversation.id_sender);
+
         const sender = await ApiModule.getBaseInformationsUser(conversation.id_sender);
+        const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
 
         //To determinate if the user is the sender or recipient
         if(userId === conversation.id_recipient) {
@@ -49,8 +52,6 @@ async function createMessagePage() {
         }
         else
             var contacts = await ApiModule.getRecipients(sender.id_user);
-
-        const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
 
         page.innerHTML = messagePageHtml;
 
@@ -62,7 +63,7 @@ async function createMessagePage() {
         }
 
         //Show messages and contacts for the first time on reload
-        refreshMessages(sender, recipient, messages)
+        await refreshMessages(user, messages)
         await refreshContactBar(contacts)
 
         //Periodic function to reload informations and content
@@ -74,41 +75,43 @@ async function createMessagePage() {
                 contacts = await ApiModule.getRecipients(user.id_user);
             const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
 
-            refreshMessages(sender, recipient, messages)
+            await refreshMessages(user, messages)
             await refreshContactBar(contacts);
         },5000)
 
         //Create the send message feature
-        createSendMessageFeature(sender, recipient);
+        createSendMessageFeature(user, other);
     } catch (e) {
         console.error(e);
     }
 }
 
-function refreshMessages(sender, recipient, messages) {
+async function refreshMessages(user, messages) {
     const chats = document.querySelector(".chat");
-    chats.innerHTML = createMessagesHtml(sender, recipient, messages);
+    chats.innerHTML = await createMessagesHtml(user, messages);
 }
 
 
-function createMessagesHtml(sender, recipient, messages) {
+async function createMessagesHtml(user, messages) {
     // Create the html for the messages
     let messagesHtml = "";
-    messages.forEach(message => {
+    for (const message of messages) {
         const date = new Date(message.date_creation);
         let dateString = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()} at ${date.getUTCHours()}:`;
         dateString += `${date.getUTCMinutes()}`;
 
-        if (message.id_sender === recipient.id_user) {
+        if (message.id_sender === user.id_user) {
             messagesHtml += `<div align="right">
                                    <li class="other">
                                         <div align="left" class="msg">
-                                            <p class="userName">${recipient.username}</p>`;
+                                            <p class="userName">${user.username}</p>`;
         } else {
+            let other = await ApiModule.getSender(user.id_user);
+            other = await ApiModule.getBaseInformationsUser(other[0].id_sender);
             messagesHtml += `<div align="left">
                                     <li class="self">
                                         <div align="left" class="msg">
-                                            <p class="userName">${sender.username}</p>`;
+                                            <p class="userName">${other.username}</p>`;
         }
 
         messagesHtml +=`
@@ -117,7 +120,7 @@ function createMessagesHtml(sender, recipient, messages) {
                 </div>
             </li>
         </div>`
-    });
+    }
     return messagesHtml;
 }
 
@@ -157,18 +160,17 @@ async function refreshContactBar(contacts) {
 /**
  * Create the feature to send a message when clicking on send image
  */
-function createSendMessageFeature (convSender, recipient) {
+function createSendMessageFeature (user , other) {
     const sendMessageButton = document.getElementById("sendMessageButton");
-    const sender = load_user.loadUser()
     sendMessageButton.addEventListener("click", async (e) => {
         const body = {
-            id_sender: sender.id_user,
-            id_recipient: convSender.id_user,
+            id_sender: user.id_user,
+            id_recipient: other.id_user,
             message: document.getElementById("textarea").value
-        }
+        };
         await ApiModule.sendMessage(body);
-        const messages = await ApiModule.getMessages(convSender.id_user, recipient.id_user);
-        refreshMessages(convSender, recipient, messages);
+        const messages = await ApiModule.getMessages(user.id_user, other.id_user);
+        await refreshMessages(user, messages);
     });
 }
 
