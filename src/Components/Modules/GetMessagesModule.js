@@ -74,9 +74,9 @@ async function createMessagePage() {
                 contacts = await ApiModule.getRecipients(user.id_user);
             const messages = await ApiModule.getMessages(sender.id_user, recipient.id_user);
 
-            refreshMessages(user, recipient, messages)
+            refreshMessages(sender, recipient, messages)
             await refreshContactBar(contacts);
-        },10000)
+        },5000)
 
         //Create the send message feature
         createSendMessageFeature(user, recipient, message);
