@@ -10,12 +10,13 @@ async function createMessagePage() {
     const userId = load_user.loadUser().id_user;
     try {
         let conversation = await ApiModule.getTheLatestConversation(userId);
+        console.log(conversation)
             //don't remove await, ide is wrong
         const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
         if(userId === conversation.id_recipient)
-            var contacts = await ApiModule.getContacts(conversation.id_sender);
+            var contacts = await ApiModule.getSender(conversation.id_recipient);
         else
-            var contacts = await ApiModule.getContacts(conversation.id_recipient);
+            var contacts = await ApiModule.getRecipients(userId);
         const messages = await ApiModule.getMessages(conversation.id_sender, conversation.id_recipient)
 
         const user = await ApiModule.getBaseInformationsUser(userId);
@@ -48,10 +49,7 @@ async function createMessagePage() {
         await refreshContactBar(contacts)
         setInterval(async function (){
             const recipient = await ApiModule.getBaseInformationsUser(conversation.id_recipient);
-            if(userId === conversation.id_recipient)
-                contacts = await ApiModule.getContacts(conversation.id_sender);
-            else
-                contacts = await ApiModule.getContacts(conversation.id_recipient);
+            const contacts = await ApiModule.getContacts(userId);
             const messages = await ApiModule.getMessages(conversation.id_sender, conversation.id_recipient);
 
             refreshMessages(user, recipient, messages)

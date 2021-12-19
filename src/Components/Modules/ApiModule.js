@@ -181,14 +181,28 @@ async function getMessages(id_sender, id_recipient) {
     return await response.json();
 }
 
-async function getContacts(userId) {
+async function getRecipients(id_sender) {
     const request = {
         method: "GET",
         headers: {
             Authorization: load_user.getToken()
         }
     };
-    const response = await fetch(`/api/messages/recipients/${userId}`, request);
+    const response = await fetch(`/api/messages/recipients/${id_sender}`, request);
+    if (!response.ok) {
+        throw new Error("fetch error : " + response.status + " : " + response.statusText);
+    }
+    return await response.json();
+}
+
+async function getSender(id_recipient) {
+    const request = {
+        method: "GET",
+        headers: {
+            Authorization: load_user.getToken()
+        }
+    };
+    const response = await fetch(`/api/messages/sender/${id_recipient}`, request);
     if (!response.ok) {
         throw new Error("fetch error : " + response.status + " : " + response.statusText);
     }
@@ -221,6 +235,7 @@ export default {
     isLiked,
     sendLike,
     getMessages,
-    getContacts,
+    getRecipients,
+    getSender,
     getTheLatestConversation
 };
