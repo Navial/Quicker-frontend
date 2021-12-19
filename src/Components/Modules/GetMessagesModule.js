@@ -62,7 +62,7 @@ async function createMessagePage() {
         }
 
         //Show messages and contacts for the first time on reload
-        refreshMessages(user, recipient, messages)
+        refreshMessages(sender, recipient, messages)
         await refreshContactBar(contacts)
 
         //Periodic function to reload informations and content
@@ -79,36 +79,37 @@ async function createMessagePage() {
         },10000)
 
         //Create the send message feature
-        createSendMessageFeature(user, recipient, messages);
+        createSendMessageFeature(user, recipient, message);
     } catch (e) {
         console.error(e);
     }
 }
 
-function refreshMessages(user, recipient, messages) {
+function refreshMessages(sender, recipient, messages) {
     const chats = document.querySelector(".chat");
-    chats.innerHTML = createMessagesHtml(user, recipient, messages);
+    chats.innerHTML = createMessagesHtml(sender, recipient, messages);
 }
 
 
-function createMessagesHtml(user, recipient, messages) {
+function createMessagesHtml(sender, recipient, messages) {
     // Create the html for the messages
     let messagesHtml = "";
+    console.log(messages)
     messages.forEach(message => {
         const date = new Date(message.date_creation);
         let dateString = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()} at ${date.getUTCHours()}:`;
         dateString += `${date.getUTCMinutes()}`;
 
-        if (message.id_sender === user.id_user) {
+        if (message.id_sender === recipient.id_user) {
             messagesHtml += `<div align="right">
                                    <li class="other">
                                         <div align="left" class="msg">
-                                            <p class="userName">${user.username}</p>`;
+                                            <p class="userName">${recipient.username}</p>`;
         } else {
             messagesHtml += `<div align="left">
                                     <li class="self">
                                         <div align="left" class="msg">
-                                            <p class="userName">${recipient.username}</p>`;
+                                            <p class="userName">${sender.username}</p>`;
         }
 
         messagesHtml +=`
@@ -167,7 +168,7 @@ function createSendMessageFeature (user, recipient, message) {
             message: document.getElementById("textarea").value
         }
         await ApiModule.sendMessage(body);
-        refreshMessages(user, recipient, message)
+        refreshMessages(sender, recipient, messages)
     });
 }
 
