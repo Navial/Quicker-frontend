@@ -52,10 +52,7 @@ async function register (e) {
         errorLogin.innerHTML = "<h2>Les mots de passe ne sont pas identiques</h2>";
         throw new Error("Passwords don't match");
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
     user = {
         lastname: document.getElementById("lastnameRegister").value,
         forename: document.getElementById("forenameRegister").value,

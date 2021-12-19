@@ -1,10 +1,8 @@
 import Posts_modifications from "../../utils/posts_modifications";
 import load_user from "../../utils/load_user";
-<<<<<<< HEAD
-=======
+
 import ApiModule from "./ApiModule";
 import {Redirect} from "../Router/Router";
->>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
 
 function showPostsHtml(page, posts){
     const user = load_user.loadUser();
@@ -36,12 +34,9 @@ function showPostsHtml(page, posts){
             <div id="post">
                 <div class="col-sm-auto">
                     <div class="col-sm-5" id="postAuthor">
-<<<<<<< HEAD
                         <a class="userName" id="postusersender${post.id_user}" href="/profile?idUser=${post.id_user}">
-=======
 <!--                    /profile?idUser=${post.id_user}-->
                         <a class="userName" id="postusersender${post.id_user}" data-uri="/" href="#">
->>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
                             ${post.username}
                         </a>
                       ${removeButton}
@@ -58,10 +53,6 @@ function showPostsHtml(page, posts){
             </div>
         `;
         page.innerHTML += postRow;
-<<<<<<< HEAD
-
-=======
->>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
     });
 
     for (const item of document.getElementsByClassName("userName")) {

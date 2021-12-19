@@ -18,7 +18,6 @@ async function sendMessage(body) {
         throw new Error("fetch error : " + response.status + " : " + response.statusText);
 }
 
-export default {sendMessage};
 /**
  * getPosts
  * @param profilePosts
