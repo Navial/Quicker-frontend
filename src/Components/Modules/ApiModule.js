@@ -100,7 +100,7 @@ async function isLiked(post) {
  * @param post
  * @returns {Promise<void>}
  */
-async function sendLike(post){
+async function sendLike(post) {
     const user = load_user.loadUser();
     const request = {
         method: "POST",
@@ -142,9 +142,40 @@ async function sendLike(post){
     }
 }
 
+async function getMessages(userId, idRecipient) {
+    const request = {
+        method: "GET",
+        headers: {
+            "Authorization": load_user.getToken()
+        }
+    };
+    //Get messages from dm
+    const response = await fetch(`/api/messages/getMessages/${userId}/${idRecipient}`, request);
+    if (!response.ok) {
+        throw new Error("fetch error : " + response.status + " : " + response.statusText);
+    }
+    return await response.json();
+}
+
+async function getContacts(userId) {
+    const request = {
+        method: "GET",
+        headers: {
+            "Authorization": load_user.getToken()
+        }
+    };
+    const response = await fetch(`/api/messages/recipients/${userId}`, request);
+    if (!response.ok) {
+        throw new Error("fetch error : " + response.status + " : " + response.statusText);
+    }
+    return await response.json();
+}
+
 export default {
     sendMessage,
     getPosts,
     isLiked,
-    sendLike
+    sendLike,
+    getMessages,
+    getContacts
 };

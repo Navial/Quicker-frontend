@@ -17,33 +17,9 @@ const Messages = async () => {
     const idRecipient = new URLSearchParams(window.location.search).get("idUser");
     const recipient = await getBaseInformationsUser(idRecipient);
 
-
-    let request = {
-        method: "GET",
-        headers: {
-            "Authorization": load_user.getToken()
-        }
-    };
     try {
-
-        //Get messages from dm
-        const reponseMessages = await fetch(`/api/messages/getMessages/${userId}/${idRecipient}`, request);
-        if (!reponseMessages.ok) {
-            throw new Error(
-                "fetch error : " + reponseMessages.status + " : " + reponseMessages.statusText
-            );
-        }
-        const reponseContacts = await fetch(`/api/messages/recipients/${userId}` , request);
-        if (!reponseContacts.ok) {
-            throw new Error(
-                "fetch error : " + reponseContacts.status + " : " + reponseContacts.statusText
-            );
-        }
-
-        const contacts = await reponseContacts.json();
-
-        const messages = await reponseMessages.json();
-
+        const contacts = await ApiModule.getContacts(userId);
+        const messages = await ApiModule.getMessages(userId, idRecipient);
 
         // Create the html for the messages
         let messagesHtml = "";
@@ -52,12 +28,12 @@ const Messages = async () => {
             let dateString = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()} at ${date.getUTCHours()}:`;
             dateString += `${date.getUTCMinutes()}`;
 
-            if(message.id_sender === user.id_user){
+            if (message.id_sender === user.id_user) {
                 messagesHtml += `<div align="right">
                                    <li class="other">
                                         <div align="left" class="msg">
                                             <p class="userName">${user.username}</p>`;
-            }else{
+            } else {
                 messagesHtml += `<div align="left">
                                     <li class="self">
                                         <div align="left" class="msg">
@@ -75,8 +51,8 @@ const Messages = async () => {
 
         //Create contacts bar
         let contactHtml = "";
-        let contact ;
-        for(const idContact of contacts) {
+        let contact;
+        for (const idContact of contacts) {
             contact = await getBaseInformationsUser(idContact.id_recipient);
             console.log("contact" + contact)
             contactHtml += `
@@ -86,7 +62,6 @@ const Messages = async () => {
                     </li>
                 </div>`
         }
-
 
 
         pageDiv.innerHTML = `
