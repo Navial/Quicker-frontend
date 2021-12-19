@@ -2,12 +2,11 @@ import Tables from "../../utils/tables";
 
 const adminPagehtml = `
     <div id="adminPage">
-        <div id="adminButtons">
-            <input class="adminButtonChoice" id="postsGestionButton" type="button" value="Posts Gestion">
-            <input class="adminButtonChoice" id="membersGestionButton" type="button" value="Members Gestion">
+        <div class="btn-group d-flex justify-content-center m-5" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary adminHandlingButton" id="postsGestionButton">Posts Gestion</button>
+            <button type="button" class="btn btn-primary adminHandlingButton" id="membersGestionButton">Members Gestion</button>
         </div>
-        <div id="adminTable">
-        </div>
+        <div id="adminTable"></div>
     </div>
 `;
 
@@ -18,6 +17,7 @@ const AdminPage = () => {
     const membersGestionButton = document.getElementById("membersGestionButton");
     postGestionButton.addEventListener("click", showPostsGestion);
     membersGestionButton.addEventListener("click", showMembersGestion);
+
 }
 
 const postsGestionHtml = `

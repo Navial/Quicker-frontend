@@ -14,7 +14,7 @@ async function sendMessage(body) {
         }
     };
     const response = await fetch("/api/messages/", request);
-    if(!response.ok)
+    if (!response.ok)
         throw new Error("fetch error : " + response.status + " : " + response.statusText);
 }
 

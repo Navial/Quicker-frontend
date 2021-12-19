@@ -1,11 +1,13 @@
 import { Redirect } from "../Router/Router";
 import Navbar from "../Navbar/Navbar";
 import anime from "animejs";
+import notificationModule from "../Modules/NotificationModule";
 
 const registerDiv = `
         <div id="registerPage">
                 <form id="registerForm" class="loginRegisterContainer">
                     <h3 class="loginText">Kwicker</h3>
+                    <div id="errorRegister"></div>
                     <input class="inputForm fields" type="text" id="lastnameRegister" placeholder="Nom">
                     <input class="inputForm fields" type="text" id="forenameRegister" placeholder="Prénom">
                     <input class="inputForm fields" type="text" id="usernameRegister" placeholder="Nom d'utilisateur">
@@ -14,7 +16,6 @@ const registerDiv = `
                     <input class="inputForm fields" type="password" id="passwordConfirmationRegister" placeholder="Confirmez votre mot de passe">
                     <input class="inputForm submitButton" type="submit" value="S'inscrire" id="registerButton">
                     <a class="loginText" type="button" id="goToLogin">J'ai déjà un compte</a>
-                    <div id="errorRegister" class="alert-danger"></div>
                 </form>
         </div>
     `;
@@ -49,10 +50,9 @@ async function register (e) {
 
     try{
     if(password !== passwordConfirmation) {
-        errorLogin.innerHTML = "<h2>Les mots de passe ne sont pas identiques</h2>";
+        errorLogin.innerHTML = notificationModule("alert-danger", "Passwords doesn't match");
         throw new Error("Passwords don't match");
     }
-
     user = {
         lastname: document.getElementById("lastnameRegister").value,
         forename: document.getElementById("forenameRegister").value,
@@ -63,20 +63,20 @@ async function register (e) {
 
     //Si erreur dans le formulaire alors fait trembler le formulaire en catchant l'exception lancée
         if(!user.lastname){
-            errorLogin.innerHTML = `<h2>Tu dois entrer un nom !</h2>`;
-            throw new Error("No lastname");
+            errorLogin.innerHTML = notificationModule("alert-danger", "Enter a lastname");
+            return;
         } else if (!user.forename){
-            errorLogin.innerHTML = `<h2>Tu dois entrer un prénom !</h2>`;
-            throw new Error("No forename");
+            errorLogin.innerHTML = notificationModule("alert-danger", "Enter a forename");
+            return;
         } else if (!user.username){
-            errorLogin.innerHTML = `<h2>Tu dois entrer un pseudo !</h2>`;
-            throw new Error("No username");
+            errorLogin.innerHTML = notificationModule("alert-danger", "Enter a username");
+            return;
         } else if (!user.email){
-            errorLogin.innerHTML = `<h2>Tu dois entrer un email !</h2>`;
-            throw new Error("No email");
+            errorLogin.innerHTML = notificationModule("alert-danger", "Enter a email");
+            return;
         } else if (!user.password){
-            errorLogin.innerHTML = `<h2>Tu dois entrer un mot de passe !</h2>`;
-            throw new Error("No password");
+            errorLogin.innerHTML = notificationModule("alert-danger", "Enter a password");
+            return;
         }
     }catch (e) {
         console.error("LoginPage::error ", e);
@@ -99,7 +99,7 @@ async function register (e) {
     try {
         const response = await fetch("api/users/register", request);
             if (!response.ok) {
-                errorLogin.innerHTML = "<h2>Problème lors de l'inscription.</h2>";
+                errorLogin.innerHTML = notificationModule("alert-danger", "Register problem");
                 throw new Error("fetch error : " + response.status + " : " + response.statusText);
             }
         const user = await response.json();
