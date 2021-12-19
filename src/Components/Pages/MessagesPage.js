@@ -6,7 +6,6 @@ import ApiModule from "../Modules/ApiModule";
  */
 
 const Messages = async () => {
-<<<<<<< HEAD
     // Init
     const pageDiv = document.querySelector("#page");
 
@@ -126,11 +125,12 @@ const Messages = async () => {
             ApiModule.sendMessage(body);
             //TODO refresh messages
         });
-=======
-    //setTimeout("location.reload(true)", 5000); //TODO change the 1st parameter for reload conversation only
-    try {
-        await createMessagePage();
->>>>>>> fea0641ee5ddada619d4f2438ce310189bf1d9bb
+        //setTimeout("location.reload(true)", 5000); //TODO change the 1st parameter for reload conversation only
+        try {
+            await createMessagePage();
+        } catch (e) {
+            console.error(e);
+        }
     } catch (e) {
         console.error(e);
     }
