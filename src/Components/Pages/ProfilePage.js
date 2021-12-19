@@ -1,6 +1,6 @@
 import GetPostsModule from "../Modules/GetPostsModule";
 import load_user from "../../utils/load_user";
-import createSendMessageButton from "../../utils/messages";
+import {Redirect} from "../Router/Router";
 
 const ProfilePage = async () => {
     if (!location.search.startsWith("?idUser=")) location.pathname = "/";
@@ -25,9 +25,11 @@ const ProfilePage = async () => {
                         <div class="col-sm-10" id="userName">${user.forename} ${user.lastname} 
                             <div id="followSign"></div>
                             <div type="button" id="followButton"></div>
+                            <div type="button" id="sendMessageButton">Envoyer un message</div>
                         </div>
                         <div class="col-sm-10" id="biography">Biography : ${biographyDisplay}</div>
                         <div class="col-sm-10" id="creationDate">Created his account on ${new Date(user.date_creation).toDateString()}</div>
+                        <div id="sendMessageDiv"></div>
                     </div>
                 </div>
                 <div class="container" id="tablePost"></div>
@@ -38,9 +40,11 @@ const ProfilePage = async () => {
 
     const followSign = document.getElementById("followSign");
     const followButton = document.getElementById("followButton");
+    const sendMessage = document.getElementById("sendMessageButton");
+    sendMessage.hidden = true;
     // Add follow button if other profile
     if (user.id_user !== userConnected.id_user) {
-
+        sendMessage.hidden = false;
         followSign.hidden = true;
         if ((await existFollow(userConnected.id_user, idCurrentUser, userConnected.token)).status === 201) {
             followSign.hidden = false;
@@ -64,6 +68,8 @@ const ProfilePage = async () => {
                 } else if (responseFollow.status === 200) {
                     e.target.innerHTML = "Suivre"
                 }
+            } else if (e.target.id === "sendMessageButton") {
+                Redirect('/messages?idUser=' + idCurrentUser);
             }
         });
     } else {
