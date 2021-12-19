@@ -630,7 +630,7 @@ h3{
     vertical-align: middle;
 }
 
-#followButton {
+#followButton, #sendMessageButton {
     font-size: small;
     background-color: #2c5096;
     border-radius: 5px;
@@ -640,9 +640,10 @@ h3{
     vertical-align: middle;
 }
 
-#followButton:hover {
+#followButton:hover, #sendMessageButton:hover {
     background-color: #153058;
 }
+
 
 
 .remove_button{
