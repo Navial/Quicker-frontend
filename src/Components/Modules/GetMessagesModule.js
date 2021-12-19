@@ -89,8 +89,7 @@ function createMessagesHtml(user, recipient, messages) {
                                             <p class="userName">${recipient.username}</p>`;
         }
 
-        messagesHtml +=
-            `
+        messagesHtml +=`
                     <p>${message.message}</p>
                     <p>${dateString}</p>
                 </div>
@@ -114,7 +113,7 @@ async function createContactBarHtml(contacts) {
         contactHtml += `
                 <div class="contact">
                     <li>
-                        <p class="userName">${contact.username}  </p>
+                        <a href="/messages?idUser=${contact.id_user}" class="userName">${contact.username}  </a>
                     </li>
                 </div>`
     }
