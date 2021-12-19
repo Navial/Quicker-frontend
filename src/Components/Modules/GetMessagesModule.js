@@ -1,6 +1,5 @@
 import ApiModule from "./ApiModule";
 import load_user from "../../utils/load_user";
-import {msg} from "@babel/core/lib/config/validation/option-assertions";
 
 /**
  * Create the message page
@@ -49,20 +48,21 @@ async function createMessagePage() {
         refreshMessages(user, recipient, messages)
         await refreshContactBar(contacts)
         setInterval(async function (){
+            const recipient = await ApiModule.getBaseInformationsUser(idRecipient);
+            const contacts = await ApiModule.getContacts(userId);
+            const messages = await ApiModule.getMessages(userId, idRecipient);
             refreshMessages(user, recipient, messages)
             await refreshContactBar(contacts);
         },5000)
-        createSendMessageFeature();
+        createSendMessageFeature(user, recipient, messages);
     } catch (e) {
         console.error(e);
     }
 }
 
 function refreshMessages(user, recipient, messages) {
-    const chats = document.querySelectorAll(".chat");
-    chats.forEach((chat) => {
-        chat.innerHTML = createMessagesHtml(user, recipient, messages);
-    });
+    const chats = document.querySelector(".chat");
+    chats.innerHTML = createMessagesHtml(user, recipient, messages);
 }
 
 
@@ -124,16 +124,14 @@ async function createContactBarHtml(contacts) {
  * @returns {Promise<void>}
  */
 async function refreshContactBar(contacts) {
-    const contactsHtml = document.querySelectorAll(".contacts");
-    for (const contactHtml of contactsHtml) {
-        contactHtml.innerHTML = await createContactBarHtml(contacts);
-    }
+    const contactsHtml = document.querySelector(".contacts");
+    contactsHtml.innerHTML = await createContactBarHtml(contacts);
 }
 
 /**
  * Create the feature to send a message when clicking on send image
  */
-function createSendMessageFeature () {
+function createSendMessageFeature (user, recipient, message) {
     const sendMessageButton = document.getElementById("sendMessageButton");
     sendMessageButton.addEventListener("click", async (e) => {
         const body = {
@@ -141,9 +139,8 @@ function createSendMessageFeature () {
             id_recipient: new URLSearchParams(window.location.search).get("idUser"),
             message: document.getElementById("textarea").value
         }
-        console.log(body)
         await ApiModule.sendMessage(body);
-        //TODO refresh messages
+        refreshMessages(user, recipient, message)
     });
 }
 
